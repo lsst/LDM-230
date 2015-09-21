@@ -1,4 +1,4 @@
 PyYAML>=3.11
 Sphinx>=1.3.1
--e git://github.com/lsst-sqre/lsst_dd_rtd_theme.git@tickets/DM-3863#egg=lsst_dd_rtd_theme
--e git://github.com/lsst-sqre/sphinxkit.git@tickets/DM-3813#egg=sphinxkit
+-e git://github.com/lsst-sqre/lsst_dd_rtd_theme.git@master#egg=lsst_dd_rtd_theme
+-e git://github.com/lsst-sqre/documenteer.git@master#egg=documenteer

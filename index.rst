@@ -9,14 +9,14 @@ Introduction
 
 This document details the automated operations concept for the LSST Data
 Management System (:term:`DMS`). It describes how the various components of the
-application [#f1]_, middleware [#f2]_, and infrastructure [#f3]_ layers of
+application,\ [#f1]_ middleware,\ [#f2]_ and infrastructure\ [#f3]_ layers of
 the :term:`DMS` work together to enable generation, storage, and access for the
 Level 1, Level 2, and Level 3 data products [#f4]_). It specifies how
 processing and data will flow from one component to another.
 
 There are four major parts within the :term:`DMS`: the Alert Production
 and its associated Archivers, the Calibration Products Production, the
-Data Release Production (DRP), and the Data Access Center
+Data Release Production (:term:`DRP`), and the Data Access Center
 (:term:`DAC`), which also provides facilities for Level 3 science
 processing.
 
@@ -73,7 +73,8 @@ operations afterwards.
    Alert Production Hardware
 
 For context, here are the basic functions of some of the Data Management
-(:term:`DM`) infrastructure components (see :ref:`fig-alert-prod-hardware`):
+(:term:`DM`) infrastructure components (see
+:numref:`fig-alert-prod-hardware`):
 
 1. “Replicator” computers at the Base that receive images from the
    Camera and associated telemetry, transfer them to local storage, and
@@ -87,7 +88,7 @@ For context, here are the basic functions of some of the Data Management
    each image and other data products.
 
 4. Shared disk storage for inputs and Level 1 data products at the
-   Chilean and US DACs.
+   Chilean and US :term:`DAC`\ s.
 
 5. “Distributor” computers at the Archive that receive images and
    telemetry from the replicator machines and transfer them to local
@@ -103,17 +104,17 @@ For context, here are the basic functions of some of the Data Management
 8. A DM Event Services Broker running on one or more computers at the
    Archive that mediates all DM Event Services messaging traffic.
 
-9. A Calibration database at the US DAC that keeps information necessary
+9. A Calibration database at the US :term:`DAC` that keeps information necessary
    to calibrate images.
 
 10. Engineering and Facilities Database (:term:`EFD`) replicas at the
-    Chilean and US DACs that store all observatory commands and
+    Chilean and US :term:`DAC`\ s that store all observatory commands and
     telemetry.
 
-11. The Level 1 database at the Chilean and US DACs that stores the
+11. The Level 1 database at the Chilean and US :term:`DAC`\ s that stores the
     Level 1 catalog data products.
 
-12. The Level 2 database at the US DAC that stores measurements of
+12. The Level 2 database at the US :term:`DAC` that stores measurements of
     astronomical Objects.
 
 13. An Alert Production control database at the Base that maintains
@@ -134,21 +135,21 @@ from the perspective of the :term:`OCS`:
    captured in real time due to an outage of some part of the DM system.
 
 3. :term:`EFD` Replicator: responsible for replicating the :term:`EFD`
-   from the Summit to the Chilean DAC and the US DAC.
+   from the Summit to the Chilean :term:`DAC` and the US :term:`DAC`\ .
 
 4. Alert Production Cluster: responsible for generating Level 1 data
    products.
 
 Each commandable entity can be commanded by the :term:`OCS` to
-configure, enable, or disable itself, along with obeying other generic
-:term:`OCS` commands such as ``init``, ``release``, ``stop``, and
-``abort``. Each commandable entity publishes events and telemetry to the
-:term:`OCS` for use by the observatory operations staff. The
-command/action/response protocol used by the :term:`OCS` is common to
-all subsystems and is a standard real-time system control mechanism
-used, for example, by the ATST [#f5]_. The configure/enable/disable
-message pattern is also a common one; it is used, for example, in the
-LHCb control system [#f6]_.
+``configure``, ``enable``, or ``disable`` itself, along with obeying
+other generic :term:`OCS` commands such as ``init``, ``release``,
+``stop``, and ``abort``. Each commandable entity publishes events and
+telemetry to the :term:`OCS` for use by the observatory operations
+staff. The command/action/response protocol used by the :term:`OCS` is
+common to all subsystems and is a standard real-time system control
+mechanism used, for example, by the ATST.\ [#f5]_ The
+``configure``/``enable``/``disable`` message pattern is also a common
+one; it is used, for example, in the LHCb control system.\ [#f6]_
 
 All these commandable entities are implemented in the Base :term:`DMCS`.
 They all run on a single machine, which is the only one that
@@ -157,28 +158,28 @@ heartbeat monitoring, it is powered down and a spare machine is enabled
 at the same IP address, possibly missing one or more visits.
 
 The Base :term:`DMCS` communicates with the :term:`OCS` via the Data
-Distribution Service (DDS), through which it receives commands according
-to a well-defined asynchronous command protocol [#f7]_ and sends command
-result messages, status updates, events, and telemetry. It should be
-noted that the commandable entities do their processing while in the
-IDLE state from the perspective of the command protocol.
+Distribution Service (:term:`DDS`), through which it receives commands
+according to a well-defined asynchronous command protocol [#f7]_ and
+sends command result messages, status updates, events, and telemetry. It
+should be noted that the commandable entities do their processing while
+in the ``IDLE`` state from the perspective of the command protocol.
 
 The Base :term:`DMCS` will be booted before the start of each night's
 observing to ensure that the system is in a clean configuration. When
 the Base :term:`DMCS` cold boots, the Base :term:`DMCS` performs a self
 test sequence to verify that it can communicate with the DM Event
 Services Broker (for DM-internal communications) and the :term:`OCS`
-(via DDS).  After the self test sequence, the commandable entities start
-up, in no particular defined configuration, and publish the OFFLINE
-state to the :term:`OCS`.
+(via ``DDS``).  After the self test sequence, the commandable entities
+start up, in no particular defined configuration, and publish the
+``OFFLINE`` state to the :term:`OCS`.
 
 The Base :term:`DMCS` uses the Orchestration Manager (currently
 baselined to be implemented using HTCondor [#f8]_) to start jobs on the
 replicators, distributors, and workers. The Orchestration Manager may
 run on the Base :term:`DMCS` host or another machine.
 
-The typical sequence of :term:`OCS` commands after a cold boot will be init,
-configure, and enable for each commandable entity.
+The typical sequence of :term:`OCS` commands after a cold boot will be
+``init``, ``configure``, and ``enable`` for each commandable entity.
 
 .. _init-command:
 
@@ -186,44 +187,45 @@ init command
 ~~~~~~~~~~~~
 
 This instructs the :term:`OCS`-visible commandable entity controlled by
-the Base :term:`DMCS` to move from an OFFLINE state to a normal
-commandable IDLE state.  Successful completion requires that the Base
+the Base :term:`DMCS` to move from an ``OFFLINE`` state to a normal
+commandable ``IDLE`` state.  Successful completion requires that the Base
 :term:`DMCS` ensure that :term:`OCS` global control is not locked out by
-DM engineering (e.g.  software installation, diagnostic tests, etc.).
+:term:`DM` engineering (e.g.  software installation, diagnostic tests, etc.).
 
 .. _configure-command:
 
 configure command
 ~~~~~~~~~~~~~~~~~
 
-This tells one of the :term:`OCS`-visible commandable entities controlled by the
-Base :term:`DMCS` to establish or change its configuration. The
-configuration includes the set of computers to be used, the software to
-be executed on them, and parameters used to control that software. There
-will be several standard configurations used during operations (although
-each configuration will change with time); each such configuration can
-be thought of as a mode of the corresponding DM commandable entities.
-Some modes may apply to multiple commandable entities at the same time.
-Changing modes (by reconfiguring the commandable entities) is expected
-to take from seconds to possibly a few minutes; it is intended that mode
-changes may occur at any time and multiple times during a night.
+This tells one of the :term:`OCS`-visible commandable entities
+controlled by the Base :term:`DMCS` to establish or change its
+configuration. The configuration includes the set of computers to be
+used, the software to be executed on them, and parameters used to
+control that software. There will be several standard configurations
+used during operations (although each configuration will change with
+time); each such configuration can be thought of as a mode of the
+corresponding :term:`DM` commandable entities.  Some modes may apply to
+multiple commandable entities at the same time.  Changing modes (by
+reconfiguring the commandable entities) is expected to take from seconds
+to possibly a few minutes; it is intended that mode changes may occur at
+any time and multiple times during a night.
 
 Besides normal science observing mode, available configurations will
 include raw calibration image and engineering image modes for the
 Archiver and Alert Production Cluster in which there are no visits and
 different data products are generated. Another mode for the Alert
-Production Cluster will be daytime DM operations (disconnected from the
-camera), in which the Alert Production Cluster will be used to perform
-solar system object orbit-fitting and various daily maintenance and
-update tasks and the Archiver is disabled or offline.
+Production Cluster will be daytime :term:`DM` operations (disconnected
+from the camera), in which the Alert Production Cluster will be used to
+perform solar system object orbit-fitting and various daily maintenance
+and update tasks and the Archiver is disabled or offline.
 
 First, the Base :term:`DMCS` verifies the command format and accepts the
 command. Then it checks that the configuration is legal and consistent
 and that various prerequisites are met. When the check is complete, the
 commandable entity is disabled (see :ref:`disable-command`), the
-configuration is installed, and success is returned to the :term:`OCS`. If the
-configuration is illegal or cannot be installed properly, a command
-error (non-fatal) with failure reason is sent instead.
+configuration is installed, and success is returned to the :term:`OCS`.
+If the configuration is illegal or cannot be installed properly, a
+command error (non-fatal) with failure reason is sent instead.
 
 All of the commandable entities' configurations include the version of
 the software to be used. This version must have already been installed
@@ -241,9 +243,9 @@ The Alert Production Cluster's prerequisites are that sufficient workers
 are available.
 
 The :term:`EFD` Replicator's prerequisite is that communication with the
-US DAC :term:`EFD` replica is possible.
+US :term:`DAC` :term:`EFD` replica is possible.
 
-At the end of a configure command, the commandable entity is always
+At the end of a ``configure`` command, the commandable entity is always
 disabled.
 
 .. _enable-command:
@@ -252,23 +254,23 @@ enable command
 ~~~~~~~~~~~~~~
 
 This command enables the commandable entity to run and process events
-and data. An enable command is rejected if no configuration has been
-selected by a prior configure command to the commandable entity.
+and data. An ``enable`` command is rejected if no configuration has been
+selected by a prior ``configure`` command to the commandable entity.
 
 Enabling the Archiver causes the Base :term:`DMCS` to subscribe to the
-“startIntegration” event.
+``startIntegration`` event.
 
 Enabling the Catch-Up Archiver allows it to scan for unarchived images
 to be handled and enables the Orchestration Manager to schedule image
 archive jobs.
 
 Enabling the Alert Production Cluster causes the Base :term:`DMCS` to
-subscribe to the “nextVisit” event in normal science mode; another event
+subscribe to the ``nextVisit`` event in normal science mode; another event
 may be subscribed to in calibration or engineering mode.
 
 Enabling the :term:`EFD` Replicator causes the Base :term:`DMCS` to
-enable the US DAC :term:`EFD` replica to be a slave to the Chilean DAC
-:term:`EFD` replica.
+``enable`` the US :term:`DAC` :term:`EFD` replica to be a slave to the
+Chilean :term:`DAC` :term:`EFD` replica.
 
 .. _disable-command:
 
@@ -279,7 +281,7 @@ This command disables the commandable entity from running and processing
 news events and data.
 
 Disabling the Archiver causes it to unsubscribe from the
-“startIntegration” event. It does not terminate any replicator jobs
+``startIntegration`` event. It does not terminate any replicator jobs
 already executing.
 
 Disabling the Catch-Up Archiver stops it from scanning for unarchived
@@ -287,27 +289,27 @@ images and tells the Orchestration Manager to stop scheduling any new
 image archive jobs.
 
 Disabling the Alert Production Cluster causes it to unsubscribe from the
-“nextVisit” event. It does not terminate any worker jobs already
+``nextVisit`` event. It does not terminate any worker jobs already
 executing. In particular, the processing for the current visit (not just
 exposure) will normally complete.
 
 Disabling the :term:`EFD` Replicator causes the Base :term:`DMCS` to
-disable the slave operation of the US DAC :term:`EFD` replica.
+disable the slave operation of the US :term:`DAC` :term:`EFD` replica.
 
 .. _release-command: 
 
 release command
 ~~~~~~~~~~~~~~~
 
-This is the equivalent of a disable command, but the commandable entity
-goes to the OFFLINE state.
+This is the equivalent of a ``disable`` command, but the commandable entity
+goes to the ``OFFLINE`` state.
 
 .. _stop-command:
 
 stop command
 ~~~~~~~~~~~~
 
-If issued during a configure command, this command causes the
+If issued during a ``configure`` command, this command causes the
 commandable entity to go into the no configuration state.
 
 If issued during any other command, this command is ignored.
@@ -317,34 +319,34 @@ If issued during any other command, this command is ignored.
 abort command
 ~~~~~~~~~~~~~
 
-If issued during a configure command, this command causes the
-commandable entity to go into the ERROR state with no configuration.
+If issued during a ``configure`` command, this command causes the
+commandable entity to go into the ``ERROR`` state with no configuration.
 
 If issued at any other time, this command does nothing except change the
-commandable entity to the ERROR state. In particular, an abort received
-during enable will leave the system enabled and taking data, but in the
-ERROR state from the command processing standpoint. Note that stopping
-the processing of any commandable entity is handle by the disable
-command, not the abort command.
+commandable entity to the ``ERROR`` state. In particular, an abort
+received during ``enable`` will leave the system enabled and taking
+data, but in the ``ERROR`` state from the command processing standpoint.
+Note that stopping the processing of any commandable entity is handle by
+the ``disable`` command, not the abort command.
 
 .. _reset-command:
 
 reset command
 ~~~~~~~~~~~~~
 
-This command performs the equivalent of the disable command and leaves
-the commandable entity in the IDLE state with no configuration.
+This command performs the equivalent of the ``disable`` command and leaves
+the commandable entity in the ``IDLE`` state with no configuration.
 
 In addition to the above commands, the Base :term:`DMCS` subscribes to
 and responds to the following events published through the :term:`OCS`
-DDS:
+:term:`DDS`:
 
 .. _start-integration-event:
 
 startIntegration event
-~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^
 
-Upon receipt of an startIntegration event, if the Archiver has been
+Upon receipt of an ``startIntegration`` event, if the Archiver has been
 enabled, the Base :term:`DMCS` launches replicator jobs. One job is
 launched for each science raft (21) and one more job is launched to
 handle wavefront sensor images. The middleware will preferentially
@@ -364,9 +366,9 @@ Production control database.
 .. _next-visit-event:
 
 nextVisit event
-~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^
 
-Upon receipt of a nextVisit event, if the Alert Production Cluster has
+Upon receipt of a ``nextVisit`` event, if the Alert Production Cluster has
 been enabled, the Base :term:`DMCS` launches worker jobs. One job is
 launched for each :term:`CCD` (189) and four more jobs are launched for
 the wavefront sensors. These jobs are sent to the Orchestration Manager
@@ -387,30 +389,32 @@ EFD replication
 ---------------
 
 Not included in the Alert Production per se but closely tied to it is
-replication of the Engineering and Facility Database (:term:`EFD`) from
-the Summit to the Chilean DAC and the Chilean DAC to the US DAC.
+replication of the Engineering and Facility Database (:term:`EFD`) from the
+Summit to the Chilean :term:`DAC` and the Chilean :term:`DAC` to the US
+:term:`DAC`.
 
 The replication is implemented by standard replication mechanisms for
 the selected database management system used to implement the
 :term:`EFD`. The latency for the replication from the Summit to the
-Chilean DAC is anticipated to typically be in the milliseconds, although
-latencies of up to one visit time are acceptable. The latency for the
-replication from the Chilean DAC to the US DAC is to be as short as
-possible, constrained by the available bandwidth from Chile to the US,
-but no longer than 24 hours (except when a network outage occurs). The
-typical case for Chile-to-US replication is expected to be seconds or
-less.
+Chilean :term:`DAC` is anticipated to typically be in the milliseconds,
+although latencies of up to one visit time are acceptable. The latency
+for the replication from the Chilean :term:`DAC` to the US :term:`DAC`
+is to be as short as possible, constrained by the available bandwidth
+from Chile to the US, but no longer than 24 hours (except when a network
+outage occurs). The typical case for Chile-to-US replication is expected
+to be seconds or less.
 
 The Alert Production computations will require telemetry stored in the
 :term:`EFD`. The design does not rely on replication for this
-information, however. At the Base, the local Chilean DAC :term:`EFD`
-replica is queried for some information, but the :term:`OCS` telemetry
-stream is also monitored for more recent changes than are reflected in
-the results of the query. This essential data is then sent along with
-the image data to the Archive for processing. If the replication proves
-to have sufficiently low-latency and be sufficiently reliable, it will
-be easy to switch to an alternate mode where the US DAC :term:`EFD`
-replica is queried for the information of interest.
+information, however. At the Base, the local Chilean :term:`DAC`
+:term:`EFD` replica is queried for some information, but the :term:`OCS`
+telemetry stream is also monitored for more recent changes than are
+reflected in the results of the query. This essential data is then sent
+along with the image data to the Archive for processing. If the
+replication proves to have sufficiently low-latency and be sufficiently
+reliable, it will be easy to switch to an alternate mode where the US
+:term:`DAC` :term:`EFD` replica is queried for the information of
+interest.
 
 .. _fig-visit-sequence:
 
@@ -426,10 +430,10 @@ Alert Production Hardware
 
 We now describe the detailed operations performed by each Alert
 Production infrastructure component. The sequence of operations for a
-typical visit is shown in Figure :ref:`fig-visit-sequence`.
+typical visit is shown in :numref:`fig-visit-sequence`.
 
-All DM hardware is monitored by DM system administration tools, which
-publish results via the Archive DM Control System. Each machine verifies
+All :term:`DM` hardware is monitored by :term:`DM` system administration tools, which
+publish results via the Archive :term:`DM` Control System. Each machine verifies
 its software installation on boot (e.g. via hash or checksum).
 
 
@@ -470,28 +474,28 @@ First, the job sends the visit id, exposure sequence number within the
 visit, and raft id (for science sensor jobs) that it received from the
 Base :term:`DMCS` to the replicator's connected distributor. It queries
 the Base Engineering and Facility Database replica for information
-needed to process the image. Subscriptions to the CCS startReadout event
-and :term:`OCS` telemetry topics are made; the latter topics are
-monitored for updates to key values, including a flag indicating whether
-the system is taking science data. When the startReadout event occurs,
-the image id information in the event is used to request retrieval of
-the crosstalk-corrected exposure for the raft using the :term:`CDS`
-client interface [#f9]_, blocking until it is available. When the
-term:`CDS` delivers the image, its integrity is verified using a hash or
-checksum, and the image and associated telemetry is sent over the
-network to the distributor, compressing it if configured.
-Simultaneously, the image is written to the network outage buffer and
-the raw image cache using the Data Access Client Framework. The latter
-two transfers are retried if necessary (up to a configured number of
-retries). All images that are written are tagged with the Archiver mode.
-After the crosstalk-corrected image has been sent, the raw exposure is
-retrieved. That image is then sent over the network to the distributor
-and simultaneously written to the network outage buffer and the tape
-archive. All successful (and unsuccessful) image transmissions over the
-network are recorded to the Alert Production database. (Successful
-writes to the tape archive could also be recorded in the database for
-convenience, although that poses the possibility of disagreement between
-the database and the tape archive.)
+needed to process the image. Subscriptions to the :term:`CDS`
+``startReadout`` event and :term:`OCS` telemetry topics are made; the
+latter topics are monitored for updates to key values, including a flag
+indicating whether the system is taking science data. When the
+startReadout event occurs, the image id information in the event is used
+to request retrieval of the crosstalk-corrected exposure for the raft
+using the :term:`CDS` client interface,[#f9]_ blocking until it is
+available. When the :term:`CDS` delivers the image, its integrity is
+verified using a hash or checksum, and the image and associated
+telemetry is sent over the network to the distributor, compressing it if
+configured.  Simultaneously, the image is written to the network outage
+buffer and the raw image cache using the Data Access Client Framework.
+The latter two transfers are retried if necessary (up to a configured
+number of retries). All images that are written are tagged with the
+Archiver mode.  After the crosstalk-corrected image has been sent, the
+raw exposure is retrieved. That image is then sent over the network to
+the distributor and simultaneously written to the network outage buffer
+and the tape archive. All successful (and unsuccessful) image
+transmissions over the network are recorded to the Alert Production
+database. (Successful writes to the tape archive could also be recorded
+in the database for convenience, although that poses the possibility of
+disagreement between the database and the tape archive.)
 
 (In some calibration or engineering modes, there may only be raw image
 data, not crosstalk-corrected image data; the replicator job
@@ -571,9 +575,9 @@ filter and airmass), Objects (from the last Data Release),
 :term:`DIAObject`\s, past :term:`DIASource`\s, and :term:`SSObject`\s
 that overlap that region using the Data Access Client Framework. It also
 retrieves the master calibration images appropriate for that :term:`CCD`
-and filter.  Note that we have the time from the nextVisit event to the
-completion of the first exposure of the visit, which is a minimum of 15
-seconds, to start the worker job and perform this retrieval.
+and filter.  Note that we have the time from the ``nextVisit`` event to
+the completion of the first exposure of the visit, which is a minimum of
+15 seconds, to start the worker job and perform this retrieval.
 
 The job contacts the Archive :term:`DMCS` to determine the appropriate
 distributor for the first image for the visit and raft. This is a
@@ -592,16 +596,16 @@ Processing Pipelines, Association Pipelines, Alert Generation Pipeline,
 Moving Object Pipelines, and Difference Imaging Pipeline. This includes
 instrument signature removal (:term:`ISR`); :term:`CCD` assembly from
 constituent amplifiers; cosmic ray removal and visit image combination;
-image calibration (:term:`WCS`, :term:`PSF`, and background determination);
-image differencing with the template; detection and measurement on the
-difference image; forced photometry on the calibrated exposure at the
-positions of the difference image detections; spatial association of
-:term:`DIASource`\s with :term:`SSObject`\s (at positions interpolated
-using pre-computed coefficients and the exact midpoint of the exposure)
-and :term:`DIAObject`\s; creation of new :term:`DIAObject`\s for any
-unassociated :term:`DIASource`\s; science data quality analysis (SDQA)
-on all data products; and generation of Alerts for all relevant
-:term:`DIASource`\s.
+image calibration (:term:`WCS`, :term:`PSF`, and background
+determination); image differencing with the template; detection and
+measurement on the difference image; forced photometry on the calibrated
+exposure at the positions of the difference image detections; spatial
+association of :term:`DIASource`\s with :term:`SSObject`\s (at positions
+interpolated using pre-computed coefficients and the exact midpoint of
+the exposure) and :term:`DIAObject`\s; creation of new
+:term:`DIAObject`\s for any unassociated :term:`DIASource`\s; science
+data quality analysis (:term:`SDQA`) on all data products; and
+generation of Alerts for all relevant :term:`DIASource`\s.
 
 :term:`DIASource`\s, :term:`DIAObject`\s, and :term:`SSObject`\s are
 updated (append-only) in the Level 1 database. Alerts are sent to the
@@ -610,21 +614,21 @@ are written to their respective caches. All images written are tagged
 with the Alert Production Cluster mode. The Data Access Client Framework
 is used for all of this output.
 
-Information from the image calibration and SDQA, including the
+Information from the image calibration and :term:`SDQA`, including the
 :term:`WCS` and information about the :term:`PSF`, is sent via the
 :term:`DM` Event Services to the Base :term:`DMCS`, which then publishes
-it via DDS as telemetry.
+it via :term:`DDS` as telemetry.
 
 If the algorithms require communication of data between :term:`CCD`
 jobs, either to determine global, focal-plane-wide values or to retrieve
-certain data from neighboring :term:`CCD`\s, the DM Inter-Process
-Messaging Services are used.  These services may be implemented using
-two technologies, transparent to application code:
+certain data from neighboring :term:`CCD`\s, the :term:`DM`
+Inter-Process Messaging Services are used.  These services may be
+implemented using two technologies, transparent to application code:
 
-1. The jobs may communicate via the DM Event Services.
+1. The jobs may communicate via the :term:`DM` Event Services.
 
 2. The jobs may be submitted as an HTCondor MPI universe job and then
-may communicate via MPI.
+   may communicate via MPI.
 
 In addition, the worker jobs themselves are likely to
 (non-transparently) use thread-level parallelism to achieve sufficient
@@ -653,8 +657,9 @@ restarted job may need to obtain its data from the raw image cache
 rather than a distributor.
 
 As the Level 1 data products are generated at the Archive Center, they
-are replicated to the US DAC and the Chilean DAC (over the WAN) via DM
-File System Services and native replication for the Level 1 database.
+are replicated to the US :term:`DAC` and the Chilean :term:`DAC` (over
+the WAN) via :term:`DM` File System Services and native replication for the
+Level 1 database.
 
 .. _catch-up-archiver:
 
@@ -687,13 +692,13 @@ of these images.
 Calibration image and engineering image modes
 ---------------------------------------------
 
-When the DM Archiver and Alert Production Cluster are configured in
-these modes, there are no visits. The startExposure event is used to
-trigger both replicator jobs and worker jobs (although another event
+When the :term:`DM` Archiver and Alert Production Cluster are configured
+in these modes, there are no visits. The ``startExposure`` event is used
+to trigger both replicator jobs and worker jobs (although another event
 could be used to trigger the workers). Worker processing only performs
 :term:`ISR` (often just a subset), :term:`CCD` assembly, :term:`PSF`
-determination (if appropriate), and a subset of SDQA, as configured for
-the mode selected.
+determination (if appropriate), and a subset of :term:`SDQA`, as
+configured for the mode selected.
 
 .. _daytime-ops-mode:
 
@@ -709,7 +714,7 @@ Cluster is in this mode, but no processing of any images will occur and
 the distributors will never receive requests from the workers. The
 Catch-Up Archiver may be enabled.
 
-The Base :term`DMCS` will submit jobs to the Orchestration Manager as
+The Base :term:`DMCS` will submit jobs to the Orchestration Manager as
 necessary to perform the daytime tasks.
 
 .. _failure-modes:
@@ -765,7 +770,7 @@ the LSST Network Operations and Management Plan (Document-11918).
 
 If a replicator, distributor, or worker dies, a spare will be used
 automatically by the Orchestration Manager. If the Base or Archive
-:term`DMCS`, the DM Event Services Broker, or the Orchestration Manager
+:term:`DMCS`, the DM Event Services Broker, or the Orchestration Manager
 itself dies, a spare will be brought online. Since these machines
 maintain little state, a replacement should be available rapidly without
 missing many visits.
@@ -776,8 +781,9 @@ Catch-Up Archiver can be used with the network outage buffer when they
 return.
 
 If an :term:`EFD` replica fails, queries can be directed to the next
-master up the chain (US DAC to Chilean DAC, Chilean DAC to Summit) until
-a new slave can be brought online and synchronized.
+master up the chain (US :term:`DAC` to Chilean :term:`DAC`, Chilean
+:term:`DAC` to Summit) until a new slave can be brought online and
+synchronized.
 
 If the calibration, Level 1 catalog, or Alert Production control
 database fails, a hot spare replica will be reconfigured to be the
@@ -793,15 +799,16 @@ If the Alert Production workers get behind, the Orchestration Manager
 will begin to schedule worker jobs on spare worker hardware. If so
 configured, it may also schedule jobs on the Data Release general
 compute pool. The worker jobs themselves are designed to process batches
-of DiaSources into Alerts so that at least some Alerts are issued for
-each visit before the latency deadline. Executing jobs that are beyond
-the deadline may be killed and scheduled for later reprocessing. If even
-that is not enough and unexecuted jobs pile up because processing is too
-slow, as determined by monitoring the Orchestration Manager's queue
-length, the Base :term:`DMCS` will kill the oldest unexecuted jobs to
-get below threshold. In addition, the Base :term:`DMCS` configuration
-will allow sampling of visits for worst-case scenarios, in which only a
-fraction of visits actually spawn worker jobs.
+of ``DiaSource``\s into Alerts so that at least some Alerts are
+issued for each visit before the latency deadline. Executing jobs that
+are beyond the deadline may be killed and scheduled for later
+reprocessing. If even that is not enough and unexecuted jobs pile up
+because processing is too slow, as determined by monitoring the
+Orchestration Manager's queue length, the Base :term:`DMCS` will kill
+the oldest unexecuted jobs to get below threshold. In addition, the Base
+:term:`DMCS` configuration will allow sampling of visits for worst-case
+scenarios, in which only a fraction of visits actually spawn worker
+jobs.
 
 .. _maintenance-upgrades:
 
@@ -851,32 +858,33 @@ frames, dark frames (if necessary), flat frames, and fringe frames (if
 necessary) using the Data Access Client Framework. Although these images
 need to be processed sequentially (so that biases can be removed from
 flat frames, for example), these images can generally be processed on a
-per-term:`CCD` (per-sensor) basis, allowing division into 189 (plus 4
+per-:term:`CCD` (per-sensor) basis, allowing division into 189 (plus 4
 for wavefront sensors) separate jobs. The Archive :term:`DMCS` submits
 these jobs to the Orchestration Manager for execution on a portion of
 the general Archive compute pool. Each job writes its resulting master
-calibration images to the shared disk image storage at the US DAC using
-the Data Access Client Framework and writes other information to the
-calibration database at the US DAC. These master calibration images and
-database records are then replicated to the Chilean DAC. It is not
-expected that inter-process communication (i.e. inter-sensor data
-movement) will be necessary to produce suitable master calibration
-images at the :term:`ISR` level, though the architecture permits it.
+calibration images to the shared disk image storage at the US
+:term:`DAC` using the Data Access Client Framework and writes other
+information to the calibration database at the US :term:`DAC`. These
+master calibration images and database records are then replicated to
+the Chilean :term:`DAC`. It is not expected that inter-process
+communication (i.e. inter-sensor data movement) will be necessary to
+produce suitable master calibration images at the :term:`ISR` level,
+though the architecture permits it.
 
 Crosstalk correction matrix computations will initially proceed on a
 per-:term:`CCD` basis as well, but it will require inter-process
 communication.  This will be provided by the Inter-Process Messaging
 Services.
 
-In its pre-DRP mode, separate jobs will analyze the telemetry in the
-:term:`EFD`, including auxiliary telescope spectra, to determine
+In its pre-:term:`DRP` mode, separate jobs will analyze the telemetry in
+the :term:`EFD`, including auxiliary telescope spectra, to determine
 detailed calibration models. These models include the system bandpass
 function for every visit. This information will be written to the
-calibration database at the US DAC and then replicated to the Chilean
-DAC. Note that new versions of this information for every exposure will
-be calculated each time; old versions will be maintained. These jobs
-will be partitioned by time period, allowing parallelism for this
-operation.
+calibration database at the US :term:`DAC` and then replicated to the
+Chilean :term:`DAC`. Note that new versions of this information for
+every exposure will be calculated each time; old versions will be
+maintained. These jobs will be partitioned by time period, allowing
+parallelism for this operation.
 
 .. _drp:
 
@@ -896,7 +904,7 @@ execution on the general Archive compute pool.
 The Data Release Production is handled by the following infrastructure
 components located at the Archive Center at :term:`NCSA` in Illinois:
 
-1. Archive DM Control System
+1. Archive :term:`DM` Control System
 
 2. Tape archive
 
@@ -904,18 +912,18 @@ components located at the Archive Center at :term:`NCSA` in Illinois:
 
 4. Compute nodes
 
-5. DM Event Services Broker
+5. :term:`DM` Event Services Broker
 
-6. Shared disk for Level 2 data products at the US DAC
+6. Shared disk for Level 2 data products at the US :term:`DAC`
 
-7. Level 2 database at the US DAC
+7. Level 2 database at the US :term:`DAC`
 
 8. Data Release Production (control) database
 
 All :term:`DM` hardware is monitored by :term:`DM` system administration
-tools, which publish results via the Archive DM Control System. Each
-machine verifies its software installation on boot (e.g. via hash or
-checksum).
+tools, which publish results via the Archive :term:`DM` Control System.
+Each machine verifies its software installation on boot (e.g. via hash
+or checksum).
 
 .. _drp-overall-sequence:
 
@@ -927,34 +935,35 @@ computations across the full set of available images, at least in one
 region of the sky and possibly across the entire survey area. It is
 impractical to perform these computations in an incremental fashion.
 Therefore a “freeze date” must be chosen which delineates the latest
-image to be included in the DRP processing.
+image to be included in the :term:`DRP` processing.
 
 After the freeze date is selected, the Calibration Products Production
-is run in pre-DRP mode, which recalculates all of the master calibration
-images and the calibration database to be used for all the exposures up
-to that date.
+is run in pre-:term:`DRP` mode, which recalculates all of the master
+calibration images and the calibration database to be used for all the
+exposures up to that date.
 
 Second, a region of the sky (about 5-10% of the total survey area) is
-processed through the entire DRP, treating it as if that were the entire
-survey. The results of this processing are analyzed and verified to
-ensure that the software is performing properly.
+processed through the entire :term:`DRP`, treating it as if that were
+the entire survey. The results of this processing are analyzed and
+verified to ensure that the software is performing properly.
 
 Finally, after any software fixes or configuration changes resulting
 from the single-region analysis, the entire sky is processed.
 
 When the complete set of Level 2 data products has been generated, it is
-transferred to the Chilean DAC (and any other non-project stand-alone
-DACs that provide the necessary bandwidth resources). For the Chilean
-DAC, this transfer nominally occurs by writing the data products to disk
-and shipping the disk to Chile, although an alternative path via
-high-speed network is being considered.
+transferred to the Chilean :term:`DAC` (and any other non-project
+stand-alone :term:`DAC`\s that provide the necessary bandwidth
+resources). For the Chilean :term:`DAC`, this transfer nominally occurs
+by writing the data products to disk and shipping the disk to Chile,
+although an alternative path via high-speed network is being considered.
 
 .. _drp-detailed-sequence:
 
 Detailed Sequence
 -----------------
 
-The DRP computation can be considered to have several major segments:
+The :term:`DRP` computation can be considered to have several major
+segments:
 
 1. Single-frame processing
 
@@ -966,12 +975,12 @@ The DRP computation can be considered to have several major segments:
 
 5. Object characterization and forced photometry
 
-To initialize the DRP, Level 1 database visit metadata tables as of the
-"freeze date" are copied to the DRP temporary database along with the
+To initialize the :term:`DRP`, Level 1 database visit metadata tables as of the
+"freeze date" are copied to the :term:`DRP` temporary database along with the
 Calibration Database from the CPP and a verified “seed” Solar System
 Object catalog. A dataset repository is configured pointing to the raw
 images on tape and the master calibration images from the Calibration
-Products Production, along with the DRP temporary database. The visit
+Products Production, along with the :term:`DRP` temporary database. The visit
 metadata tables are scanned to extract the boresight RA/dec coordinates.
 These are used to determine which sky tiles are covered by each visit.
 The complete list of such sky tiles is gathered.
@@ -985,16 +994,16 @@ each visit overlapping that sky tile. Each task reads the raw visit
 images from tape, performs instrument signature removal, characterizes
 the image by determining its :term:`WCS`, :term:`PSF`, and approximate
 photometric calibration, and detects and measures Sources on the image.
-SDQA metrics are derived from these results. The image characterization
-parameters and SDQA metrics are loaded into the DRP temporary database.
-The Source datasets are retained in DRP scratch space. The calibrated
-exposures are not retained, so all sky tiles can be processed as quickly
-as possible.
+:term:`SDQA` metrics are derived from these results. The image
+characterization parameters and :term:`SDQA` metrics are loaded into the
+:term:`DRP` temporary database.  The Source datasets are retained in
+:term:`DRP` scratch space. The calibrated exposures are not retained, so
+all sky tiles can be processed as quickly as possible.
 
 The Archive :term:`DMCS` next submits tasks to the Orchestration Manager
 to perform global astrometric and photometric calibration using the
 Source datasets. The resulting astrometric and photometric models are
-loaded into the DRP temporary database.
+loaded into the :term:`DRP` temporary database.
 
 Source ingestion into the nascent Level 2 database can occur at this
 point.
@@ -1010,8 +1019,8 @@ deterministically matched with a list of coadd patches it covers, the
 entire task graph can be precomputed.
 
 The first group of tasks regenerates calibrated exposures for each visit
-overlapping a sky tile and writes the exposure images to DRP scratch
-space. (This regeneration task is simplified to just instrument
+overlapping a sky tile and writes the exposure images to :term:`DRP`
+scratch space. (This regeneration task is simplified to just instrument
 signature removal because it can use the image characterization results
 from the first pass.)
 
@@ -1021,66 +1030,70 @@ Each such coadd task depends on the calibrated exposure regeneration
 tasks for the exposures that overlap the patch. These tasks warp the
 calibrated exposure to the patch frame using the astrometric models from
 global astrometric calibration and then generate all coadds (deep,
-short-period, best seeing, :term:`PSF`-matched, and template) from the warped
-exposures. All coadd patches (except the templates) have detection and
-measurement performed. The CoaddSource datasets, including footprints,
-the deep coadd images, and the template images are retained in DRP
-scratch space.
+short-period, best seeing, :term:`PSF`-matched, and template) from the
+warped exposures. All coadd patches (except the templates) have
+detection and measurement performed. The ``CoaddSource`` datasets,
+including footprints, the deep coadd images, and the template images are
+retained in :term:`DRP` scratch space.
 
 Another group of tasks is issued for each sky tile, again one per visit,
 depending on the coadd tasks for the coadd patches covered by that
 visit. These difference imaging tasks use the calibrated exposure for
 the visit and the template images for the coadd patches to do image
-differencing and DiaSource detection and measurement. Each DiaSource is
-matched against known :term:`SSObject`\s. The DiaSource datasets and difference
-images are retained in DRP scratch space.
+differencing and :term:`DiaSource` detection and measurement. Each
+:term:`DiaSource` is matched against known :term:`SSObject`\s. The
+:term:`DiaSource` datasets and difference images are retained in
+:term:`DRP` scratch space.
 
 A group of tasks, one per coadd patch, is used to spatially associate
-DiaSources into DiaObjects.
+:term:`DiaSource`\s into :term:`DiaObject`\s.
 
 Another group of tasks is executed to perform :term:`MOPS` on all
-DiaObjects that have only one associated DiaSource. :term:`MOPS` is
-expected to use a different data partitioning than the coadd patches.
-The result of :term:`MOPS` is an updated list of :term:`SSObject` orbits
-and a list of DiaObjects/DiaSources that were successfully linked.
+:term:`DiaObject`\s that have only one associated :term:`DiaSource`.
+:term:`MOPS` is expected to use a different data partitioning than the
+coadd patches.  The result of :term:`MOPS` is an updated list of
+:term:`SSObject` orbits and a list of
+:term:`DiaObject`\s/:term:`DiaSource`\s that were successfully linked.
 
-The remaining unlinked DiaObjects (both single-DiaSource and
-multiple-DiaSource) are loaded into the DRP temporary database.
+The remaining unlinked :term:`DiaObject`\s (both
+single-:term:`DiaSource` and multiple-:term:`DiaSource`) are loaded into
+the :term:`DRP` temporary database.
 
 A group of tasks, one per visit, is used to do forced photometry on
-difference images at the positions of the DiaObjects in the database,
-resulting in DiaForcedSources. The difference images are then removed
-from the DRP scratch space.
+difference images at the positions of the :term:`DiaObject`\s in the
+database, resulting in ``DiaForcedSources``. The difference images are then
+removed from the :term:`DRP` scratch space.
 
-DiaObjects, DiaSources, DiaForcedSources, and :term:`SSObject`\s can be ingested
-into the nascent Level 2 database.
+:term:`DiaObject`\s, :term:`DiaSource`\s, ``DiaForcedSource``\s, and
+:term:`SSObject`\s can be ingested into the nascent Level 2 database.
 
 Finally, a group of tasks is executed, one per coadd patch, to associate
-and deblend CoaddSources, Sources, and DiaObjects into Objects and then
-perform MultiFit object characterization and forced photometry using the
-calibrated exposures overlapping the patch, generating Object
-measurements and ForcedSources.
+and deblend ``CoaddSource``\s, ``Source``\s, and ``DiaObject``\s into
+``Objects`` and then perform MultiFit object characterization and forced
+photometry using the calibrated exposures overlapping the patch,
+generating ``Object`` measurements and ``ForcedSource``\s.
 
-Objects and ForcedSources are ingested into the Level 2 database at this
-point.
+``Object``\s and ``ForcedSource``\s are ingested into the Level 2
+database at this point.
 
 The Level 2 catalogs are ingested into a temporary Level 2 database at
 the Archive Center as portions are generated as described above, and the
 metadata for the Level 2 image products is also ingested into the
 database.
 
-SDQA is performed continuously at each step as the Level 2 data products
-are generated, with the resulting metrics ingested into the Level 2
-database. Metrics from SDQA may be used in succeeding steps (e.g. to
-avoid low-quality images during coaddition). Additional SDQA (automated
-and manual) is performed after the data products are complete.
+:term:`SDQA` is performed continuously at each step as the Level 2 data
+products are generated, with the resulting metrics ingested into the
+Level 2 database. Metrics from :term:`SDQA` may be used in succeeding
+steps (e.g. to avoid low-quality images during coaddition). Additional
+:term:`SDQA` (automated and manual) is performed after the data products
+are complete.
 
-The Level 2 data products are sent to the Chilean DAC and installed
-there. They are copied from Data Release Production scratch space and
-the Data Release Production database to the US DAC.
+The Level 2 data products are sent to the Chilean :term:`DAC` and
+installed there. They are copied from Data Release Production scratch
+space and the Data Release Production database to the US :term:`DAC`.
 
 The Level 2 database and images are then released simultaneously at the
-US and Chilean DACs.
+US and Chilean :term:`DAC`\s.
 
 .. _drp-parallelization:
 
@@ -1094,7 +1107,7 @@ as images, sky patches, or Objects. :term:`MOPS` is parallelizable over
 lunation time periods. These data units will generate thousands to
 millions or even billions of independent tasks, which will be grouped
 into jobs of appropriate length, on the order of single-digit hours. In
-particular, the object characterization may be done on all Objects
+particular, the object characterization may be done on all ``Object``\s
 within a sky patch to minimize I/O of image pixels. These jobs will be
 submitted to the Orchestration Manager.
 
@@ -1125,8 +1138,8 @@ All data products are backed up to tape as they are written to the data
 products storage.
 
 At the time of the data release, the in-progress data products are made
-available to the DAC while the oldest data release (except DR1, which is
-always kept) is removed.
+available to the :term:`DAC` while the oldest data release (except DR1,
+which is always kept) is removed.
 
 .. _drp-failure-modes:
 
@@ -1262,8 +1275,8 @@ on disk. Historical versions are accessible from tape.
 
 An image regeneration Web service is provided to produce calibrated and
 difference images on demand. This service access the raw, master
-calibration, and template images from the DAC disk or from tape as
-required. Latency when tape is involved will obviously be greater.
+calibration, and template images from the :term:`DAC` disk or from tape
+as required. Latency when tape is involved will obviously be greater.
 
 The primary access to the image storage and regeneration service occurs
 through the image cutout Web service. This takes a request with
@@ -1284,12 +1297,12 @@ file transfer protocols.
 Level 3 Storage and Compute
 ---------------------------
 
-DAC users may be allocated database and file storage space for use by
-their own, possibly proprietary, computations. At least part of the
-database space will be distributed on the same nodes as the Level 2
-query services database to facilitate joins with the large Object,
-Source, and ForcedSource catalogs. Transfer of data to and from Level 3
-file storage will be via standard file transfer protocols.
+:term:`DAC` users may be allocated database and file storage space for
+use by their own, possibly proprietary, computations. At least part of
+the database space will be distributed on the same nodes as the Level 2
+query services database to facilitate joins with the large ``Object``,
+``Source``, and ``ForcedSource`` catalogs. Transfer of data to and from
+Level 3 file storage will be via standard file transfer protocols.
 
 A compute cluster is provided for Level 3 usage. An Orchestration
 Manager instance will control access to these nodes by pipelines written
@@ -1304,22 +1317,23 @@ part of the storage infrastructure and Orchestration Manager.
 
 A significant use case for Level 3 compute capacity is expected to be
 processing of Data Release Production intermediate data products in a
-way different than the DRP itself. This could involve producing
+way different than the :term:`DRP` itself. This could involve producing
 different coadds or different measurements, for example. This use case
-will be enabled by copying the DRP intermediates to Level 3 file storage
-as they are generated. Users may submit tasks and task graphs to the DAC
-Orchestration Manager that have data dependencies on these
-intermediates. The same facility that allows the Archive :term:`DMCS` to
-sequence through the set of available visits or coadd patches can be
-used to generate these task submissions. Note that the one-way nature of
-the copy from DRP to Level 3 storage and the isolation of the Level 3
-processes and compute hardware from the DRP hardware ensures that there
-is no possibility for problems with user code in Level 3 to impact the
-DRP. Also note that the Level 3 compute tasks are subject to the usual
-resource management, and, in addition, the compute time available to
-these tasks will be dependent on the amount of available Level 3 file
-storage, since new intermediate data products will overwrite old ones
-when the available space has filled up.
+will be enabled by copying the :term:`DRP` intermediates to Level 3 file
+storage as they are generated. Users may submit tasks and task graphs to
+the :term:`DAC` Orchestration Manager that have data dependencies on
+these intermediates. The same facility that allows the Archive
+:term:`DMCS` to sequence through the set of available visits or coadd
+patches can be used to generate these task submissions. Note that the
+one-way nature of the copy from :term:`DRP` to Level 3 storage and the
+isolation of the Level 3 processes and compute hardware from the
+:term:`DRP` hardware ensures that there is no possibility for problems
+with user code in Level 3 to impact the :term:`DRP`. Also note that the
+Level 3 compute tasks are subject to the usual resource management, and,
+in addition, the compute time available to these tasks will be dependent
+on the amount of available Level 3 file storage, since new intermediate
+data products will overwrite old ones when the available space has
+filled up.
 
 .. _dac-failure-modes:
 
@@ -1352,20 +1366,21 @@ disabled, and its space is reclaimed.
 
 Level 1 database maintenance, including modifications to its schema,
 will occur on the Archive Center copy during the day with replication to
-the DAC copies during a daily maintenance period before the start of
-nighttime observing. Level 2 databases in new data releases need not
-have the same schema as in previous data releases. Further details on
-database schema evolution are in the LSST Database Design document
-(LDM-135).
+the :term:`DAC` copies during a daily maintenance period before the
+start of nighttime observing. Level 2 databases in new data releases
+need not have the same schema as in previous data releases. Further
+details on database schema evolution are in the :term:`LSST` Database
+Design document (LDM-135).
 
-When new versions of the DAC software services are to be deployed, they
-will be brought up on the same hosts as the operational services, but
-using different network ports. If the new versions require different
-internal data formats, additional reserved space on the storage media
-(tape, shared disk, local disk) will be used to hold the transformed
-data. After the new services are tested, the old and new versions will
-be swapped. Once the new version has been proved in operation, the old
-service will be disabled and any space used will be reclaimed.
+When new versions of the :term:`DAC` software services are to be
+deployed, they will be brought up on the same hosts as the operational
+services, but using different network ports. If the new versions require
+different internal data formats, additional reserved space on the
+storage media (tape, shared disk, local disk) will be used to hold the
+transformed data. After the new services are tested, the old and new
+versions will be swapped. Once the new version has been proved in
+operation, the old service will be disabled and any space used will be
+reclaimed.
 
 As for the Data Release Production, new hardware will be deployed
 throughout the course of the survey to add capacity, to replace failed
@@ -1402,6 +1417,9 @@ Appendix: Abbreviations
    DIA
       difference imaging analysis
 
+   DDS
+      Data Distribution Service
+
    DIAObject
       DIA (variable) object
 
@@ -1419,6 +1437,9 @@ Appendix: Abbreviations
 
    DR
       Data Release
+
+   DRP
+      Data Release Production
 
    EFD
       Engineering and Facility Database
@@ -1444,6 +1465,9 @@ Appendix: Abbreviations
 
    PSF
       point-spread function
+
+   SDQA
+       Science Data Quality Analysis
 
    SSObject
       solar system object

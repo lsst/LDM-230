@@ -9,7 +9,7 @@ Automated Operations of the LSST Data Management System
 This is a working repository for *LDM-230: Automated Operations of the
 LSST Data Management System*.
 
-* Read the living document on the web: http://ldm-230.readthedocs.org
+* Read the living document on the web: http://ldm-230.lsst.io
 * Read the officially-approved document:
   https://docushare.lsstcorp.org/docushare/dsweb/ServicesLib/LDM-230/History
 

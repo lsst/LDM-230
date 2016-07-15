@@ -17,8 +17,8 @@ products.
 Overview
 ========
 
-Description (what)
-------------------
+Description
+-----------
 ...
 
 Objective

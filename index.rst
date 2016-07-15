@@ -64,9 +64,10 @@ A **campaign** is the set of all pipeline executions needed to achieve a LSST ob
 - For each input pipeline data set there is a **data handling scheme** for handling that data set in a way that inputs are properly retrieved from the archive and made available for pipeline use.
 - For each output pipeline data set there is a **data handling scheme** for handling that data set in a way that outputs are properly archived.
 
-The key factor in the nature of the LSST computing system is the inherent trivial paralleism in due to the nature of the computations.  This means that 
-large campaigns can be divided into ensembles of smaller, independent jobs, even though some jobs may require a small number of nodes.
-
+The key factor in the nature of the LSST computing problem is the inherent trivial parallelism
+is due to the nature of the computations. This means that large campaign can be divided into
+ensembles of smaller, independent jobs, even though some jobs may require a small number
+of nodes.
 
 Batch Production services are distinct from other services that may use batch infrastructure,
 such as Development Support services. Also, there are other scenarios where pipelines need

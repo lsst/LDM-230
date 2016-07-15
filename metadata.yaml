@@ -1,10 +1,10 @@
 doc_id: 'LDM-230'
-doc_title: 'Automated Operations of the LSST Data Management System'
-copyright: '2015, AURA/LSST'
+doc_title: 'Concept of Operations for the LSST Batch Production Services'
+copyright: '2016, AURA/LSST'
 authors:
     - 'Don Petravick'
     - 'Margaret Johnson'
 # Current document version
-last_revised: '2016-07-16'
+last_revised: '2016-07-15'
 version: '2.0'
 # dev_version_suffix: None  # e.g. 'alpha'/'beta'/'rc' if necessary

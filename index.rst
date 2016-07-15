@@ -21,8 +21,8 @@ Description (what)
 ------------------
 ...
 
-Objective (why)
----------------
+Objective
+---------
 
 Batch operations consists of executing large or small processing campaigns that use released
 software configured into pipelines to produce data products, such as calibrations and DRP
@@ -39,12 +39,13 @@ the desired **LSST data products**, which are measured against **first-level qua
 - A campaign satisfies a need for data products. Campaigns produce the designated batch data products specified in the DPPD, or other authorized data products.
 - Campaigns can be large, such as an annual release processing, or small, such as producing a few calibrations.
 
-.. _risks:
+Risks
+-----
 
    ...
 
-Operational Concepts (how)
---------------------------
+Operational Concepts
+--------------------
 
 A **pipeline** is a body of code, typically maintained and originated within the Science 
 Directorate.  Pipelines may produce final end data products in release processing, may
@@ -59,9 +60,12 @@ A **campaign** is the set of all pipeline executions needed to achieve a LSST ob
 - Each campaign has an **ordering constraint** that specifies any dependencies on the order of running pipelines in a campaign.
 - Each campaign has an adjustable **campaign priority** reflecting LSST priority for that objective.
 - Each pipeline invocation may require one or more input **pipeline data sets**. 
-- Each pipeline invocation produces one or more output **pipeline data sets**. 
+- Each pipeline invocation produces one or more output **pipeline data sets**.  Notice that, for LSST, a given file may be in multiple data sets.
 - For each input pipeline data set there is a **data handling scheme** for handling that data set in a way that inputs are properly retrieved from the archive and made available for pipeline use.
 - For each output pipeline data set there is a **data handling scheme** for handling that data set in a way that outputs are properly archived.
+
+The key factor in the nature of the LSST computing system is the inherent trivial paralleism in due to the nature of the computations.  This means that 
+large campaigns can be divided into ensembles of smaller, independent jobs, even though some jobs may require a small number of nodes.
 
 
 Batch Production services are distinct from other services that may use batch infrastructure,
@@ -117,6 +121,8 @@ An **Orchestration System** is a system that supports the execution of a pipelin
         - Pre-stages into a platform's cluster file system, if available
         - Produces condensed versions of database tables into portable lightweight format (e.g. mysql->sqlLite, flat table etc.)
     - Deals with TBD platform-specific edge services.
+    - Identities and provides for local identity on the computing platforms.
+    - Provides credentials and end-point informtion for any needed LSST services.
 - In-job context:
     - Provides stage-in for any in-job pipeline input data sets
     - Provides any butler configurations necessarily provided from in-job context.
@@ -167,7 +173,7 @@ During normal operations, the Batch Production service will conduct a number of 
 
 - Runs to validate Data Release Processing, 
 - Data Release Processing itself.
-- After-burner campaigns (to correct specific errors in not-yet-delivered data products).
+- After-burner processing (to correct specific errors in not-yet-released data products).
 - Calibration processing.
 - Miscellaneous processing.
 
@@ -198,26 +204,46 @@ Operational Scenarios
 
 Initiate campaign:
 ------------------
-Campaigns are initiated in response to an LSST objective, by specifying an initial set of pipelines, a coverage set, and an initial priority. The Batch Production service is consulted with a reasonable lead time. Consistent with LSST processes, pipelines can modified or added (for example in the case of after-burners) during a campaign. These changes and additions are admitted when the criteria relevant change control processes are satisfied, including 
+Campaigns are initiated in response to an LSST objective, by specifying an initial set 
+of pipelines, a coverage set, and an initial priority. The Batch Production service is consulted 
+with a reasonable lead time. Consistent with LSST processes, pipelines can modified or
+added (for example in the case of after-burners) during a campaign. These changes and
+additions are admitted when the criteria of change control processes are satisfied, including 
 - relevant build-and test criteria
 - the impact of resource-intensive campaigns is approved and understood.
 - production-scale test campaigns
 
 Terminate failed campaign:
 --------------------------
-Reasons for a campaign failure will be documented and submitted to Science Operations for review. The deletion of data products needs to be scheduled so that it occurs after the review has completed. This includes backing out files, materials from databases, and other production artifacts; and maintaining production records as these activities occur.
+Reasons for a campaign failure will be documented and submitted to Science Operations for
+review. The deletion of data products needs to be scheduled so that it occurs after the
+review has completed. This includes backing out files, materials from databases, and other
+production artifacts from the Data Backbone, and maintaining production records as these activities occur.
 
 
 Deal with problematic campaign:
 -------------------------------
-LSST is a large system. Pipeline will evolve and be maintained.  There will be the campaigns, described in the operations documents. It is the nature of the system that as issues emerge extra resource will be needed to provide focused scrutiny on aspects of production for some pipeline.  In many cases problems will be resolved by bug-fixes, or addressed by quality controls and changes to processes.  **Any system needs to support  mustering focused effort on quality analysis that is urgent, and lacks an adequate basis for robust quality controls.**  The L2 service contributes effort to to solve these problems, in collaboration with the science operations group (or other responsible party for codes)
-
-Adjust campaign priority:
--------------------------
+LSST is a large system. Pipelines will evolve and be maintained.  There will be the 
+campaigns, described in the operations documents. It is the nature of the system that as
+issues emerge extra resources will be needed to provide focused scrutiny on aspects of
+production for some pipeline.  In many cases problems will be resolved by bug fixes, or
+addressed by quality controls and changes to processes.  **Any system needs to support 
+mustering focused effort on quality analysis that is urgent, and lacks an adequate
+basis for robust quality controls.**  The Batch Production services staff contribute effort
+to solve these problems, in collaboration with the Science Operations group (or other
+party responsible for codes)
 
 
 Deal with sudden lack (or surplus) in resources:
 ------------------------------------------------
+
+As noted above, for large scale computing, the amount of resource available to support all
+campaigns will vary due to scheduled and unscheduled outages.  
+The technical system responds to an increase or decrease in resources by running more or
+few jobs, once the workload manager is aware of the new level of resources. The technical
+system responds to hardware failures on a running job in just like any other system -- with the
+ultimate recovery being to  delete an partial data and retry, while respecting the priorities of
+the respective campaigns. 
 
 
 

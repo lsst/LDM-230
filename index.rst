@@ -19,17 +19,19 @@ the level of drafting within the working group becomes suitable to expose the do
 LSST construction project.
 
 
-operations consists of executing large or small processing campaigns that use released
-software configured into pipelines to produce data products, such as calibrations and DRP
-products.
-
 .. _overview:
 
 Level 1 Services
 ================
 
+
 Level 2 Services
 ================
+
+This document describes the operational concept for batch production operations. Batch operations consists of executing large or small processing campaigns that use released software configured into pipelines to produce data products, such as calibrations and DRP products.
+
+`Batch Production Services <https://docs.google.com/document/d/1MVe0qdHt5RNTN8KkIxWzd24nNbxA5ZWghajoak3i0HU/edit?usp=sharing>`_
+
 
 Data Backbone Services
 ======================

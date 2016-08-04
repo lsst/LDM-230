@@ -24,6 +24,45 @@ LSST construction project.
 Level 1 Services
 ================
 
+Main Camera Data Prompt Processing
+----------------------------------
+
+
+Main Camera Data Archiving
+--------------------------
+
+Alert Distribution
+------------------
+
+Auxiliary Telescope  Data Processing and Archiving
+--------------------------------------------------
+
+Telemetry Gateway
+-----------------
+
+Observatory Operations Data Services
+------------------------------------
+
+OCS-Driven Batch Services
+-------------------------
+
+EFD Replication
+---------------
+
+Commissioning Cluster Services
+------------------------------
+
+Summit Data Services
+--------------------
+
+Offline L1 Processing
+---------------------
+
+FIrst Order Scientific Quality Assurance
+----------------------------------------
+
+Level 1 Complete Test Environment
+---------------------------------
 
 Level 2 Services
 ================

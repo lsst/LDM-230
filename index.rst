@@ -18,7 +18,6 @@ ReStructuredText as they mature.  Therefore, initially, we will provide pointers
 the level of drafting within the working group becomes suitable to expose the documents to the
 LSST construction project.
 
-
 .. _overview:
 
 Level 1 Services
@@ -33,6 +32,14 @@ Main Camera Data Archiving
 
 Alert Distribution
 ------------------
+
+Is a service which connects programs generating alert information to event brokers.
+
+`Alert Distribution Services <https://docs.google.com/document/d/1z_j-b41BHwpfXoeRAwTVA76Uzp8Xodx3vOLFDAnVnrY/edit?usp=sharing>`_
+
+A figure that illistrates a representative logical structure is here:
+
+`Alert Distribution Figure <https://drive.google.com/open?id=0B4OAryR7BjSiWHEtYlFpX3lQM2M>`_
 
 Auxiliary Telescope  Data Processing and Archiving
 --------------------------------------------------

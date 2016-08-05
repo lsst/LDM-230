@@ -23,21 +23,42 @@ LSST construction project.
 Level 1 Services
 ================
 
-Main Camera Data Prompt Processing
+Main Camera Data Prompt Processing Service
+------------------------------------------
+
+The prompt processing of raw data acquired from the main LSST camera by the DM system. The prompt processing service is primarily
+presented to the the Observing Operations as an OCS-controllable device. 
+
+`Main Camera Data Prompt Processing Service  <https://docs.google.com/a/illinois.edu/document/d/1hv0_ZhkPXt2xCUcMU5J94SjnEr2ZH8JK43PsqJJn_6k/edit?usp=sharing>`_
+
+This figure illustrates a logical conception of the service.
+
+`Logical Conception of the Main Camera Data Prompt Processing Service  <https://drive.google.com/open?id=0B4OAryR7BjSiU1BfVndSNzRRQ0U>`_
+
+
+
+Main Camera Data Archiving Service
 ----------------------------------
 
+The main camera data archive service is presented to Observing Operations as a OCS-controllable device.
+The service constructs raw data files from exposures in the camera data system, and meta-data residing in OCS.
+The files so constructed are ingested into the data backbone. 
 
-Main Camera Data Archiving
+`Main Camera Data Archiving Service <https://drive.google.com/open?id=1-2jV-VovfVpJO62C2PmVXSUWaXB0gFfZ4pgp6I1d3k0>`_
+
+This figure illustrates a logical conception of the service.
+
+`Logical Conception of the Main Camera Archiving Service  <https://docs.google.com/document/d/1ZolFLDtRbOxKhC6CMLXMRmy3zvQbiyE2kYkc_odSR6c/edit?usp=sharing>`_
+
+
+Alert Distribution Service
 --------------------------
 
-Alert Distribution
-------------------
+The Alert Distribution service  a service which connects programs generating alert information to event brokers.
 
-Is a service which connects programs generating alert information to event brokers.
+`Alert Distribution Service <https://docs.google.com/document/d/1z_j-b41BHwpfXoeRAwTVA76Uzp8Xodx3vOLFDAnVnrY/edit?usp=sharing>`_
 
-`Alert Distribution Services <https://docs.google.com/document/d/1z_j-b41BHwpfXoeRAwTVA76Uzp8Xodx3vOLFDAnVnrY/edit?usp=sharing>`_
-
-A figure that illistrates a representative logical structure is here:
+A figure that illistrates a repesentative logical structure is here:
 
 `Alert Distribution Figure <https://drive.google.com/open?id=0B4OAryR7BjSiWHEtYlFpX3lQM2M>`_
 
@@ -61,6 +82,13 @@ Commissioning Cluster Services
 
 Summit Data Services
 --------------------
+
+Summit data services refer to presistent data storage at the summit site, Most likely to
+satisfy use cases related to sustaining operations should the fiber be cut, or for any other
+need that would emerge.
+
+This Need is under discussion. 
+
 
 Offline L1 Processing
 ---------------------

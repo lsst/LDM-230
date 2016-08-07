@@ -28,7 +28,7 @@ Main Camera Data Prompt Processing Service
 
 The prompt processing of raw data acquired from the main LSST camera
 by the DM system. The prompt processing service is primarily presented
-to the the Observing Operations as an OCS-controllable device.
+to the Observing Operations as an OCS-controllable device.
 
 `Main Camera Data Prompt Processing Service  <https://docs.google.com/a/illinois.edu/document/d/1hv0_ZhkPXt2xCUcMU5J94SjnEr2ZH8JK43PsqJJn_6k/edit?usp=sharing>`_
 
@@ -62,14 +62,14 @@ generating alert information to event brokers.
 
 `Alert Distribution Service <https://docs.google.com/document/d/1z_j-b41BHwpfXoeRAwTVA76Uzp8Xodx3vOLFDAnVnrY/edit?usp=sharing>`_
 
-A figure that illistrates a repesentative logical structure is here:
+A figure that illustrates a representative logical structure is here:
 
 `Alert Distribution Figure <https://drive.google.com/open?id=0B4OAryR7BjSiWHEtYlFpX3lQM2M>`_
 
 Auxiliary Telescope  Data Processing and Archiving
 --------------------------------------------------
 
-Ingest data from spectrophotometer into Data Backbone.
+Ingest data from spectrometer into Data Backbone.
 TBD whether or not processing is needed.
 
 ** Pre-phase 1**
@@ -80,13 +80,13 @@ Telemetry Gateway
 Capabilities for system information sent from the DM system to the OCS system.
 This service covers the transmission of all telemetry into the OCS system.
 
-** In phase 2 discussion which resuled in need for clarification
+** In phase 2 discussion which resulted in need for clarification
 
 Observatory Operations Data Services
 ------------------------------------
-Provide access to designated datasets from the LSST science data archive as needed by observatory operations to the stipulated service levels
+Provide access to designated data sets from the LSST science data archive as needed by observatory operations to the stipulated service levels
 
-** In phase 2 discussion which resuled in need for clarification
+** In phase 2 discussion which resulted in need for clarification
 
 
 OCS-Driven Batch Services
@@ -110,7 +110,7 @@ computations of TBD capacity
 Summit Data Services
 --------------------
 
-Summit data services refer to presistent data storage at the summit
+Summit data services refer to persistent data storage at the summit
 site, Most likely to satisfy use cases related to sustaining
 operations should the fiber be cut, or for any other need that would
 emerge.
@@ -123,7 +123,7 @@ Offline L1 Processing
 
 Offline Level 1 processing is processing that occurs in the a batch context, instead of the context of the Prompt Processing under OCS control.
 
-The concepts for this process are presented in the "Level 1 Producition Services" section of this document prepared for the LOPT/TOWG
+The concepts for this process are presented in the "Level 1 Production Services" section of this document prepared for the LOPT/TOWG
 
 `<https://docs.google.com/document/d/1KFwL38iIKbvDhhcbPcwjWr-CDg9cPvZuq0PFzSBmbPc/edit>`_
 
@@ -140,7 +140,7 @@ The additional quality assessment concepts presented in the section "Level 2 pro
 Level 1 Complete Test Environment
 ---------------------------------
 
-Level 1 Complete Test Environment a capablity need to for testing Level 1 Service Changes.
+Level 1 Complete Test Environment a capability need to for testing Level 1 Service Changes.
 
 The concepts for this process are presented in the "Level 1 Production Services" section of this document prepared for the LOPT/TOWG
 
@@ -152,15 +152,14 @@ Level 2 Services
 
 This document describes the operational concept for batch production operations. Batch operations consists of executing large or small processing campaigns that use released software configured into pipelines to produce data products, such as calibrations and DRP products.
 
-The basci concept of batch produciotn apply to these level 2 servince elements:
-These concepts apply to these Batch oriented servicesL
+The basic concept of batch production apply to these level 2 service elements:
 
-Annual Release Processing: Processing of payloads of tested workflows
+Annual Release Processing: Processing of payloads of tested work flows
 at NCSA and satellite sites through and including ingest of release
 products into file stores, relational databases, and the Data
 Backbone, including system quality assurance.
 
-Calibration Processing: processing of payload tested workflows at NCSA
+Calibration Processing: processing of payload tested work flows at NCSA
 and satellite sites through and including ingest of release products
 into file stores, relational databases, and the Data Backbone,
 including initial quality assurance. Calibration production occurs at
@@ -173,7 +172,7 @@ other than specifically enumerated.
 Batch framework upgrade testing: Test suite run after system upgrades
 and other  changes to verify operations.
 
-Payload Testing Verification and validation: of workflows from the
+Payload Testing Verification and validation: of work flows from the
 continuous build system on the production hardware located of NCSA and
 satellite sites.
 
@@ -249,22 +248,22 @@ Detailed conops will be in a future planning period.
 
 Service Design
 --------------
-Building a servince catalog and arranging for changes to the service offering, including internal supporting services.
+Building a service catalog and arranging for changes to the service offering, including internal supporting services.
 
 Detailed conops will be in a future planning period.
 
 
 Service Transition
 ------------------
-Service transtion process provide for specifiing neeed changess, and assessing the quality of proposed changes,
+Service transition process provide for specifying needed changes, and assessing the quality of proposed changes,
 controlling the order and timing of inserting changes  into the system.
 
 Detailed conops will be in a future planning period.
 
 Change management:
 +++++++++++++++++
-An authorized stream of changes to be requested, and for the insertion
-of changes into the reliable production system, and the assessent of the success of these changes 
+Provides authorization for stream of changes to be requested, and for the insertion
+of changes into the reliable production system, and the assessment of the success of these changes 
 
 Detailed conops will be in a future planning period.
 
@@ -272,20 +271,20 @@ Detailed conops will be in a future planning period.
 Release management:
 ++++++++++++++++++
 
-Release management interacts with project producing a specfic change, to ensure that
+Release management interacts with project producing a specific change, to ensure that
 a complete change is presented to change management for approval into the live system.
-Examples areas that are typically a concern -- documention, security concerns.
+Examples areas that are typically a concern -- documentation, security concerns.
 
 Configuration Management: provides an accurate model of the components in the live
-system sufficent to understand changes, and support operations.
+system sufficient to understand changes, and support operations.
 
 Detailed conops will be in a future planning period.
 
 Service Delivery
 ----------------
-Service Delivery is a set of processes needed to operates the current system.  The servince delivery
-processes must statisfy the detailed service delivery concepts presented elsewhere in this concept of
-operations doumentation ensemble. 
+Service Delivery is a set of processes needed to operates the current system.  The service delivery
+processes must satisfy the detailed service delivery concepts presented elsewhere in this concept of
+operations documentation ensemble. 
 
 Request Response
 ++++++++++++++++
@@ -294,7 +293,7 @@ Detailed conops will be in a future planning period.
 Incident response
 +++++++++++++++++
 
-Incident response concept processes are documented in in material developened for the
+Incident response concept processes are documented in material development for the
 LOPT/TOWG working groups. 
 
 The concepts for this process are presented in the "Incident Response" section of this document prepared for the LOPT/TOWG
@@ -304,7 +303,7 @@ The concepts for this process are presented in the "Incident Response" section o
 Problem Management
 ++++++++++++++++++
 
-Problem management processing are documented in material develope for the LOPT/TOWG working groups.
+Problem management processing are documented in material developed for the LOPT/TOWG working groups.
 
 The concepts for this process are presented in the "Problem Management" section of this document prepared for the LOPT/TOWG
 

@@ -80,7 +80,7 @@ Telemetry Gateway
 Capabilities for system information sent from the DM system to the OCS system.
 This service covers the transmission of all telemetry into the OCS system.
 
-** In phase 2 discussion which resulted in need for clarification
+Telemetry Gateway Service <https://docs.google.com/document/d/18ZS3Q-06FGg9tRUQbFRIiO4paA3rKXrKG-dyJkSw_AM/edit?usp=sharing>`_
 
 Observatory Operations Data Services
 ------------------------------------

@@ -4,7 +4,7 @@
 This document describes the operational concepts for the emerging LSST DPP group which will operate
 the system that will be delivered by the LSST construction project. This system will be incrementally
 stood up and operated by the construction project as part of validation and verification activities
-within the construction project.
+within the construction project. See \citeds{LDM-294}
 
 The concept of operations covers approximately 40 distinct services, The operations concepts
 are initially developed in Google docs. It is the vision to  migrate these documents to
@@ -21,11 +21,11 @@ The prompt processing of raw data acquired from the main LSST camera
 by the DM system. The prompt processing service is primarily presented
 to the Observing Operations as an OCS-controllable device.
 
-`Main Camera Data Prompt Processing Service  <https://docs.google.com/a/illinois.edu/document/d/1hv0_ZhkPXt2xCUcMU5J94SjnEr2ZH8JK43PsqJJn_6k/edit?usp=sharing>`_
+Main Camera Data Prompt Processing Service  \url{https://docs.google.com/a/illinois.edu/document/d/1hv0_ZhkPXt2xCUcMU5J94SjnEr2ZH8JK43PsqJJn_6k/edit?usp=sharing}
 
 This figure illustrates a logical conception of the service.
 
-`Logical Conception of the Main Camera Data Prompt Processing Service  <https://drive.google.com/open?id=0B4OAryR7BjSiU1BfVndSNzRRQ0U>`_
+Logical Conception of the Main Camera Data Prompt Processing Service  \url{https://drive.google.com/open?id=0B4OAryR7BjSiU1BfVndSNzRRQ0U}
 
 
 
@@ -37,11 +37,11 @@ data files from exposures in the camera data system, and meta-data
 residing in OCS.  The files so constructed are ingested into the data
 backbone.
 
-`Main Camera Data Archiving Service <https://drive.google.com/open?id=1-2jV-VovfVpJO62C2PmVXSUWaXB0gFfZ4pgp6I1d3k0>`_
+Main Camera Data Archiving Service \url{https://drive.google.com/open?id=1-2jV-VovfVpJO62C2PmVXSUWaXB0gFfZ4pgp6I1d3k0}
 
 This figure illustrates a logical conception of the service.
 
-`Logical Conception of the Main Camera Archiving Service  <https://docs.google.com/document/d/1ZolFLDtRbOxKhC6CMLXMRmy3zvQbiyE2kYkc_odSR6c/edit?usp=sharing>`_
+Logical Conception of the Main Camera Archiving Service  \url{https://docs.google.com/document/d/1ZolFLDtRbOxKhC6CMLXMRmy3zvQbiyE2kYkc_odSR6c/edit?usp=sharing}
 
 
 \subsection{Alert Distribution Service}
@@ -49,11 +49,11 @@ This figure illustrates a logical conception of the service.
 The Alert Distribution service a service which connects programs
 generating alert information to event brokers.
 
-`Alert Distribution Service <https://docs.google.com/document/d/1z_j-b41BHwpfXoeRAwTVA76Uzp8Xodx3vOLFDAnVnrY/edit?usp=sharing>`_
+Alert Distribution Service \url{https://docs.google.com/document/d/1z_j-b41BHwpfXoeRAwTVA76Uzp8Xodx3vOLFDAnVnrY/edit?usp=sharing}
 
 A figure that illustrates a representative logical structure is here:
 
-`Alert Distribution Figure <https://drive.google.com/open?id=0B4OAryR7BjSiWHEtYlFpX3lQM2M>`_
+Alert Distribution Figure \url{https://drive.google.com/open?id=0B4OAryR7BjSiWHEtYlFpX3lQM2M}
 
 \subsection{Auxiliary Telescope  Data Processing and Archiving}
 
@@ -62,20 +62,20 @@ TBD whether or not processing is needed.
 
 ** Pre-phase 1**
 
-\sebsection{Telemetry Gateway
+\subsection{Telemetry Gateway}
 
 Capabilities for system information sent from the DM system to the OCS system.
 This service covers the transmission of all telemetry into the OCS system.
 
-Telemetry Gateway Service <https://docs.google.com/document/d/18ZS3Q-06FGg9tRUQbFRIiO4paA3rKXrKG-dyJkSw_AM/edit?usp=sharing>`_
+Telemetry Gateway Service \url{https://docs.google.com/document/d/18ZS3Q-06FGg9tRUQbFRIiO4paA3rKXrKG-dyJkSw_AM/edit?usp=sharing}
 
-\sebsection{Observatory Operations Data Services
+\subsection{Observatory Operations Data Services}
 Provide access to designated data sets from the LSST science data archive as needed by observatory operations to the stipulated service levels
 
 ** In phase 2 discussion which resulted in need for clarification
 
 
-\sebsection{OCS-Driven Batch Services
+\subsection{OCS-Driven Batch Services}
 Service to expose the  batch production service as an OCS command-able device at service levels with observatory needs.
 
 ** Need being discussed.
@@ -109,26 +109,26 @@ Offline Level 1 processing is processing that occurs in the a batch context, ins
 
 The concepts for this process are presented in the "Level 1 Production Services" section of this document prepared for the LOPT/TOWG
 
-`<https://docs.google.com/document/d/1KFwL38iIKbvDhhcbPcwjWr-CDg9cPvZuq0PFzSBmbPc/edit>`_
+\url{https://docs.google.com/document/d/1KFwL38iIKbvDhhcbPcwjWr-CDg9cPvZuq0PFzSBmbPc/edit}
 
 
-\sebsection{First Order Scientific Quality Assurance
+\subsection{First Order Scientific Quality Assurance}
 ----------------------------------------
 
 First Order Scientific Quality for Level one is described in the "Level 1 Production Services" section of this document prepared for the LOPT/TOWG.
 The additional quality assessment concepts presented in the section "Level 2 production services" in the level system also apply.
 
-`<https://docs.google.com/document/d/1KFwL38iIKbvDhhcbPcwjWr-CDg9cPvZuq0PFzSBmbPc/edit>`_
+\url{https://docs.google.com/document/d/1KFwL38iIKbvDhhcbPcwjWr-CDg9cPvZuq0PFzSBmbPc/edit}
 
 
-\sebsection{Level 1 Complete Test Environment
+\subsection{Level 1 Complete Test Environment}
 ---------------------------------
 
 Level 1 Complete Test Environment a capability need to for testing Level 1 Service Changes.
 
 The concepts for this process are presented in the "Level 1 Production Services" section of this document prepared for the LOPT/TOWG
 
-`<https://docs.google.com/document/d/1KFwL38iIKbvDhhcbPcwjWr-CDg9cPvZuq0PFzSBmbPc/edit>`_
+\url{https://docs.google.com/document/d/1KFwL38iIKbvDhhcbPcwjWr-CDg9cPvZuq0PFzSBmbPc/edit}
 
 
 \section{ Level 2 Services}
@@ -161,13 +161,13 @@ continuous build system on the production hardware located of NCSA and
 satellite sites.
 
 
-`Batch Production Services <https://docs.google.com/document/d/1MVe0qdHt5RNTN8KkIxWzd24nNbxA5ZWghajoak3i0HU/edit?usp=sharing>`_
+Batch Production Services \url{https://docs.google.com/document/d/1MVe0qdHt5RNTN8KkIxWzd24nNbxA5ZWghajoak3i0HU/edit?usp=sharing}
 
 The additional concepts for this process are presented in the "Level 2
 Production Services" section of this document prepared for the
 LOPT/TOWG
 
-`<https://docs.google.com/document/d/1KFwL38iIKbvDhhcbPcwjWr-CDg9cPvZuq0PFzSBmbPc/edit>`_
+\url{https://docs.google.com/document/d/1KFwL38iIKbvDhhcbPcwjWr-CDg9cPvZuq0PFzSBmbPc/edit}
 
 
 \section{ Data Backbone Services}
@@ -193,7 +193,7 @@ The presentation of this concept of operations is expected in a future planning 
 
 
 
-\sebsection{Authentication and Authorization
+\subsection{Authentication and Authorization}
 --------------------------------
 
 The Authentication and Authorization concept of operations has been prepared and
@@ -215,7 +215,7 @@ NCSA ITC
 Provide equipment for US DAC, Archive Center, and the DPPD designated support for the Observatory Operation Support Services. Provide for local administration at NCSA.
 
 
-\sebsection{Wide Area Network Services
+\subsection{Wide Area Network Services}
 --------------------------
 Provide connectivity between border routers of La Serena, NCSA, CC-IN2P3 and other designated sites.
 
@@ -282,7 +282,7 @@ LOPT/TOWG working groups.
 
 The concepts for this process are presented in the "Incident Response" section of this document prepared for the LOPT/TOWG
 
-`<https://docs.google.com/document/d/1KFwL38iIKbvDhhcbPcwjWr-CDg9cPvZuq0PFzSBmbPc/edit>`_
+\url{https://docs.google.com/document/d/1KFwL38iIKbvDhhcbPcwjWr-CDg9cPvZuq0PFzSBmbPc/edit}
 
 Problem Management
 ++++++++++++++++++
@@ -291,27 +291,4 @@ Problem management processing are documented in material developed for the LOPT/
 
 The concepts for this process are presented in the "Problem Management" section of this document prepared for the LOPT/TOWG
 
-`<https://docs.google.com/document/d/1KFwL38iIKbvDhhcbPcwjWr-CDg9cPvZuq0PFzSBmbPc/edit>`_
-
-.. _changerecord:
-
-Change Record
-=============
-
-
-+-------------+------------+----------------------------------+--------------+
-| **Version** | **Date**   | **Description**                  | **Owner**    |
-+=============+============++==============+
-| 1.0         | 5/22/2013  | Initial Version                  | Kian-Tat Lim |
-+-------------+------------+----------------------------------+--------------+
-| 1.1         | 10/9/2013  | Updates resulting from Process   | Kian-Tat Lim |
-|             |            | Control and Data Products        |              |
-|             |            | Reviews                          |              |
-+-------------+------------+----------------------------------+--------------+
-| 1.2         | 10/10/2013 | TCT approved                     | R Allsman    |
-+-------------+------------+----------------------------------+--------------+
-| 2.0         | 08/05/2016 | Beginning to render working group| D Petravick  |
-|             |            | schema as more complete view of  |              |
-|             |            | operational need as a basis for  |              |
-|             |            | planning.                        |              |
-+-------------+------------+----------------------------------+--------------+
+\url{https://docs.google.com/document/d/1KFwL38iIKbvDhhcbPcwjWr-CDg9cPvZuq0PFzSBmbPc/edit}

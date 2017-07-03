@@ -1,0 +1,108 @@
+﻿\subsubsection{Scope}
+
+The Data Backbone is a set of data storage, management and movement
+resources distributed between the Base Center and NCSA. The
+scope of the Data Backbone includes both files and data maintained by relational
+and other database engines holding the record of the survey and used by
+L1, L2, and Data Access Center services.
+
+The Data Backbone provides read-only data service to the US and Chilean
+DACs, but does not host data stores where DAC users create state. This is
+done to create a hard and easily enforceable separation of technologies,
+where no flaw in a DAC can corrupt the data produced by L1 and L2
+production systems. For example, DAC resources such as Qserv and user databases,
+colloquially know as MyDBs, are provisioned in the context of a data
+access center, not the Data Backbone.
+
+The Data Backbone ensures that designated data sets are replicated at both sites.
+The data backbone provides an enclave environment that is oriented toward
+protecting data by management, operational, and technical controls,
+including processes such as maintaining disaster recovery copies.
+
+\subsubsection{Overview}
+
+\paragraph{Description}
+
+Files in the data backbone are presented as file system mounts and data access
+services. Database-resident data are presented as managed database services.
+
+\paragraph{Objective}
+
+\begin{itemize}
+
+\item Replication of designated file data within LSST Data Facility sites
+at NCSA and the Base Center.
+
+\item Replication of designated relational tables and data maintained
+in other database engines at NCSA and the Base Center.
+
+\item Implementation of policy-based flows to the disaster recovery stores. At
+the time of this writing, disaster recovery stores include the NCSA tape archive, CC-IN2P3,
+and commercial providers.
+
+\item Ingest of images produced by the Spectrograph, ComCam, and LSSTCam instruments. 
+
+\item Ingest of the Engineering and Facility Database and associated Large File Annex.
+
+\item Ingest of data products from L1 and L2 production processing.
+
+\item Ingest of data from TBD other sources, approved by a change control process. 
+
+\item Serving data to L1, L2, and other approved production processes.
+
+\item Serving data to the US and Chilean Data Access Centers.
+
+\item Integrity checking and other curation activates related to data integrity and
+continuity of operations.
+
+\end{itemize}
+
+\paragraph{Operational Context}
+
+\subsubsection{Operational Concepts}
+
+\subparagraph{Files}
+
+Files in the Data Backbone possess path names which are subject to change
+through the lifetime of the LSST project, which at the time of this writing is 
+seen as serving the last data release through 2034.
+
+Robust identification of a file involves
+\begin{itemize}
+\item Obtaining a logical file name through querying metadata and provenance.
+\item Possibly migrating a file from a medium where the file is not directly accessible,
+such as tape, to a medium where the file is accessible.
+\item Selecting a distinct instance of the file from possibly many replicas.
+\item Accessing the file though an access method such as a file system mount or Http(s). 
+\end{itemize}
+
+The project has identified several caches of data that are used in production circumstances.
+The distinguishing circumstances for these caches involve quality of service requirements for
+performance and availability. Absent sophisticated QoS in file systems, performance requirements
+are met by controlling access to the underlying storage via caching. Availability is assured by
+decoupling the cache from the database providing metadata, provenance, and location information.
+Application-level cache management provides path names within the cache to the application.
+
+Casual use of data for short periods may rely on knowledge such as file paths, but is subject
+to disruption when paths are re-arranged, or should the underlying storage technology change, 
+such as introduction of object stores.
+
+\subparagraph{Data Managed by Databases}
+
+Replication of database information is specific to the database technology involved.
+Databases identified as holding permanent records of the survey are in the Data Backbone 
+in the sense that they are instantiated in the context of a security enclave with management, 
+operational, and technical controls needed to assure preservation of this data, and that the 
+principal concern of enclave management is that data reside at the Base and at NCSA 
+driven by business need.
+
+\paragraph{Operational Scenarios}
+
+\subparagraph{Availablity and Change Management}
+
+Catalog-based access systems such as indicated for the Data Backbone are
+limited by database availability as well as the availability of the file
+store and its access methods.
+
+Time-critical applications involving the Observatory Operations Data Service and access 
+to L1 templates for prompt processing protect themselves by having caches as described above.

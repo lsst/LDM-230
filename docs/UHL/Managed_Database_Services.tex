@@ -1,0 +1,63 @@
+﻿\subsubsection{Scope}
+
+Managed Database Services provide database access to data that reside in relational or non-relational databases
+and generally meet at least one of the following criteria:
+\begin{itemize}
+\item Data originate outside of the LSST Data Facility, but are (or are potentially) used in L1 and L2 processing,
+especially in the sense of data inputs needed to reproduce or refine a L1 or L2 computation.
+\item Data originate as data produced within the L1 or L2 production processes, and are meant to be retained for some period of time.
+\item Data are production-related metadata.
+\item Data are used as data coupling for processes involved in maintaining L1 and L2 products or other aspects of the LSST Data Facility.
+\end{itemize}
+
+\subsubsection{Overview}
+
+In LSST, a distinction is made between patterns of storage of
+data in a database engine (schema, for purposes here) and an
+implementation of the schema in a database engine which stores the
+data. In LSST, common schema are used and shared in many scenarios in
+distinct but schema-compatible databases.
+
+As an example, a common relational database schema can be used in
+development, unit test, integration, and production, but realized in
+different relational database software, e.g., SQLite3 in development
+and a heavy commercial database in production.
+
+\paragraph{Description}
+
+\paragraph{Objective}
+
+The primary focus of Managed Database Services is, as outlined, not the support 
+of developers, but the support of production and data needing custody or curation. 
+While some database schema design is performed in managed database services, 
+by no means is all schema designed by Managed Database Services. Managed Database 
+Services does have a role in determining the fitness for use of any schema present in 
+databases it operates.
+
+\paragraph{Operational Context}
+
+The operational context for Managed Database Services is the context
+of the LSST Data Backbone within the LSST Data facility.
+
+Part of the context is to consolidate database technologies where
+appropriate.
+
+\subsubsection{Operational Concepts}
+
+\begin{itemize}
+
+\item Select technology appropriate for managed database instances
+\item Present a managed database service hosting the required schema
+\item Support the evolution of schema in a managed database service
+\item Provide the level of service needed for each managed database instance
+\item Provide capacity planning
+\item Provide installation
+\item Provide configuration
+\item Provide data migration
+\item Provide performance monitoring
+\item Provide security
+\item Provide troubleshooting
+\item Provide backup and data recovery
+\item Provide data replication where needed
+
+\end{itemize}

@@ -1,0 +1,57 @@
+﻿\subsubsection{Scope}
+
+Containerized Application Management Services provide an elastic capability to deploy containerized
+applications. These services are provided with distinct configurations tailored for each enclave, 
+but are provisioned on a common pool of ITC resources residing in the Master Provisioning Enclaves at each site. 
+
+\subsubsection{Overview}
+
+There are two instances of Containerized Application Management Services - 
+one at the Base Center and one at NCSA. These instances are the basis for servicing
+elastic computing needs at each site and a portable abstraction for symmetric
+deployment on commercial provisioning.
+
+\paragraph{Description}
+
+Both NCSA and the Base Center will have a containerized infrastructure that
+logically partitions a pool of Kubernetes resources to various enclaves at the respective
+sites, with policies that govern priorities and file systems exposed to
+applications running in the context of each enclave.
+
+At the Base Center, Containerized Application Management Services are supplied to the Commissioning
+Cluster and the Chilean Data Access Center from this pool.
+
+At NCSA, Containerized Application Management Services are supplied to the Development, Integration,
+General Production, L1 and US Data Access Center enclaves from this pool.
+
+\paragraph{Objective}
+
+The objective of these services is to support LSST elastic operations by providing a containerized application 
+management system compatible with LSST requirements. 
+
+\begin{itemize}
+
+\item Provide containerized application management to each enclave, respecting enclave-specific controls including information security and work rules. 
+
+\item Provide storage for containers and container management.
+
+\item Provide adequate capacity for each site.
+
+\end{itemize}
+
+\paragraph{Operational Context}
+
+These services use resources in the master provisioning enclave at each site and expose them
+to a given enclave, implementing policies appropriate to that enclave.
+
+\subsubsection{Operational Concepts}
+
+\paragraph{Operational Scenarios}
+
+An important consideration is that these resources do not have a constant
+level of use within each enclave, and that over time the hardware resources
+needed for elastic services in an enclave will change.
+
+Operating conditions may change as well. For example, even with container
+abstractions, it may be necessary to partition the the hardware resources  to
+support two versions of an operating system.

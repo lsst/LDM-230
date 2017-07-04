@@ -2,12 +2,12 @@
 LDM-230
 #######
 
-=======================================================
-Automated Operations of the LSST Data Management System
-=======================================================
+============================================================
+Concept of Operations for the LSST Batch Production Services
+============================================================
 
-This is a working repository for *LDM-230: Automated Operations of the
-LSST Data Management System*.
+This is a working repository for *LDM-230: Concept of Operations
+for the LSST Batch Production Services*.
 
 * Read the living document on the web: http://ldm-230.lsst.io
 * Read the officially-approved document:

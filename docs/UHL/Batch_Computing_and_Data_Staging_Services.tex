@@ -1,8 +1,8 @@
-﻿\subsubsection{Scope}
+\subsubsection{Scope}
 
-Batch Computing and Data Staging Services provide primitives 
-used by the Master Batch Job Scheduling Service. Batch Computing 
-and Data Staging Services are provides in a distinct implementation 
+Batch Computing and Data Staging Services provide primitives
+used by the Master Batch Job Scheduling Service. Batch Computing
+and Data Staging Services are provides in a distinct implementation
 for that is tailored for each batch system deployment.
 
 \subsubsection{Overview}
@@ -11,7 +11,7 @@ Batch Computing and Data Staging Services are provided at NCSA and the Base Cent
 
 Analogous (but not identical) services are provided by MoU to the LSST
 Data Facility by CC-IN2P3, as well as by any commercial batch
-provisioning and agency resources, such as XSEDE. 
+provisioning and agency resources, such as XSEDE.
 
 \paragraph{Description}
 
@@ -38,8 +38,8 @@ via http or FTP.
 
 \paragraph{Objective}
 
-Batch Computing and Data Staging Services support LSST batch 
-operations by providing a batch system supported by data movement primitives. 
+Batch Computing and Data Staging Services support LSST batch
+operations by providing a batch system supported by data movement primitives.
 
 \begin{itemize}
 
@@ -57,7 +57,7 @@ needed for information security and work processes.
 
 \paragraph{Operational Context}
 
-Batch Computing and Data Staging Services use resources in the master provisioning 
+Batch Computing and Data Staging Services use resources in the master provisioning
 enclave and expose them to a given enclave, implementing policies appropriate to that enclave.
 
 \subsubsection{Operational Concepts}
@@ -73,9 +73,9 @@ abstractions, it may be necessary to partition the batch resources to
 support two versions of an operating system.
 
 Somewhat analogously, the batch system may opportunistically use idle nodes provisioned
-for elastic Kubernetes computing. 
+for elastic Kubernetes computing.
 
 Lastly, NCSA has substantial resources for prompt processing, such as alert
 production. Scheduling jitter and performance may preclude using a single batch
-scheduler for general offline production and prompt processing. Batch Computing 
+scheduler for general offline production and prompt processing. Batch Computing
 and Data Staging Services covers having multiple scheduler instances.

@@ -1,4 +1,4 @@
-﻿\subsubsection{Scope}
+\subsubsection{Scope}
 
 The Engineering and Facility Database (EFD) is a system used in the
 context Observatory Operations. It contains all data, apart from pixel
@@ -74,7 +74,7 @@ resources. The prime framework for controlling operations is the OCS
 system. Operations in this context will be controlled from the OCS
 framework.
 
-\paragraph{Risks} 
+\paragraph{Risks}
 
 The query load applied by general staff on the Original Format
 EFD at the Base Center may be disruptive to the primary purpose,
@@ -125,41 +125,41 @@ available using I/O methods of the LSST stack.
 
 \begin{itemize}
 \item The Reformatted EFD is replicated to the US DAC and the Chilean DAC.
-\item LDF will extract, transform and load into the Reformatted EFD pointers to files 
-that have been transferred from the EFD large file annex into the Data Backbone. 
-\item LDF will extract, transform and load designated tabular data from the 
-Original Format EFD into the Reformatted EFDs residing in the Data Backbone at 
-NCSA and the Base Center. 
+\item LDF will extract, transform and load into the Reformatted EFD pointers to files
+that have been transferred from the EFD large file annex into the Data Backbone.
+\item LDF will extract, transform and load designated tabular data from the
+Original Format EFD into the Reformatted EFDs residing in the Data Backbone at
+NCSA and the Base Center.
 \item “Designated” data will include:
   \begin{itemize}
   \item Any quantities used in a production process.
   \item Any quantities designated by an authorized change control process.
   \end{itemize}
-\item The information in the Reformatted EFD is available to any authorized independent 
+\item The information in the Reformatted EFD is available to any authorized independent
 DAC which may choose to host a copy.
 \end{itemize}
 
 \paragraph{Operational Scenarios}
 
-\subparagraph{ETL Control} 
+\subparagraph{ETL Control}
 
-The Extract, Transform and Load operation is under the control of Observing Operations.  
+The Extract, Transform and Load operation is under the control of Observing Operations.
 
-\subparagraph{Disaster Recovery and DR Testing for the Original Format EFD} 
+\subparagraph{Disaster Recovery and DR Testing for the Original Format EFD}
 
-Observing Operations will periodically test a restore in a disaster recovery scenario. 
+Observing Operations will periodically test a restore in a disaster recovery scenario.
 
-\subparagraph{Disaster Recovery and DR Testing for the Reformatted EFD} 
+\subparagraph{Disaster Recovery and DR Testing for the Reformatted EFD}
 
-Should the Reformatted EFD relational database be reproducible from the 
-Original Format EFD, disaster recovery is provided by a re-ingest from the 
-original format. DR testing includes re-establishing operations of the Reformatted 
-EFD relational database and ETL capabilities from the Original Format EFD. Ingested 
-files from the file annex can be recovered by the general disaster recovery capabilities 
+Should the Reformatted EFD relational database be reproducible from the
+Original Format EFD, disaster recovery is provided by a re-ingest from the
+original format. DR testing includes re-establishing operations of the Reformatted
+EFD relational database and ETL capabilities from the Original Format EFD. Ingested
+files from the file annex can be recovered by the general disaster recovery capabilities
 of the Data Backbone.
 
 \subparagraph{Change Control}
 
-Upgrades to the EFD ETL Service are produced by the LSST Data Facility. 
-Change control of this function is coordiniated with the Observatory, with the 
+Upgrades to the EFD ETL Service are produced by the LSST Data Facility.
+Change control of this function is coordiniated with the Observatory, with the
 Observatory having an absolute say about insertion and evaluation of changes.

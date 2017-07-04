@@ -1,4 +1,4 @@
-﻿\subsubsection{Scope}
+\subsubsection{Scope}
 
 This section describes the concept of operations for archiving designated raw data acquired from the main LSST camera to the permanent archive.
 
@@ -6,8 +6,8 @@ This section describes the concept of operations for archiving designated raw da
 
 \paragraph{Description}
 
-The LSSTCam Archiving Service acquires pixel and header 
-data and arranges for the data to arrive in the Observatory 
+The LSSTCam Archiving Service acquires pixel and header
+data and arranges for the data to arrive in the Observatory
 Operations Data Server and in the Data Backbone.
 
 
@@ -18,13 +18,13 @@ the LSST main camera and header data from the OCS system, and to
 place appropriately formatted data files in the Data Backbone. The
 service needs to have the capability of archiving at the nominal frame
 rate for the main observing cadence, and to perform ``catch up'' archiving
-at twice that rate. 
+at twice that rate.
 
 \paragraph{Operational Context}
 
 LSSTCam Archiving is a service provided by LDF as part of the
 Level 1 system. It is presented to Observatory Operations as an
-OCS-commandable device. The archiving system operates independently 
+OCS-commandable device. The archiving system operates independently
 from related observatory services, such as data acquisition, as well as other
 Level 1 services, such as prompt processing.  However, a normal
 operational mode is operation of the service such that data are
@@ -44,7 +44,7 @@ and into the Observatory Operations Data Server. However, while all
 science and calibration data from the main camera require ingest into
 the Observatory Operations Server, some data (e.g., one-off
 calibrations, engineering data, smoke test data, etc.) may not require
-archiving in the Data Backbon permanent store. Observatory Operations may 
+archiving in the Data Backbon permanent store. Observatory Operations may
 designate data which will not be archived.
 
 \paragraph{Operational Scenarios}
@@ -58,11 +58,11 @@ archiving service provides a number of policies (which are TBD) to
 Observatory Operations that can be selected via the OCS interface in order to
 prioritize data ingestion.
 
-Other operational parameters of interest include rate-limiting when network 
+Other operational parameters of interest include rate-limiting when network
 bandwidth is a concern.
 
 \subparagraph{Change Control}
 
 Upgrades to the LSSTCam Archving Service are produced in the LSST Data Facility.
-Change control of this function is coordiniated with the Observatory, with the 
-Observatory having an absolute say about insertion and evaluation of changes. 
+Change control of this function is coordiniated with the Observatory, with the
+Observatory having an absolute say about insertion and evaluation of changes.

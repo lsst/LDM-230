@@ -1,25 +1,25 @@
-﻿\subsubsection{Scope}
-This section describes the prompt processing of raw data acquired from the main 
+\subsubsection{Scope}
+This section describes the prompt processing of raw data acquired from the main
 LSST camera by the DM system.
 
 \subsubsection{Overview}
 
 \paragraph{Description}
-During nightly operations, the DM system acquires images from the main LSST 
-camera as they are taken, and promptly processes them with codes specific to an 
-observing program. 
+During nightly operations, the DM system acquires images from the main LSST
+camera as they are taken, and promptly processes them with codes specific to an
+observing program.
 
 \paragraph{Objective}
-The LSSTCam Prompt Processing Services provide timely processing of newly 
-acquired raw data, including QA of images, alert processing and delivery, 
-returning image parameters to the Observatory, and populating the Level 1 
+The LSSTCam Prompt Processing Services provide timely processing of newly
+acquired raw data, including QA of images, alert processing and delivery,
+returning image parameters to the Observatory, and populating the Level 1
 Database.
 
 \paragraph{Operational Context}
-Prompt Processing is a service provided by the LSST Data Facility as part of the 
-Level 1 system. It is presented to Observatory Operations as an OCS-commandable 
-device. The Prompt Processing Service retrieves crosstalk-corrected pixel data 
-from the main LSST camera at the Base Center, builds FITS images, and sends them 
+Prompt Processing is a service provided by the LSST Data Facility as part of the
+Level 1 system. It is presented to Observatory Operations as an OCS-commandable
+device. The Prompt Processing Service retrieves crosstalk-corrected pixel data
+from the main LSST camera at the Base Center, builds FITS images, and sends them
 to NCSA for prompt processing.
 
 \subsubsection{Operational Concepts}
@@ -58,7 +58,7 @@ when conditions again become suitable.
 It follows that the desired behavior for science data-taking
 operations is to start the Prompt Processing system at the beginning
 of the night and to turn off the system after all processing for all
-science observations is finished.  
+science observations is finished.
 
 The operational framework for observing discloses no future knowlege
 about what exposures will be taken, until the “next visit” is
@@ -93,7 +93,7 @@ community-provided alert brokers.
 
 AP runs in the context of the wide-fast-deep survey, deep drilling  program and TBD
 other programs. Other observing programs may also include AP as a science code,
-or may have codes of their own. 
+or may have codes of their own.
 
 \subparagraph{Calibration Operations}
 
@@ -179,7 +179,7 @@ maintenance window, with deviations negotiated as needed.
 
 \paragraph{Operational Scenarios}
 
-\subparagraph{Code Performance Problems} 
+\subparagraph{Code Performance Problems}
 Should a code run longer than budgeted, and the pace of processing
 fail to keep up with the pace of images, operations input is needed
 because there are trade-offs, as this would affect the production of
@@ -194,7 +194,7 @@ of processing (including backlogs caused by problems with
 international networking) is managed.  The policies may need to be
 sensitive to details of the observation sequence;.
 
-\subparagraph{Offline Backup} 
+\subparagraph{Offline Backup}
 When needed, all of this processing, including both generating QA
 parameters and running science codes, can be executed under offline
 conditions at the Archive Center at a later time.  The products of
@@ -207,6 +207,6 @@ parameters used to gauge whether an observation meets quality
 requirements can still be produced and ingested to the OCS system.
 
 \subparagraph{Change Control}
-Upgrades to the LSSTCam Prompt Processing Services are produced in the LSST Data Facility. Change control 
+Upgrades to the LSSTCam Prompt Processing Services are produced in the LSST Data Facility. Change control
 of this function is coordiniated with the Observatory, with the Observatory having an absolute say
 about insertion and evaluation of changes.

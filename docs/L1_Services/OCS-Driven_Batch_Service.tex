@@ -6,10 +6,20 @@ with a small amount of returned data via the Telemetry Gateway.
 
 \subsubsection{Overview}
 
+The service provides a method for OCS script to invoke Batch
+production, allowing for the automation batch procesing into simple work
+flows involving LSST instrumentation.
+
+
 \paragraph{Description}
 
+The servine profives OCS commands to initiate Batch Jobs and to optionally
+rendevous wiht small amounts of data. 
 
 \paragraph{Objective}
+
+Examples of the type of workflows may be verifation of flats or wave-front sensing
+application.
 
 
 \paragraph{Operational Context}
@@ -21,7 +31,12 @@ Observatory  Operations.
 
 \paragraph{Normal Operations}
 
+During normal operations, the OCS scripts submit batch jobs. The subject batch systems attempt to dispatch jobs at high priority. 
+
 \paragraph{Operational Scenarios}
+
+The promptness of the return of results varies accorsing to the ablity
+of the batch system to schedule the coresponding batch job promptly.
 
 \subparagraph{Change Control}
 

@@ -87,6 +87,7 @@ Casual use of data for short periods may rely on knowledge such as file paths, b
 to disruption when paths are re-arranged, or should the underlying storage technology change, 
 such as introduction of object stores.
 
+
 \subparagraph{Data Managed by Databases}
 
 Replication of database information is specific to the database technology involved.
@@ -96,6 +97,17 @@ operational, and technical controls needed to assure preservation of this data, 
 principal concern of enclave management is that data reside at the Base and at NCSA 
 driven by business need.
 
+\subparagraph{Managed Lifetime of Data}
+Data in teh data backdone are preseres and replicated under processes
+guided by an overall Data Management Policy.  Elements of the policy
+include specifications for replication suportign disasater recovery,
+and the permissiblity of deleing fiel based data, and purgingin
+database records.  Examples of deletion of data likley in such a
+policy are: Removal of production data from faulty production campaigns,
+removal of data produced in the production system that are not part
+of the retained record of the LSST suvey, and removal of data in
+shakedown and debug processing.
+
 \paragraph{Operational Scenarios}
 
 \subparagraph{Availablity and Change Management}
@@ -104,5 +116,6 @@ Catalog-based access systems such as indicated for the Data Backbone are
 limited by database availability as well as the availability of the file
 store and its access methods.
 
-Time-critical applications involving the Observatory Operations Data Service and access 
-to L1 templates for prompt processing protect themselves by having caches as described above.
+Time-critical applications involving the Observatory Operations Data
+Service and access to L1 templates for prompt processing protect
+themselves by having caches as described above.

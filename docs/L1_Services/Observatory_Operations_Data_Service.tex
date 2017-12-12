@@ -77,9 +77,8 @@ Observatory Operations-controlled enclaves.
 Butler interfaces: Use of the LSST Stack is advocated for Observatory Operations, 
 and so access to this data is possible via access methods supported by the LSST stack.  
 The standard access method provided by the LSST stack is through a set of
-abstractions provided by a software package called the Butler. The Observatory 
-Operations Data Service provides butler context, and updates that context continuously 
-as new data (for example, new raw images) becomes available.
+abstractions provided by a software package called the Butler. Whether the Observatory
+Operations Service provides a Bulter interface is TBD.
 
 Native interfaces: Not all needed application in the Observatory Operations context 
 will use the LSST stack and will not be able to avail themselves of Butler abstractions.  
@@ -115,4 +114,10 @@ into a file-format such as SQLite.
 
 \paragraph{Normal Operations}
 
+As indicated the OOS is a a severs used by teh Spectrograph and LSSTCam arcihvers, and used
+to continually present data to the Base Computing Endpoint. The Availablity targers for the
+Observicatory operations server need to accomidat the availablity requirements of both systems.
+
 \paragraph{Operational Scenarios}
+
+Scheduling of changes to this system is controlled by the Observatory Change Control Authority.

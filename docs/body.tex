@@ -37,7 +37,8 @@ Cluster at the Base Site.
 \item  A QA and Base Computing Task Endpoint that allows fast and reliable access 
 through the QA portal to recently acquired data from the Observatory instruments 
 and other designated datasets, and ability to submit batch jobs, supporting 
-operations at the Base Center.
+operations at the Base Center.  This endpoint is implemented as an instance of
+the LSST Science Platform.
 \item  An Observatory Operations Data Service that allows fast and reliable 
 access to data recently acquired from LSST cameras and designated datasets held 
 in the Data Backbone.
@@ -111,16 +112,17 @@ LSST Science Platform.
 
 \subsection{User Data Access Services}
 Service hosting elements of the LSST Science Platform.
-%\input{}
+\input{docs/Data_Access_Hosting_Services/DAC.tex}
 
 \subsection{Bulk Data Distribution Service}
 Service providing bulk data download to sites supporting groups of users.
-%\input{}
+\input{docs/Data_Access_Hosting_Services/Bulk_Export.tex}
 
 \subsection{Hosting of Feeds to Brokers}
 The LSST Data Facility hosts the alert distribution system and supports users of 
 the LSST mini-broker, as well as providers of community brokers.
-% \input{}
+\input{docs/Data_Access_Hosting_Services/Broker_Feeds.tex}
+
 
 \section{Data, Compute, and IT Security Services}
 The LSST Data Facility provides a set of general IT services which support the 

@@ -1,0 +1,24 @@
+sudo: true
+dist: trusty
+services:
+  - docker
+language: python
+python:
+  - '3.5'
+before_install:
+  - "pip install 'lander>=0.1.0,<0.2'"
+script:
+  # Compile PDF using containerized lsst-texmf
+  - "docker run --rm -v `pwd`:/workspace -w /workspace lsstsqre/lsst-texmf:latest sh -c 'make'"
+after_success:
+  # Deploy website. See https://github.com/lsst-sqre/lander for CLI options
+  - "lander --pdf LDM-230.pdf --upload --lsstdoc LDM-230.tex --env=travis --ltd-product $PRODUCT --handle $HANDLE --title \"$TITLE\""
+env:
+  global:
+    - PRODUCT="LDM-230"
+    # Temporarily needed until https://github.com/lsst-sqre/lander can process LaTeX \input
+    - HANDLE="LDM-230"
+    - TITLE="Concept of Operations for the LSST Data Facility Services"
+    # LSST the Docs credentials
+    - secure: "uudN49Lgk8E4j/wWXQYe2HoXC94xRzWOzbq1WL3LyPGaC66jnW2HLmo74tZ8OgM4C985YOcARTdoZ+r3VbX1fkor9L4po14i6K9T59yhfeF9ScJmIjLL4ONTTsie9ifvbeUea4OJir+PepP4/4XvSXfXqUsHlRZrzCK9xS28akgysTyVKfI1qe+x5soxkfq8Oh11poNX15reuFvryj4UctYHTdWq/pzV8renf3Z3vBWiBoca0S5qEzsxQBEtCs+J2Tyn/SF1OPxkrQWuOkMQKd6SpV6xy2ZqbqRlI5l1Xf4CfAkbgETtbmDO1yCBjIVPiP5osj49Wjl5w2dttpfSEWnI2XvATfYC5VUSNLEeaBNkFCcz6Wja+u+G9CsJYc7kIJ7/d0R3EWQUfr8uDr7nWpd3q4ZrtYrVXOwo+zaZ93MsiGUyn4R6XZ7GoWOcQKosd7nzZGRo70f8sM1zIoEzm1Iql0hdpjZfC0Yd5PW6wwMgsnsx6eCMJd1yQfWjvlL3QdDv4TaKvNY+fQ2XFj76aKR/9ai3EmFVJ9h2LtAFLoJXcw9uSeVX8r6NhzGdLhdt4dPkVxrD8+VLTudA9tk+0OVfnuJ+eiKgkFsmRlGC1HcmySVEhNjhSEXxr84jhzSLWvUbNZa8ModCjllcI87LOSwddDA/xS9rZ02qluvZuP4="
+    - secure: "LpVuRQnZ2LkBwISuorex842oVuQkc9kjjeK4SPqi3rj05RBjgZtN0R94TDJuyffNUiICMaCgzJ2Wn+rqcTY9pkOxv9ssKvbYjLsEfvTp2ibwb62blbS5Rta5C3DUQL4XUrppjh+0TJ/I2nNzxRvsIdIxsUopLLazxE+0RHRSIk9owZm5Yw+Ec6H5PZg1kgI6LTovI3HebVrsoUgPad2C1Y1ncCMLG+jK+OtZU2WftGwwyzdoajJCgs4Uhh29ROVHSDJDkXQCVU633IVbt1hQxtWJC6UnQ+6uRIDCg9yCDrT/GI0pvUxSfI85Dge2eCRTB8Dj4WfdSJSRmr/pBEuCmtiQMIlAQ75is9V5+Xw+eZTYjzmzzzak+eEVzZAqnpeHt21bpmo+ABpyRbT278DCaJPRdCKRFAjz7bM9APFmVsN+4JSnqJOFM2joClAH85YA4/x9AdVxDgpE8peug58pumU9XfuVtj6ni5FgZIXVzehNOtSnGL8gr9LwJutBHsgXm5ZWux7MuM9sXUIerxomi3yyS76GHCQRh4NZ0UerZ11NH9h0nogO8JDt1tNPU0NaZWuGCRNZuPVWDM8H2cSZY7XVWQHnKGMgf/b2HblwGBLYiZmPiwMPCQFU//bmJnOqXdd/O9oxIJKw7jWGG/Mf3dHfd2SwcyY3Fvdv93qaAV8="

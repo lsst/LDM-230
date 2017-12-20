@@ -80,34 +80,33 @@ if delivered quite late, since the scheduler uses historical data
 in addition to recent h data.
 
 The Prompt Processing system also executes code that is specific to an
-observing program. For science exposures, the dcode is divided into
-a front-end -- that is abel to compute the parameters sent back  to the
+observing program. For science exposures, the code is divided into
+a front-end -- that is able to compute the parameters sent back  to the
 observator, and a back end , Alert Production (AP), is the specific
 science code that detects transient objects.
 
-The detected transients are passed off to another servince,which
-recored the data date in a catalog which can be queried offline and sends
-to an ensemble of transient brokers. Data are transmitted to end
+The detected transients are passed off to another service, which
+records the data in a catalog which can be queried offline and sends
+events to an ensemble of transient brokers. Data are transmitted to end
 users either via feeds from an LSST-provisioned broker or via
 community-provided alert brokers.
 
-AP runs in the context of the wide-fast-deep survey, deep drilling  program and TBD
-other programs. Other observing programs may also include AP as a science code,
-or may have codes of their own.
+Alert Production runs in the context of the wide-fast-deep survey,
+deep drilling program and TBD other programs. Other observing programs
+may also include AP as a science code, or may have codes of their own.
 
 \subparagraph{Calibration Operations}
 
 In addition to collecting data for science programs, the telescope and
 camera are involved in many calibration activities.
 
-the Baseline Claibraitons include flats and biases. Dariks are nto anticipated.
-LSST has an additional calibration devvices in its baseline a collumanted
-Beam projector as well.
+the Baseline Calibrations include flats and biases. Darks are not anticipated.
+LSST has a collumanted Beam projector calibration device as well.
 
 Nominally, a three-hour period each afternoon is scheduled for Observatory
 Operations to take dark and flat calibration data. As noted above, calibration data
 may be taken during the night when conditions are not suitable for
-science observations. As well, the LSST dome is specified as being
+science observations. The LSST dome is specified as being
 light-tight, enabling certain calibration data to be collected
 whenever operationally feasible, regardless of the time of day.
 
@@ -131,21 +130,21 @@ calibrations.
 
 \begin{itemize}
 
-\item Nightly flats, biases and darks consist of about 10 broad-band
-flatfield exposures in each camera filter, about 10 bias frames
-acquired from rapid reads of an un-illuminated camera, and optional 10
-dark images acquired from reads of an un-illuminated camera at the
-cadence of the expected exposure time.  Observers will consider the
-collection of these nightly calibrations as a single operational
-sequence that is typically carried out prior to the start of nightly
-observing.  The Prompt Processing system computes parameters for
-quality assessment of these calibration data, and returns the QA
-parameters to the observing system.  Examples of defects that could be
-detected are the presence of light in a bias exposure and a deviation
-of a flat field from the norm, indicating a possible problem with the
-flat-field screen or its illumination.  The sequence is considered
-complete when processing (which necessarily lags acquisition of the
-pixel data) is finished or aborted.
+\item Nightly flats, biases and darks consist of about a sequence of  broad-band
+flatfield exposures each camera filter, bias frames acquired from
+rapid reads of an un-illuminated camera, and optional dark images
+acquired from reads of an un-illuminated camera at the cadence of the
+expected exposure time.  Observers will consider the collection of
+these nightly calibrations as a single operational sequence that is
+typically carried out prior to the start of nightly observing.  The
+Prompt Processing system computes parameters for quality assessment of
+these calibration data, and returns the QA parameters to the observing
+system.  Examples of defects that could be detected are the presence
+of light in a bias exposure and a deviation of a flat field from the
+norm, indicating a possible problem with the flat-field screen or its
+illumination.  The sequence is considered complete when processing
+(which necessarily lags acquisition of the pixel data) is finished or
+aborted.
 
 \item Narrow-band flats and calibrations involving the collimated beam
 projector help determine the response of the system, as a function of
@@ -171,10 +170,7 @@ these calibrations.
 
 Consideration of the lengthy calibrations, and the complexity of
 scheduling them means that the system must be reasonably available
-when needed. An approach requires minimal coordination between the
-observing and the archive center, which as described below is
-responsible for maintenance of the system, is a default daily
-maintenance window, with deviations negotiated as needed.
+when needed.
 
 
 \paragraph{Operational Scenarios}
@@ -192,19 +188,19 @@ completeness of science processing, decide the conditions when science
 processing should abort due to timeout, and determine how any backlog
 of processing (including backlogs caused by problems with
 international networking) is managed.  The policies may need to be
-sensitive to details of the observation sequence;.
+sensitive to details of the observation sequence.
 
 \subparagraph{Offline Backup}
 When needed, all of this processing, including both generating QA
 parameters and running science codes, can be executed under offline
-conditions at the Archive Center at a later time.  The products of
+conditions at the LDF at a later time.  The products of
 this processing may still be of operational or scientific value even
 if they are not produced in a timely manner.  Considering Alert
 Production, for example, while alerts may not be transmitted in
 offline conditions, transients can still be incorporated into the
 portion of the L1 Database that records transients.  QA image
 parameters used to gauge whether an observation meets quality
-requirements can still be produced and ingested to the OCS system.
+requirements can still be produced and ingested for use by the scheduler.
 
 \subparagraph{Change Control}
 Upgrades to the LSSTCam Prompt Processing Services are produced in the LSST Data Facility. Change control

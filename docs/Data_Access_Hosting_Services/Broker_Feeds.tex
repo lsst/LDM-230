@@ -1,0 +1,123 @@
+\subsubsection{Scope}
+This section describes the concept of operations for hosting the system that distributes transient events to the LSST-provided and community-provided brokers..
+
+\subsubsection{Overview}
+
+\paragraph{Description}
+
+Alert Distribution consists of:
+\begin{itemize}
+
+\item Receiving alerts from instances of the Alert Production Pipeline or backlogs of alerts from offline L1 production.
+
+\item If needed, formatting received alerts into broker-specific syntax and forwarding the alerts to services which propagate alerts to the community. This includes  community brokers selected by LSST and also  the LSST alert “mini broker”, which is a limited functionality broker the LSST construction project is providing.
+
+\item Operating instances of the LSST alert “mini broker,” which includes accepting filters from individual authorized users.
+
+\item Providing status information about these activities to the community.
+
+\item Providing a clear interface for trouble-shooting, monitoring, and other operational matters.
+
+\item Providing an audit trail sufficient for troubleshooting, monitoring and statistics.
+
+\item Separating the concerns of alert generation from alert distribution.
+
+\item Is capable of providing service to the prompt processing verion and various batch configurations of Alert Processing.
+
+\end{itemize}
+
+\paragraph{Objective}
+
+The objective is to provide a configurable layer that receives events from instances of the alert production pipeline and delivers alerts to event brokers ultimately resulting in end-user consumption while supporting the various operations scenarios enumerated below. This layer decouples event generators from the complexity of policy-defined event distribution.
+
+\paragraph{Operational Context}
+Alerts originate in the LSST Alert Production pipeline. The alert distribution system is configured into the overall pipeline process control system when running production modes at NCSA.
+
+The context for this document is the distribution of the alerts between the following operational entities.
+
+\begin{itemize}
+\item A running alert pipeline which outputs alerts to an interface configured to pass alerts to the alert distribution service.
+
+\item The authoring interface for each supported instance ofthe alert broker. Alert Brokers transmit alerts to subscribed users, according to their own Service Level Agreements with their users.  There are community-provided alert brokers and an LSST-provided “mini broker”.
+
+\item There may be feeds to multiple instantiations of a given broker. A use case that illustrates this need is to support testing upgrades of brokers, and the planned multiple instantiations of the LSST mini-broker.
+
+\item As the design evolves, possibly serving as an intermediate buffer between the AP codes (which cannot block in a lengthy manner) and the database ingest for the L1 database which stores records of the alert.
+
+\item Records and presents broker instances with the ability to ingest presented alerts; and to record the number of drops, and other operational matters.
+
+\item A validation end point, which “looks like” a broker, but records the alerts sent to it, as a component for smoke testing, and other testing and operational needs of the alert distribution service itself.
+
+\end{itemize}
+
+\paragraph{Risks}
+While the dominant method foreseen for alert distribution is the International Virtual Observatory Alliance (IVOA) VOEvent mechanism, practical brokers need to mature significantly to handle the LSST data rate. Moreover, it is likely that specialized brokers will serve specific astronomical interests as brokers can apply further science classification. Each event packet is large; not all information is of interest to every science topic. Providing for a way to reduce the packet size emitted at NCSA or allow brokers to filter packets before they are emitted at NCSA are risk mitigating features that need to be considered, and supported if consistent with budget. Some thought should be given in design for providing alerts to non-IVOA compliant entities. Attention should be paid to protocol and other issues related to scaling.
+
+\subsubsection{Operational Concepts}
+
+\paragraph{Normal Operations}
+The normal operating scenario is Prompt Processing. In this scenario the alert distribution needs to be part of an overall system which normally presents an alert to a broker within 60 seconds of the data being prepared.
+
+The distribution system needs
+
+\begin{itemize}
+
+\item Only to present an alert to a broker instance, one and only once.
+
+\item For brokers that can ingest in a timely way, introduce no more than a well-stated delay between production of the alert and presentation to the broker.
+
+\item Consider the effects of a given broker that is unable to ingest the stream of events subscribed to in a timely way.
+
+\item Need to protect the throughput of any one feed due to broker misbehavior from misbehavior of other brokers.
+
+\item Needs to accept alerts from the alert production pipelines.
+
+\end{itemize}
+
+\paragraph{Operational Scenarios}
+
+Smoke testing:  Smoke tests are end-to-end tests of the L1 system. These tests are
+
+\begin{itemize}
+
+\item available to Observatory Operations to verify an L1 service is functioning.
+
+\item used to validate changes to an L1 service.
+
+\end{itemize}
+
+Testing of alert distribution is an element of smoke testing. The validation endpoint is used for this test. Testing of feeds to brokers is desired, but not required, as a valid system does not depend on the functioning of external components.
+
+Offline processing:  Offline alert distribution refers to distribution of alerts outside of the context prompt alert processing.
+
+\begin{itemize}
+
+\item When online processing fails, alert distribution may be configured into the system if offline processing occurs sufficiently recently after data is taken.
+
+\item Will likely occur when Alert Production algorithms change, due to the need to develop training sets for brokers with algorithms that need training, and where the software change in Alert Production may have affected that training. In this case alerts produced by the new software need to be conveyed appropriately to the brokers.
+
+\item Testing of upgrades of the alert distribution service itself with downstream brokers.
+
+\end{itemize}
+
+Availability: The availability requirements for the Alert Production system are quite high. The availability of Alert Distribution is a component of that availability.
+
+\begin{itemize}
+
+\item Alert distribution needs to be tested as a separate component from Alert Production AP software.
+
+\item Needs to be instantiated as part of the L1 Complete Test Stand.
+
+\end{itemize}
+
+Broker test/broker support: LSST has a notion of a limited number of supported brokers. In this model, the set of authorized brokers will change over time. Each broker will have a service level (or similar) agreement with the LSST project that provides information about the needed level of interface. The alert distribution system needs to provide a vocabulary of support actions, in addition to providing the real time stream of alerts. This support is envisioned as:
+
+\begin{enumerate}
+
+\item Alert replay, including full-rate replay, to support resolution of end-to-end problems involving rate.
+
+\item Concurrent operations of two feeds to support major upgrades of a broker’s infrastructure.
+
+\item Pushing training sets to community-provided alert brokers, for example in the case that our data model changes, and the classification algorithms in the target broker need to see training set data, processed by the new LSST algorithms.
+
+\end{enumerate}

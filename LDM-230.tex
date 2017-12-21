@@ -1,0 +1,46 @@
+\documentclass[DM,lsstdraft,toc]{lsstdoc}
+
+% Package imports go here
+
+% Local commands go here
+
+\title[ConOps for LSST Data Facility Services]{Concept of Operations for the LSST Data Facility Services}
+
+\author{
+~D. Petravick and
+~M. Gelman}
+
+\setDocRef{LDM-230}
+\setDocUpstreamLocation{\url{https://github.com/lsst/LDM-230}}
+\date{\today}
+
+\setDocAbstract{%
+This document describes the operational concepts for the emerging LSST Data Facility, which will operate the system that will be delivered by the LSST construction project. The services will be incrementally deployed and operated by the construction project as part of verification and validation activities within the construction project.
+}
+
+% Change history defined here. Will be inserted into
+% correct place with \maketitle
+% OLDEST FIRST: VERSION, DATE, DESCRIPTION, OWNER NAME
+\setDocChangeRecord{%
+	\addtohist{1}{2013-05-22}{Initial release. }{Kian-Tat Lim}
+	\addtohist{1.1}{2013-09-10}{ Updates resulting from Process  Control and Data Products Reviews}{Kian-Tat Lim}
+	\addtohist{1.2}{2013-10-10}{TCT approved  }{R.~Allsman }
+	\addtohist{}{2016-05-8}{ Beginning to render working group schema as more complete view of  operational need as a basis for  planning. }{D.~Petravick }
+	\addtohist{}{2017-06-26}{Import draft versions into single document, with updates based on evolved operational concepts.}{M.~Gelman}
+	\addtohist{}{2017-12-15}{Updates prior to submission to change control.}{M.~Gelman, D.~Petravick}
+}
+
+\begin{document}
+
+% Create the title page
+% Table of contents will be added automatically if "toc" class option
+% is used.
+\maketitle
+
+\input{docs/body}
+%\verb|\citellp|: \citellp{LPM-17, LSE-30} \\
+
+\bibliography{lsst,ldm230}
+\section{Acronyms}
+\input{acronyms}
+\end{document}

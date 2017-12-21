@@ -1,0 +1,229 @@
+\subsubsection{Scope}
+
+This section describes network-based operational information security services
+supporting the Observatory Operations and the LSST Data Facility.
+
+\subsubsection{Overview}
+
+\paragraph{Description}
+
+The LSST Network-based IT Security Service provides technical controls for
+operational security assurance. These controls provide data that support the
+LSST Master Information Security Plan and IT security processes such as incident
+detection and resolution.
+
+\paragraph{Objective}
+
+The objective of the Network-based IT Security Service is to provide:
+
+\begin{itemize}
+\item Network Security Monitoring, including monitoring of high-rate data
+connections for data transfer across the LDF system boundaries (but excluding
+certain high rate transfers, such as the Level 1 service access to the Camera
+Data System), including deployment of technologies for Active Response and
+Blocking of Attacks.
+\item Vulnerability Management for computers and application software in the
+enclaves.
+\item The technical framework to facilitate efficient Incident Detection and
+Response, including central log collection/event correlation for security purposes.
+\item Management of certain access controls, such as firewalls and bastion hosts,
+used for administrative access.
+\item Host-based intrusion detection clients deployed on end systems as
+appropriate.
+\item Security configuration management and auditing to baseline standards.
+\end{itemize}
+
+\paragraph{Operational Context}
+
+The general approach to operational information security is that there is a LSST
+Information Security Officer (ISO) who reports to the Head of the LSST
+construction project, and will transition to report to the Head of the Operations
+project.
+
+The ISO drafts a Master Security Program \citedsp{LPM-121} plan, which the Head
+approves of as appropriately mitigating the Information Security risk. The Head
+then assumes responsibility for the residual risk of the plan. This is the
+security risk that remains, given faithful execution of the plan. The ISO
+oversees implementation and evolution of the plan, seeing that it is faithfully
+implemented and noting when mitigation and changes are needed. The ISO does any
+required staff work for the Head; for example, running staff training. The ISO
+is informed of and keeps records on security incidents, and is responsible for
+evolution of the security plan and evolution of security threats.
+
+The ISO is responsible for a Information Security Response Team, which deals
+with actual or latent potential breaches in information security. The Incident
+Response Team is made of a set of draftees from the various operations
+departments, with the draft weighted towards departments with expertise and
+responsibility for critical operations and critical information security needs.
+
+ The ISO runs the annual security plan assessment. The management of each
+ construction subsystem and operations department is responsible for annual
+ revision of a Departmental Security Plan that complies with the Master Plan.
+ These departmental plans include
+
+\begin{itemize}
+\item A comprehensive list of IT assets, applications and services.
+\item A list of security controls the department applies to each asset
+(technical and operational).
+\item A list of controls supplied by others that are relied on.
+\end{itemize}
+
+These controls apply to all offered services and all supported ITC. Reporting
+is easiest if the systems offered are under good configuration control. Under a
+good system, the security plans are living and updated by an effective change
+control process.
+
+Verification: The ISO oversees a group that provides network-based security
+services described in the Objective part of this concept of operations.
+
+A general approach to LSST-specific networking is the use of software-defined
+networking. This provides for isolation of networking supporting security enclaves.
+In particular, this allows for the separation of critical infrastructure for
+Observatory Operations and the LSST Data Facility from office or other routine
+networking.
+
+The context for these security enclaves cover the following production services
+in the LSST project, though other enclaves may join if feasible and desired by
+the relevant operational partners. These networks may participate in this
+infrastructure, but are currently seen as the responsibilities of AURA and NCSA.
+
+\begin{longtable}{|p{0.3\textwidth}|p{0.5\textwidth}|} \hline
+\textbf{Production Service} & \textbf{Security Enclave} \\\hline
+Level One Services & Split Between NCSA and Chile  \\\hline
+Batch Production services & NCSA portion, excluding satellite center \\\hline
+US Data Access Center Services & NCSA \\\hline
+Critical Observing Enclave Services & Summit and Base Center \\\hline
+Chilean Data Access Center Services & Base Site \\\hline
+Data Backbone Services & Base Center and NCSA \\\hline
+\end{longtable}
+
+\paragraph{Risks}
+
+These are the standard elements of an information security infrastructure which
+are needed for a credible IT security project. Certain elements of the system
+are near the state of the art due to the data rates involved. Lack of credible
+infrastructure in this area will be seen as a flaw in the overall construction
+plan, preparing the LSST MREFC for operations.
+
+\subsubsection{Operational Concepts}
+
+\paragraph{Normal Operations}
+
+The following elements provide the functionality needed to implement the
+network-based security elments of the LSST Master Information Security Plan:
+
+\begin{itemize}
+
+\item Intrusion Detection Systems (IDS) detect patterns of network activity that
+indicate attacks on systems, compromise of systems, violations of Acceptable Use
+of systems, abuse of systems, and other security-related matters.
+
+\item Vulnerability Scanning detects software services with vulnerable
+configurations or unpatched versions of software via network fingerprinting. The
+system scans designated systems subject to a black-list. In addition to scanning
+for vulnerabilities, port scanning for firewall audits and ARP scanning for
+network asset management can also be conducted.
+
+\item Central Log Collection and Event Generation collects syslogs and other
+designated logs for storage (making logs invulnerable for an attacker to modify)
+and processes the logs to detect signatures indicating a compromise or poor
+security practices.
+
+\item Firewalls and bastion hosts provide a layer of active security. A typical
+use of a bastion host is to provide a layer of security between networks used to
+administer computers and more general networks.
+
+\item Host-based Intrusion Detection complements network monitoring by detecting
+actions within a system not visible from the network with tools such as auditd
+and OSSEC. This component also monitors the filesystems and checks for filesystem
+integrity.
+
+\item Active Response blocks communication with entities outside the observation site
+networks. This component is typically used to block “bad actor” entities outside
+the observation site network.
+
+\item Central Configuration Management enforces a baseline security and configuration
+on all systems.
+
+\end{itemize}
+
+New systems being deployed must be ``hardened'' to a security baseline and
+vetted by security professionals before moving into operations or after major
+configuration changes.
+
+\paragraph{Operational Scenarios}
+
+Vulnerability scanning periodically assesses designated ports on designated
+computers sensing vulnerabilities. An example of when this service is applied in
+a crucial case is assessing the effectiveness of the program of work patching a
+critical vulnerability.
+
+Intrusion detection can detect, for example, an attempt to compromise a system.
+The detection system interacts with the active response system to cut off the
+attacker’s access to the computer. The intrusion detection system can also be
+used to aid in the investigation of an attack during the incident response and
+handling of a security incident.
+
+Host-based Intrusion Detection checks for attacks against a host from the
+perspective of the host. Examples include multiple failed remote logins as reported
+by the host, or reports of file system changes that do not accompany an approved
+request for change or do not fall within a maintenance window.
+
+The networks at the Observatory site must be monitored by intrusion detection
+systems. Acceptable IDS solutions include Bro and Snort. These systems must be
+able to handle the traffic load from various network segments at 10GB to 100GB
+speeds. The IDS systems must be placed at strategic locations and account for
+any expansion or changes in the network without the need to completely retool
+the IDS systems.
+
+The information produced by the system is accessible by LSST staff involved in
+LSST information security, “landlords” hosting systems, and other parties with a
+valid interest in the data, to the extent required by the site’s specific security plans.
+
+Active Response is typically referred to as a Black Hole Router (BHR) since it peers
+with the border routers on a network and offers the shortest router to
+destinations being blocked.  Quagga and ExaBGP are two examples of BHR software.
+
+The central Configuration Management System will enforce a security baseline and
+configuration on all systems. Examples of this technology are Puppet and Chef.
+In the event that Windows systems will be deployed onsite, a system enforcing
+Group Policy Objects and WSUS for patching will have to be available. It is
+required that this system would also be the Domain Controller using Active
+Directory and federate with LSST’s Unified Identity Management system.
+
+The central log collectors are responsible for collecting and archiving all logs
+collected as described in the previous section. The collectors must be able to
+store at minimum six months of logs with a rotating windows deleting the oldest
+logs to maintain disk space. In addition to the log collectors, there is a SEIM/analysis
+system. This system is used for real-time log alerts, searches, and
+visualization. ElasticSearch, Kibana, and OSSEC are three examples of such
+software. This server spools a copy of the logs from the central collectors but
+may not be able to keep the full time window due to overhead or log metadata
+storage.
+
+All systems, both workstations and servers, are required to send system logs to
+a central collector. For Linux systems, syslog must be configured to send a copy
+of all logs in realtime to the central collector. For Windows systems, software
+such as Snare will be installed to send Windows Event logs to the central
+collector using the syslog protocol. Other alternatives exist for log collection
+such as logstash an open source log collection tool that can be used to collect
+logs from a wide variety of platforms.
+
+Network devices are also required to send system logs to the central collector.
+Note that this is different than any network logs a switch or router would send.
+The system logs refer to events such as device logins, configuration changes, and
+other system specific events. Note that this is a requirement only if the device
+has this feature available.
+
+Network devices such as routers or firewalls that are placed on the ingress/egress
+points of a vlan or the network must send firewall or router ACL logs to the
+central collector.
+
+It is best practice for network devices to also send netflow to a central
+collector. However, if netflow is collected and forwarded to the central
+collector it must not be at the expense of network or device performance.
+
+Any other devices not classified as a server, workstation, or networking device
+must be configured to send logs to the central collector if this feature is
+available. An example of a device that falls into this category is a VOIP appliance
+ or a VPN appliance.

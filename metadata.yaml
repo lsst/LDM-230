@@ -1,9 +1,0 @@
-doc_id: 'LDM-230'
-doc_title: 'Automated Operations of the LSST Data Management System'
-copyright: '2015, AURA/LSST'
-authors:
-    - 'Kian-Tat Lim'
-# Current document version
-last_revised: '2013-10-10'
-version: '1.2'
-# dev_version_suffix: None  # e.g. 'alpha'/'beta'/'rc' if necessary

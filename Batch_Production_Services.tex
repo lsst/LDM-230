@@ -1,0 +1,423 @@
+\subsubsection{Scope}
+
+This section describes the operational concepts for batch production services,
+which are a set of services used to provide designated offline campaign
+processing.
+
+\subsubsection{Overview}
+
+\paragraph{Description}
+Batch production service operations consists of executing large or small processing
+campaigns that use released software configured into pipelines to produce data products,
+such as calibrations and data release products.
+
+\paragraph{Objective}
+Batch production services execute designated processing campaigns to achieve
+LSST objectives. Example campaigns include calibration production, data release
+production, ``after-burner'' processing to modify or add to a data release,
+at-scale integration testing, producing datasets for data investigations, and
+other processing as needed. Campaign processing services provide first-order QA
+of data products.
+
+\begin{itemize}
+
+\item A campaign is a set of pipelines, a set of inputs to run the pipelines
+against, and a method of handling the outputs of the pipelines.
+
+\item A campaign satisfies a need for data products. Campaigns produce the
+designated batch data products specified in the DPDD \citedsp{LSE-163}, and
+other authorized data products.
+
+\item Campaigns can be large, such as an annual release processing, or small,
+such as producing a few calibrations.
+
+\end{itemize}
+
+\paragraph{Operational Context}
+Batch production services execute campaigns on computing resources to produce
+the desired LSST data products, which are measured against first-level quality
+criteria.
+
+\subsubsection{Operational Concepts}
+A pipeline is a body of code, typically maintained and originated within the
+Science Operations group. Each pipeline is an ordered sequence of individual
+steps. The output of one or more steps may be the input of a subsequent step
+downstream in the pipeline. Pipelines may produce final end data products in
+release processing, may produce calibrations or other data products used
+internally within LSST operations, may produce data products for investigations
+related to algorithm development, and may produce data products for testing
+purposes that cannot be satisfied using development infrastructure.
+
+A campaign is the set of all pipeline executions needed to achieve a LSST
+objective.
+
+\begin{itemize}
+
+\item Each campaign has one or more pipelines.
+
+\item Each pipeline possesses one or more configurations.
+
+\item Each campaign has a coverage set, enumerating the distinct pipeline
+invocations. There is a way to identify the input data needed for each
+invocation.
+
+\item Each campaign has an ordering constraint that specifies any dependencies
+on the order of running pipelines in a campaign.
+
+\item Each campaign has an adjustable campaign priority reflecting LSST priority
+for that objective.
+
+\item Each pipeline invocation may require one or more input pipeline data sets.
+
+\item Each pipeline invocation produces one or more output pipeline data sets.
+Notice that, for LSST, a given file may be in multiple data sets.
+
+\item For each input pipeline data set there is a data handling scheme for
+handling that data set in a
+way that inputs are properly retrieved from the archive and made available for
+pipeline use.
+
+\item For each output pipeline data set there is a data handling scheme for
+handling that data set in a way that outputs are properly archived.
+
+\end{itemize}
+
+The key factor in the nature of the LSST computing problem is the inherent
+trivial parallelism due to the nature of the computations. This means that large
+campaigns can be divided into ensembles of smaller, independent jobs, even
+though some jobs may require a small number of nodes.
+
+Batch Production Services are distinct from other services that may use batch
+infrastructure, such as Development Support Services. Also, there are other
+scenarios where pipelines need to be run outside the batch production service
+environment.  For example, alternate environments include build-and-test,
+capable desk-side development infrastructure, and ad-hoc running on central
+development infrastructure.
+
+From these considerations, the LSST Data Facility separates the concerns of a
+reliable production service from these other use cases, which do not share the
+concerns of production. This also allows for supporting infrastructure to evolve
+independently. Example production service concerns include
+
+\begin{itemize}
+
+\item Supporting reliable operation of an ensemble of many campaigns, respecting
+priorities.
+
+\item Dealing with the problems associated with large-scale needs.
+
+\item Dealing with the campaign documentation, presentation, curation and similar
+aspects of formally produced data.
+
+\end{itemize}
+
+Computing resources are needed to carry out a campaign. Batch processing occurs
+on LSST-dedicated computing platforms at NCSA and CC-IN2P3, and potentially on
+other platforms. Resources other than for computation (i.e., CPU and local
+storage), such as custodial storage to hold final data products and network
+connectivity, are also needed to completely execute a pipeline and completely
+realize the data handling scheme for input and output data sets.
+
+Computing resources are physical items which are not always fit for use. They
+have scheduled and unscheduled downtimes, and may have scheduled availability.
+The management of campaigns, provided by the Master Batch Job Scheduling Service
+requires:
+
+\begin{enumerate}
+
+\item the detection of unscheduled downtimes of resources
+
+\item recovery of executing pipelines affected by unscheduled downtimes, and
+
+\item best use of available resources.
+
+\end{enumerate}
+
+One class of potential resources  are opportunistic resources which may be very
+capacious but not guarantee that jobs run to completion. These resources may be
+needed in contingency circumstances. The Master Batch Job Scheduling Service is
+capable of differentiating kills from other failures, so as to enable use of
+these resources.
+
+The types of computing platforms that may be available, with notes, are as
+follows.
+
+\begin{longtable}{|p{0.3\textwidth}|p{0.5\textwidth}|}\hline
+\textbf{Platform Type} & \textbf{Notes} \\\hline
+NCSA batch production computing system & Ethernet cluster with competent cluster
+file system. \\\hline
+NCSA L1 computing for prompt processing & Shared nothing machines, available
+when not needed for observing operations. \\\hline
+NCSA L3 computing & TBD \\\hline
+CC-IN2P3 bulk computing & Institutional experience is shared nothing machines +
+competent caches
+and large volume storage. \\\hline
+``Opportunistic'' HPC & LSST type jobs  running in allocated or in  backfill
+context on HPC computers. [Backfill context implies jobs can be killed at
+unanticipated times]. \\\hline
+\end{longtable}
+
+An Orchestration system is a system that supports the execution of a pipeline
+instance. The basic functionality is as follows:
+
+\begin{itemize}
+
+\item Pre-job context:
+
+    \begin{itemize}
+
+    \item Supports pre-handling of any input pipeline data sets when in-job
+    context for input data is not required.
+
+    \item Pre-stages into a platform’s storage system, if available
+
+    \item Produces condensed versions of database tables into portable
+    lightweight format (e.g., MySQL to SQLite, flat table, etc.)
+
+    \item Deals with TBD platform-specific edge services.
+
+    \item Identities and provides for local identity on the computing platforms.
+
+    \item Provides  credentials and end-point information for any needed LSST
+    services.
+
+    \end{itemize}
+
+\item In-job context:
+
+    \begin{itemize}
+
+    \item Provides stage-in for any in-job pipeline input data sets
+
+    \item Provides any butler configurations necessarily provided from in-job
+    context.
+
+    \item Invokes the pipeline and collects pipeline output status and other
+    operational data
+
+    \item Provides any “pilot job” functionality.
+
+    \item Provides stage-out for pipeline output data sets when stage-out
+    requires job context.
+
+    \end{itemize}
+
+\item Post-job context:
+
+    \begin{itemize}
+
+    \item Ingests any designated data into database tables.
+
+    \item Arranges for any post-job stage out from cluster file systems
+
+    \item Arranges for detailed ingest into custodial data systems
+
+    \item Transmits job status to workload management, defined below.
+
+    \end{itemize}
+
+\end{itemize}
+
+A Master Batch Job Scheduling Service:
+
+\begin{itemize}
+
+\item Considers the ensemble of available compute resources and the ensemble of
+campaigns.
+
+\item Dispatches pipeline invocations to an Orchestration System based on
+resource availability and considering priority of campaigns.
+
+\item Considers pipeline failures reported by the Orchestration System.
+
+    \begin{itemize}
+
+    \item Identifies errors indicative of a problem with computing resources,
+    and arranges for incident report.
+
+    \item Identifies some computational errors, and arranges for incident report.
+
+    \item Retries failed pipeline invocations, if appropriate.
+
+    \end{itemize}
+
+\item Exposes progress of the campaign to relevant entities.
+
+\item Provides appropriate logging and events (N.b. critical events can be
+programmed to initiate an incident).
+
+\end{itemize}
+
+Quality support:
+
+Operations are supported by the following concepts, defined as follows for this
+document.
+
+\begin{itemize}
+
+\item Quality Assurance (QA) is what people do. This is identifying the issue
+and arranging for fixes. One source of input is quality controls, described
+below. Another source of input are the operational and scientific data products.
+
+\item A Quality Control (QC) is a software artifact that produces some sort of
+data that contains measure of quality. This data artifact may be
+
+    \begin{itemize}
+
+    \item Simply produced, recorded and not used, because it seems useful for
+    some future, likely retrospective purpose.
+
+    \item Displayed or presented for quality analysis.
+
+    \item Fed as input into active quality control which is software that
+    automatically affects the execution of a campaign.
+
+    \item Fed into software that computes additional downstream quality control
+    data.
+
+    \end{itemize}
+
+\end{itemize}
+
+\paragraph{Normal Operations}
+
+During normal operations, Batch Production Services will conduct a number of
+concurrent campaigns that support LSST goals. These campaigns will be drawn from
+
+\begin{itemize}
+
+\item Runs to validate Data Release Processing,
+
+\item Data Release Processing itself.
+
+\item After-burner processing (to correct specific errors in not-yet-released
+data products).
+
+\item Calibration processing.
+
+\item Miscellaneous processing.
+
+\end{itemize}
+
+While Batch Production Services will use the majority of LSST batch capability,
+they may share the LSST batch infrastructure with certain Level 1 services that
+require offline processing and with Level 3 batch awardees. Resource conflicts
+are sorted out and expressed as priorities for each respective campaign.
+
+The system is programmed to deal with anticipated errors. Human eye is applied
+during working hours, and can be summoned when events in the underlying systems
+ generate incidents.
+
+Each campaign is monitored for technical progress, both in in the sense of
+analyzing and responding to overtly flagged errors, and general monitoring and
+human assessment of the overall performance of the service.
+
+First-order Quality Assurance is as follows:
+
+\begin{enumerate}
+
+\item Quality controls are considered by an LSST Data Facility Production
+Scientist and other staff. Data Facility staff apply any standard authorized
+mitigations, such as reprocessing, flagging anomalies, etc. The Production
+Scientist within the LSST Data Facility understands the full suite of quality
+controls, alerts Science Operations group to anomalies, and collaborates in
+diagnosis and mitigation of problems, as requested.
+
+\item The service provided by the LSST Data Facility Production Scientist uses
+operational and scientific acumen to assess the data products at a first level,
+in addition to monitoring the extant quality controls. Particular attention is
+paid to
+
+    \begin{enumerate}
+
+    \item operationally critical data (e.g., next night’s flats needed for L1
+    processing)
+
+    \item a processing campaign that is resource intensive, hence expensive to
+    redo (or has expensive consequences)
+
+    \item known problematic output data sets that are not adequately covered by
+    existing quality controls.
+
+    \item known problematic input data sets not adequately covered by existing
+    quality controls.
+
+    \end{enumerate}
+
+\end{enumerate}
+
+Close collaboration is maintained between first order quality assurance and the
+broader scientific quality assurance in the project. Information obtained from
+first order quality assurance is continuously fed back to Science Operations.
+
+Campaign closeout provides that all outputs are in final form, documentation and
+other artifacts have been produced, and all parties are actively notified about
+the status of a campaign.
+
+\paragraph{User Genearted Products Batch Services}
+Authorized Science Users will also use batch services.   This is a future development area.  
+\paragaph{Development Support Batch Services} 
+Small-scale ad-hoc batch services are also needed for use by developers and scientists on the operations team.
+Automated batch services used for regularly-scheduled test processing (i.e. continuous integration)is also needed.   
+This is future development area.  
+
+
+ 
+\paragraph{Operational Scenarios}
+
+\subparagraph{Initiate campaign}
+
+Campaigns are initiated in response to an LSST objective, by specifying an
+initial set of pipelines, a coverage set, and an initial priority. The Batch
+Production Service is consulted with a reasonable lead time. Consistent with
+LSST processes, pipelines can be modified or added (for example, in the case of
+after-burners) during a campaign. These changes and additions are admitted when
+the criteria of change control processes are satisfied, including
+
+\begin{itemize}
+
+\item relevant build-and test criteria
+
+\item the impact of resource-intensive campaigns is approved and understood
+
+\item production-scale test campaigns
+
+\end{itemize}
+
+\subparagraph{Terminate failed campaign}
+Reasons for a campaign failure will be documented and submitted to Science
+Operations for review. Deletion of data products needs to be scheduled so that
+it occurs after the review is completed. This includes backing out files, materials
+from databases, and other production artifacts from the Data Backbone, and
+maintaining production records as these activities occur.
+
+\subparagraph{Pause campaign}
+Stop a long running campaign from proceeding allowing for TBD interventions.
+
+\subparagraph{Deal with problematic campaign}
+LSST is a large system. Pipelines will evolve and be maintained. There will be
+the campaigns, described in the operations documents. It is the nature of the
+system that as issues emerge extra resources will be needed to provide focused
+scrutiny on aspects of production for some pipeline. In many cases problems will
+be resolved by bug fixes, or addressed by quality controls and changes to
+processes. Any system needs to support mustering focused effort on quality
+analysis that is urgent, and lacks an adequate basis for robust quality controls.
+The LSST Data Facility Batch Production Services staff contribute effort to to solve
+these problems, in collaboration with Science Operations (or other parties
+responsible for codes).
+
+\subparagraph{Deal with defective data}
+Production data may be deemed defective immediately as the associated pipelines
+terminate or after a period of time when inspection processes run. Such data need
+to be marked such that they will not be included in release data and will be set aside
+for further analysis.
+
+\subparagraph{Deal with sudden lack (or surplus) in resources}
+As noted above, for large scale computing, the amount of resource available to
+support all campaigns will vary due to scheduled and unscheduled outages.
+
+The technical system responds to an increase or decrease in resources by running
+more or few jobs, once the workload manager is aware of the new level of
+resources. The technical system responds to hardware failures on a running job
+in just like any other system -- with the ultimate recovery being to  delete an
+partial data and retry, while respecting the priorities of the respective campaigns.

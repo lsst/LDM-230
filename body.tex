@@ -1,0 +1,190 @@
+\section{Scope of Document}
+
+This document describes the operational concepts for the emerging LSST Data
+Facility, which will operate the data management system as a set of services
+that will be delivered by the LSST construction project. These services will be
+incrementally stood up and operated by the construction project as part of
+validation and verification activities within the construction project.
+
+\section{Services for Observatory Operations}
+The LSST Data Facility provides a set of services that supports specific
+functions of Observatory Operations and generates Level 1 (L1) data products.
+These Level 1 services include:
+
+\begin{itemize}
+\item  A Prompt Processing Service for Alert Production for wide-field and
+targeted deep-drilling observing programs, including providing data support for
+difference image templates and calibrations, Level 1 databases, interaction with
+the alert-to-broker distribution subsystem, and providing feedback to observers.
+\item  A Prompt Processing Service for assessing the quality of nightly
+calibration exposures.
+\item  A Prompt Processing Service for assessing exposures from the Collimated
+Beam Projector, used as part of telescope optical path calibration.
+\item  An “Offline” L1 Batch Processing Service, not commanded by OCS, to
+facilitate catch-up processing for use cases involving extensive networking or
+infrastructure outages, reprocessing of image parameters used by the Scheduler,
+pre-processing data ahead of release production for broker training, and other
+emergent use cases as directed by project policy.
+\item  An Archiving Service for acquiring raw image data from the LSST main
+camera and ingesting it into the Data Backbone (Section \ref{sect:Data Backbone Services} ).
+\item  An Archiving Service for acquiring raw data from the spectrograph on the
+Auxiliary Telescope and ingesting it into the Data Backbone(Section \ref{sect:Data Backbone Services} ).
+\item  An Extract, Transform, and Load (ETL) Service for data stored in the
+Engineering Facilities Database at the Observatory.
+\item  An OCS-driven Batch Processing Service for Observatory Operations to
+submit batch jobs via the OCS environment either to NCSA or to the Commissioning
+Cluster at the Base Site.
+\item  A QA and Base Computing Task Endpoint that allows fast and reliable access
+through the QA portal to recently acquired data from the Observatory instruments
+and other designated datasets, and ability to submit batch jobs, supporting
+operations at the Base Center.  This endpoint is implemented as an instance of
+the LSST Science Platform. See \citeds{LSE-319}.
+\item  An Observatory Operations Data Service that allows fast and reliable
+access to data recently acquired from LSST cameras and designated datasets held
+in the Data Backbone(Section \ref{sect:Data Backbone Services} ).
+\end{itemize}
+
+The concept of operations for each of these services is described in the
+following sections.
+
+\subsection{LSSTCam Prompt Processing Services}
+\input{docs/L1_Services/LSSTCam_Prompt_Processing_Services}
+
+\subsection{LSSTCam Archiving Service}
+\input{docs/L1_Services/LSSTCam_Archiving_Service}
+
+\subsection{Spectrograph Archiving Service}
+\input{docs/L1_Services/Spectrograph_Archiving_Service}
+
+\subsection{EFD ETL Service}
+\input{docs/L1_Services/EFD_ETL_Service}
+
+\subsection{OCS-Driven Batch Service}
+\input{docs/L1_Services/OCS-Driven_Batch_Service}
+
+\subsection{Observatory Operations Data Service}
+\input{docs/L1_Services/Observatory_Operations_Data_Service}
+
+\subsection{Observatory Operations QA and Base Computing Task Endpoint}
+TBD
+% \input{}
+
+\section{Services for Offline Campaign Processing}
+
+The LSST Data Facility provides specific “offline” (i.e., not coupled to
+Observatory Operations) data production services to generate Level 2 data
+products, as well as Level 1-specific calibration data (e.g., templates for
+image differencing). Bulk batch production operations consists of executing
+large or small processing campaigns that use released software configured into
+pipelines to produce data products, such as calibrations and DRP products.
+Processing campaigns include
+
+\begin{itemize}
+\item  Annual Release Processing: Processing of payloads of tested work flows at
+NCSA and satellite sites through and including ingest of release products into
+file stores, relational databases, and the Data Backbone, including system
+quality assurance.
+\item  Calibration Processing: processing of payload tested work flows at NCSA
+and satellite sites through and including ingest of release products into file
+stores, relational databases, and the Data Backbone, including initial quality
+assurance. Calibration production occurs at various cadences from potentially
+daily to annual, depending on the calibration data product.
+\item  Special Programs and Miscellaneous Processing: processing other than
+specifically enumerated.
+\item  Batch framework upgrade testing: Test suites run after system upgrades
+and other changes to verify operations.
+\item  Payload Testing Verification and validation: of work flows from the
+continuous build system on the production hardware located of NCSA and satellite
+sites.
+\end{itemize}
+
+The concept of operations for batch production services serving Offline Campaign
+Processing is described in the following section.
+
+\subsection{Batch Production Services}
+\input{docs/Offline_Batch_Production_Services/Batch_Production_Services}
+
+\section{Data Access Hosting Services for Authorized Users}
+The LSST Data Facility provides authorized users and sites access to data via a
+set of services that are integrated with the overall Authentication and
+Authorization (AA) System. These services are hosted by LSST Data Facility at
+the US and Chilean Data Access Centers and will include hosting elements of the
+LSST Science Platform. There is a MOU with the Chilean DAC that is not public and can not be cited here.   
+
+\subsection{User Data Access Services}
+Service hosting elements of the LSST Science Platform.
+\input{docs/Data_Access_Hosting_Services/DAC.tex}
+
+\subsection{Bulk Data Distribution Service}
+Service providing bulk data download to sites supporting groups of users.
+\input{docs/Data_Access_Hosting_Services/Bulk_Export.tex}
+
+\subsection{Hosting of Feeds to Brokers}
+The LSST Data Facility hosts the alert distribution system and supports users of
+the LSST mini-broker, as well as providers of community brokers.
+\input{docs/Data_Access_Hosting_Services/Broker_Feeds.tex}
+
+
+\section{Data, Compute, and IT Security Services}
+The LSST Data Facility provides a set of general IT services which support the
+LSST use-case-specific services mentioned in previous sections. These
+``undifferentiated heaving lifting'' services include
+
+\begin{itemize}
+\item Data Backbone Services providing file ingestion, management, movement
+between storage tiers, and distribution to sites.
+\item Managed Database Services providing database administration for all
+database technologies and schema managed for the project.
+\item Batch Computing and Data Staging Environment Services providing batch
+capabilities on each LSST-provided platform at NCSA and the Base Center.
+\item Containerized Application Management Services providing elastic
+capabilities for deploying containerized applications at NCSA and the Base Center.
+\item Network-based IT Security Services providing project-wide intrusion
+detection, vulnerability scanning, log collection and analysis, and incident and
+event detection, and verification of controls.
+\item Authentication and Authorization (AA) Services providing central management of
+identities, supporting workflows and various authentication mechanisms, and
+operating AA endpoints at the Summit, Base, and Archive Sites.
+\end{itemize}
+
+The concept of operations for each of these services is described in the
+following sections.
+
+\subsection{Data Backbone Services}
+\input{docs/UHL/Data_Backbone_Services}
+
+\subsection{Managed Database Services}
+\input{docs/UHL/Managed_Database_Services}
+
+\subsection{Batch Computing and Data Staging Environment Services}
+\input{docs/UHL/Batch_Computing_and_Data_Staging_Services}
+
+\subsection{Containerized Application Management Services}
+\input{docs/UHL/Containerized_Application_Management_Service}
+
+\subsection{Network-based IT Security Services}
+\input{docs/UHL/IT_Security_Services}
+
+\subsection{Authentication and Authorizations Services}
+See \citeds{LSE-279}.
+
+\section{ITC Provisioning and Management}
+
+ITC is managed in distinct enclaves. Enclaves are defined based on administrative
+and security controls, and operational availability requirements. Enclaves may
+span geographic sites, with elements in both the Base Facility in La Serena and
+at NCSA. Enclaves may share computing and other resources. 
+Central administration is operated by NCSA staff, including remote administration of the Base Facility, 
+with support staff in Chile.
+
+See \citeds{LDM-129}, the LSST Data Facility Logical Infrastructure Technology and Communications (ITC) Design Document, for more information.
+
+\section{Service Management and Monitoring}
+
+The LSST Data Facility provides a set of services supporting overall management of services, as well as monitoring infrastructure which collects information about running services for service delivery, incident response, planning for future upgrades, and supporting change control. Service management processes are drawn from the ITIL IT Service Management vocabulary.
+
+\subsection{Service Management Processes}
+\input{docs/Service_Mgmt/Service_Management}
+
+\subsection{Service Monitoring}
+\input{docs/Service_Mgmt/Service_Monitoring}

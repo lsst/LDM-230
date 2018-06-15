@@ -57,9 +57,7 @@ continuity of operations.
 
 \end{itemize}
 
-\paragraph{Operational Context}
-
-\subsubsection{Operational Concepts}
+\subparagraph{Operational Concepts}
 
 \subparagraph{Files}
 
@@ -73,7 +71,7 @@ Robust identification of a file involves
 \item Possibly migrating a file from a medium where the file is not directly accessible,
 such as tape, to a medium where the file is accessible.
 \item Selecting a distinct instance of the file from possibly many replicas.
-\item Accessing the file though an access method such as a file system mount or Http(s).
+\item Accessing the file though an access method such as a file system mount or URL(s).
 \end{itemize}
 
 The project has identified several caches of data that are used in production circumstances.
@@ -98,10 +96,10 @@ principal concern of enclave management is that data reside at the Base and at N
 driven by business need.
 
 \subparagraph{Managed Lifetime of Data}
-Data in teh data backdone are preseres and replicated under processes
+Data in the data backdone are perserved and replicated under processes
 guided by an overall Data Management Policy.  Elements of the policy
-include specifications for replication suportign disasater recovery,
-and the permissiblity of deleing fiel based data, and purgingin
+include specifications for replication suporting disasater recovery,
+and the permissiblity of deleteing file based data, and purgining
 database records.  Examples of deletion of data likley in such a
 policy are: Removal of production data from faulty production campaigns,
 removal of data produced in the production system that are not part

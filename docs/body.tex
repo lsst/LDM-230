@@ -26,9 +26,9 @@ infrastructure outages, reprocessing of image parameters used by the Scheduler,
 pre-processing data ahead of release production for broker training, and other
 emergent use cases as directed by project policy.
 \item  An Archiving Service for acquiring raw image data from the LSST main
-camera and ingesting it into the Data Backbone.
+camera and ingesting it into the Data Backbone (Section \ref{sect:Data Backbone Services} ).
 \item  An Archiving Service for acquiring raw data from the spectrograph on the
-Auxiliary Telescope and ingesting it into the Data Backbone.
+Auxiliary Telescope and ingesting it into the Data Backbone(Section \ref{sect:Data Backbone Services} ).
 \item  An Extract, Transform, and Load (ETL) Service for data stored in the
 Engineering Facilities Database at the Observatory.
 \item  An OCS-driven Batch Processing Service for Observatory Operations to
@@ -38,10 +38,10 @@ Cluster at the Base Site.
 through the QA portal to recently acquired data from the Observatory instruments
 and other designated datasets, and ability to submit batch jobs, supporting
 operations at the Base Center.  This endpoint is implemented as an instance of
-the LSST Science Platform.
+the LSST Science Platform. See \citeds{LSE-319}.
 \item  An Observatory Operations Data Service that allows fast and reliable
 access to data recently acquired from LSST cameras and designated datasets held
-in the Data Backbone.
+in the Data Backbone(Section \ref{sect:Data Backbone Services} ).
 \end{itemize}
 
 The concept of operations for each of these services is described in the
@@ -66,6 +66,7 @@ following sections.
 \input{docs/L1_Services/Observatory_Operations_Data_Service}
 
 \subsection{Observatory Operations QA and Base Computing Task Endpoint}
+TBD
 % \input{}
 
 \section{Services for Offline Campaign Processing}
@@ -172,9 +173,9 @@ See \citeds{LSE-279}.
 ITC is managed in distinct enclaves. Enclaves are defined based on administrative
 and security controls, and operational availability requirements. Enclaves may
 span geographic sites, with elements in both the Base Facility in La Serena and
-at NCSA. Enclaves may share computing and other resources. Central administration
-is operated by NCSA staff, including remote administration of the Base Facility,
-with "pair-of-hands" support staff in Chile.
+at NCSA. Enclaves may share computing and other resources. 
+Central administration is operated by NCSA staff, including remote administration of the Base Facility, 
+with support staff in Chile.
 
 See \citeds{LDM-129}, the LSST Data Facility Logical Infrastructure Technology and Communications (ITC) Design Document, for more information.
 

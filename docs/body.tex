@@ -26,9 +26,9 @@ infrastructure outages, reprocessing of image parameters used by the Scheduler,
 pre-processing data ahead of release production for broker training, and other
 emergent use cases as directed by project policy.
 \item  An Archiving Service for acquiring raw image data from the LSST main
-camera and ingesting it into the Data Backbone (Section \ref{sect:Data Backbone Services} ).
+camera and ingesting it into the Data Backbone (Section \ref{sect:dbb-services}).
 \item  An Archiving Service for acquiring raw data from the spectrograph on the
-Auxiliary Telescope and ingesting it into the Data Backbone(Section \ref{sect:Data Backbone Services} ).
+Auxiliary Telescope and ingesting it into the Data Backbone (Section \ref{sect:dbb-services}).
 \item  An Extract, Transform, and Load (ETL) Service for data stored in the
 Engineering Facilities Database at the Observatory.
 \item  An OCS-driven Batch Processing Service for Observatory Operations to
@@ -41,7 +41,7 @@ operations at the Base Center.  This endpoint is implemented as an instance of
 the LSST Science Platform. See \citeds{LSE-319}.
 \item  An Observatory Operations Data Service that allows fast and reliable
 access to data recently acquired from LSST cameras and designated datasets held
-in the Data Backbone(Section \ref{sect:Data Backbone Services} ).
+in the Data Backbone (Section \ref{sect:dbb-services}).
 \end{itemize}
 
 The concept of operations for each of these services is described in the
@@ -109,7 +109,7 @@ The LSST Data Facility provides authorized users and sites access to data via a
 set of services that are integrated with the overall Authentication and
 Authorization (AA) System. These services are hosted by LSST Data Facility at
 the US and Chilean Data Access Centers and will include hosting elements of the
-LSST Science Platform.
+LSST Science Platform. There is a MOU with the Chilean DAC that is not public and can not be cited here.
 
 \subsection{User Data Access Services}
 Service hosting elements of the LSST Science Platform.
@@ -151,6 +151,7 @@ The concept of operations for each of these services is described in the
 following sections.
 
 \subsection{Data Backbone Services}
+\label{sect:dbb-services}
 \input{docs/UHL/Data_Backbone_Services}
 
 \subsection{Managed Database Services}
@@ -173,8 +174,8 @@ See \citeds{LSE-279}.
 ITC is managed in distinct enclaves. Enclaves are defined based on administrative
 and security controls, and operational availability requirements. Enclaves may
 span geographic sites, with elements in both the Base Facility in La Serena and
-at NCSA. Enclaves may share computing and other resources. 
-Central administration is operated by NCSA staff, including remote administration of the Base Facility, 
+at NCSA. Enclaves may share computing and other resources.
+Central administration is operated by NCSA staff, including remote administration of the Base Facility,
 with support staff in Chile.
 
 See \citeds{LDM-129}, the LSST Data Facility Logical Infrastructure Technology and Communications (ITC) Design Document, for more information.

@@ -16,7 +16,7 @@ Batch production services execute designated processing campaigns to achieve
 LSST objectives. Example campaigns include calibration production, data release
 production, ``after-burner'' processing to modify or add to a data release,
 at-scale integration testing, producing datasets for data investigations, and
-other processing as needed. Campaign processing services provide first-order QA
+other processing as needed. Campaign processing services provide automated quality control
 of data products.
 
 \begin{itemize}
@@ -28,7 +28,7 @@ against, and a method of handling the outputs of the pipelines.
 designated batch data products specified in the DPDD \citedsp{LSE-163}, and
 other authorized data products.
 
-\item Campaigns can be large, such as an annual release processing, or small,
+\item Campaigns can be large, such as an data release processing, or small,
 such as producing a few calibrations.
 
 \end{itemize}
@@ -111,8 +111,8 @@ aspects of formally produced data.
 
 \end{itemize}
 
-Computing resources are needed to carry out a campaign. Batch processing occurs
-on LSST-dedicated computing platforms at NCSA and CC-IN2P3, and potentially on
+Computing resources are needed to carry out a production campaign. Batch processing occurs
+on LSST-dedicated computing platforms at NCSA, Base (Commissioning Batch and Chilian DAC) and CC-IN2P3, and potentially on
 other platforms. Resources other than for computation (i.e., CPU and local
 storage), such as custodial storage to hold final data products and network
 connectivity, are also needed to completely execute a pipeline and completely
@@ -144,11 +144,11 @@ follows.
 
 \begin{longtable}{|p{0.3\textwidth}|p{0.5\textwidth}|}\hline
 \textbf{Platform Type} & \textbf{Notes} \\\hline
-NCSA batch production computing system & Ethernet cluster with competent cluster
-file system. \\\hline
-NCSA L1 computing for prompt processing & Shared nothing machines, available
+NCSA batch production computing system & Ethernet cluster with competent 
+file systems. \\\hline
+NCSA Prompt computing for prompt processing & Shared nothing machines, available
 when not needed for observing operations. \\\hline
-NCSA L3 computing & TBD \\\hline
+NCSA US DAC computing & TBD \\\hline
 CC-IN2P3 bulk computing & Institutional experience is shared nothing machines +
 competent caches
 and large volume storage. \\\hline
@@ -300,8 +300,8 @@ data products).
 \end{itemize}
 
 While Batch Production Services will use the majority of LSST batch capability,
-they may share the LSST batch infrastructure with certain Level 1 services that
-require offline processing and with Level 3 batch awardees. Resource conflicts
+they may share the LSST batch infrastructure with certain Prompt services that
+require offline processing and with User Generated batch awardees. Resource conflicts
 are sorted out and expressed as priorities for each respective campaign.
 
 The system is programmed to deal with anticipated errors. Human eye is applied
@@ -354,7 +354,7 @@ Campaign closeout provides that all outputs are in final form, documentation and
 other artifacts have been produced, and all parties are actively notified about
 the status of a campaign.
 
-\paragraph{User Genearted Products Batch Services}
+\paragraph{User Generated Products Batch Services}
 Authorized Science Users will also use batch services.   This is a future development area.
 \paragraph{Development Support Batch Services}
 Small-scale ad-hoc batch services are also needed for use by developers and scientists on the operations team.
@@ -369,7 +369,7 @@ This is future development area.
 
 Campaigns are initiated in response to an LSST objective, by specifying an
 initial set of pipelines, a coverage set, and an initial priority. The Batch
-Production Service is consulted with a reasonable lead time. Consistent with
+Production Service staff is consulted with a reasonable lead time. Consistent with
 LSST processes, pipelines can be modified or added (for example, in the case of
 after-burners) during a campaign. These changes and additions are admitted when
 the criteria of change control processes are satisfied, including

@@ -4,14 +4,15 @@ The Data Backbone is a set of data storage, management and movement
 resources distributed between the Base Center and NCSA. The
 scope of the Data Backbone includes both files and data maintained by relational
 and other database engines holding the record of the survey and used by
-L1, L2, and Data Access Center services.
+Prompt Products, Data Release Products, and Data Access Center services. There is not a 
+Data Backbone endpoint at CCIN2P3.  Out-of-band data transfer will occur depending on what data is needed for the processing taking place and what is already at CCIN2P3.  
 
 The Data Backbone provides read-only data service to the US and Chilean
 DACs, but does not host data stores where DAC users create state. This is
 done to create a hard and easily enforceable separation of technologies,
-where no flaw in a DAC can corrupt the data produced by L1 and L2
+where no flaw in a DAC can corrupt the data produced by Prompt and Data Release
 production systems. For example, DAC resources such as Qserv and user databases,
-colloquially know as MyDBs, are provisioned in the context of a data
+colloquially known as MyDBs, are provisioned in the context of a data
 access center, not the Data Backbone.
 
 The Data Backbone ensures that designated data sets are replicated at both sites.
@@ -96,7 +97,7 @@ principal concern of enclave management is that data reside at the Base and at N
 driven by business need.
 
 \subparagraph{Managed Lifetime of Data}
-Data in the data backdone are perserved and replicated under processes
+Data in the Data Backbone are perserved and replicated under processes
 guided by an overall Data Management Policy.  Elements of the policy
 include specifications for replication suporting disasater recovery,
 and the permissiblity of deleteing file based data, and purgining

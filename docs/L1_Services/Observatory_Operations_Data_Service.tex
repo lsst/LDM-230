@@ -1,5 +1,5 @@
 \subsubsection{Scope of Document}
-This section describes the services provided to Observatory
+This section describes the services provided to Observatory and Commissioning
 Operations to access data that satisfies the requirements that
 are unique to observing operations. These requirements include
 service levels appropriate for nightly operations.
@@ -78,10 +78,10 @@ Butler interfaces: Use of the LSST Stack is advocated for Observatory Operations
 and so access to this data is possible via access methods supported by the LSST stack.
 The standard access method provided by the LSST stack is through a set of
 abstractions provided by a software package called the Butler. Whether the Observatory
-Operations Service provides a Bulter interface is TBD.
+Operations Service provides a Butler interface is TBD.
 
 Native interfaces: Not all needed application in the Observatory Operations context
-will use the LSST stack and will not be able to avail themselves of Butler abstractions.
+will use the LSST stack. These will not be able to avail themselves of Butler abstractions.
 The service accommodates this need by providing files placed predictably into a
 directory hierarchy.
 
@@ -104,9 +104,9 @@ establishing mirrored databases. There are currently no actionable use cases
 for relational data. The technology to maintain subsets of relational data are distinct
 from the technologies to maintain subsets of files. It is likely that if relational data are
 needed, caches of relational data will need to be made by extract, transform and load
-into a file-format such as SQLite.
+into a file-format such as SQLite. Depending on Butler Registry implementation, this is TBD.  
 
-\item Concern: This service needs to be available in TBD operational enclaves. (and limited to those enclaves).
+\item Concern: This service needs to be available in Summit and Commissioning cluster enclaves. (and limited to those enclaves).
 
 \end{itemize}
 
@@ -114,9 +114,9 @@ into a file-format such as SQLite.
 
 \paragraph{Normal Operations}
 
-As indicated the OOS is a service used by the Spectrograph and LSSTCam archivers, and used
-to continually present data to the Base Computing Endpoint. The Availablity targets for the
-Observatory operations server needs to accomidate the availability requirements of both systems.
+As indicated the OODS is a service used by the Spectrograph and LSSTCam archivers.
+The Availablity targets for the
+Observatory operations server needs to accomodate the availability requirements of both systems.
 
 \paragraph{Operational Scenarios}
 

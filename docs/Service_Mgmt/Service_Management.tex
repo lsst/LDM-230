@@ -2,7 +2,6 @@
 \subsubsection{Scope}
 This section describes operational concepts of systems-level and service-level
 management for services operated by the LSST Data Facility.
-kk
 
 \subsubsection{Overview}
 This section briefly describes functions and processes of service
@@ -18,7 +17,7 @@ IT Service Management processes include
 \item Service Design: Building a service catalog and arranging for changes to the service offering, including internal supporting services.
 
 \item Service Transition: Specifying needed changes, assessing the quality of proposed changes,
-and controlling the order and timing of inserting changes into the system.
+and controlling the order and timing of inserting changes into the system. This can also include changes that "undo" other previous changes.  
 
   \begin{itemize}
 
@@ -44,12 +43,12 @@ a complete change is presented to change management for approval into the live s
   example, support of observatory services is likely more critical that support
   of a developer test stand.
 
-  \item \emph{Request Response} Request reponse covers both structured
-  requests which are well supported by a workflow, and unstructured
+  \item \emph{Request Response} Request response are for normal operation activities and covers both structured
+  requests and unstructured
   requests.  An example of structured requests is to on-board or
   off-board a user. Examples of unstructured requests are to answer a
   question about the implementation of a service, or to produce an
-  informative report.
+  informative report. 
 
   \item \emph{Problem Management} Not all issues with a service can be
   addressed at a given time. These issues are aggregated into a problem

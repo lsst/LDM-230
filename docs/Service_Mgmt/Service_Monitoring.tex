@@ -18,7 +18,7 @@ are not bespoken LSST software. These monitoring systems may have an API, log
 files, SNMP, and TBD other interfaces.
 
 \item Acquires data from native LSST interfaces, including interfacing to the
-logging package (lsst.log), event package (ctrl\_events), L1 logging, L1 events,
+logging package (lsst.log),  Prompt logging, Prompt events,
 scoreboards (Redis), TBD Qserv, and data from other independent packages.
 
 \item Probes services from monitoring agents and ingests quality control
@@ -101,9 +101,9 @@ similar written instrument.
 
 \paragraph{Normal Operations}
 
-\subparagraph{Example: Level 1 Services}
+\subparagraph{Example: Prompt Products Services}
 
-Level 1 services are instantiated at NCSA and the Chilean Base Center. The
+Prompt Products services are instantiated at NCSA and the Chilean Base Center. The
 services the LDF relies on that may provide monitoring information are described
 in the table below. The monitoring system may acquire additional essential data
 by agents, consistent with SLAs and systems engineering best practice.
@@ -117,8 +117,8 @@ Network transport on UIUC campus to L1 installation area in NPCF & U of I networ
 OCS interfaces (bridge, telemetry injection) & Observatory Operations \\\hline
 CDS interface & Observatory Operations \\\hline
 Base Center computing room resources & Observatory Operations, Computing Facility manager \\\hline
-``Pair of Hands'' assistance in Chile & TBD (if any) \\\hline
-ITC for L1 system, exclusive of reliances listed otherwise & LDF ITC group or relied upon NCSA groups \\\hline
+Local assistance in Chile & TBD (if any) \\\hline
+ITC for Prompt system, exclusive of reliances listed otherwise & LDF ITC group or relied upon NCSA groups \\\hline
 NCSA/NPCF facility resource management & NCSA/NPCF facility management \\\hline
 Service-specific code and service-level performance as a part of the overall system, component-level aspect of L1 internals & Interfaces provided by LDF software group \\\hline
 \end{longtable}
@@ -128,7 +128,7 @@ Service-specific code and service-level performance as a part of the overall sys
 \textbf{Entity} & \textbf{Need} & \textbf{Notes} \\\hline
 Incident response & Events indicating service faults. & TBD these directly generate notifications (page), (and have the right filtering semantics) \\\hline
 Problem management & Incident information and information about marginal or near-miss events detected. & \\\hline
-Observing Operations, DPP Staff, and LSST HQ & Comfort displays indicating real-time status of services used. & NCSA staff should be able to see the same information as Observatory Operations staff to prevent confusion in incident response. It is important to note that monitoring relied on by Observatory Operations in Chile having reliances on NSCA need to operate and provide appropriate subsets of information to each site, should the connectivity between sites be disrupted. \\\hline
+Observing Operations, DPP Staff, and LSST HQ & Comfort displays indicating real-time status of services used. & NCSA staff should be able to see the same information as Observatory Operations staff to prevent confusion in incident response. It is important to note that monitoring relied on by Observatory Operations in Chile needs to be independent of NSCA. Monitoring at each site needs to operate and provide appropriate subsets of information to each site, should the connectivity between sites be disrupted. \\\hline
 Alert users & Information about when alerts are being exported and flows to various broker-like entities. & \\\hline
 Availability management & Queries, reports and displays focused on historical contributions to failures by reliance. & \\\hline
 Capacity management & Queries, reports and displays focused on historical usage of resources. & \\\hline
@@ -141,8 +141,7 @@ ITC staff & Supplemental information to ITC monitoring. & \\\hline
 Many of the hardware components which make up the WAN will be managed by
 different entities (ISPs) based on who owns the particular section of the
 network. Typically all ISPs run their own SNMP network to monitor the health of
-the devices. LDF service monitoring taps into this information base and collects
-and forwards it to the central console for health and status monitoring.
+the devices. 
 
 \paragraph{Operational Scenarios}
 

@@ -1,7 +1,7 @@
 \subsubsection{Scope}
 
 The Engineering and Facility Database (EFD) See \citeds{LTS-210} is a system used in the
-context Observatory Operations. It contains all data, apart from pixel
+context of Observatory Operations. It contains data, apart from pixel
 data acquired by the Level 1 archiving systems, of interest to LSST
 originating from any instrument or any operation related to
 observing. The EFD is an essential record of the activities of
@@ -19,7 +19,7 @@ into a format suitable for offline use.
 \paragraph{Description}
 
 The Original Format EFD, maintained by Observatory Operations, is
-conceived of as collection of files and approximately 20 autonomous
+conceived of as a collection of files and approximately 20 autonomous
 relational database instances, all using the same relational database
 technology. The relational tables in the Original Format EFD have a
 temporal organization. This organization supports the need within
@@ -32,14 +32,13 @@ are part of the operational records of the survey.
 
 \paragraph{Objective}
 
-The prime motivation behind the EFD ETL Service is to be able to
-relate the time series data to raw images and computed entities
-produced by L1, L2, and L3 processing, and to hold these quantities in
+The prime motivation behind the EFD Transformation Service is to be able to
+relate the time series data to raw images, and to hold these quantities in
 a manner that is accessible using the standard DM methods for file and
 relational data access.
 
-The baseline design called for substantially all of the EFD relational
-and flat-file material to be ingested into what is callef the Reformatted
+The baseline design calls for all of the EFD relational
+and flat-file material to be ingested into what is called the Transformed
 EFD.
 
 \begin{enumerate}
@@ -48,9 +47,8 @@ EFD.
 EFD data in the general context of Level 2 data production and in the
 Data Access Centers. This access is supported by a query-access
 optimized, separately implemented relational database, generally
-called the Reformatted EFD. A prime consideration is to relate the
-time series data to raw images and computed entities produced by L1,
-L2, and L3 processing.
+called the Transformed EFD. A prime consideration is to relate the
+time series data to raw images.
 
 \item To be usable in offline context, files from the Original Format EFD
 need to be ingested into the LSST Data Backbone. This ingest operation
@@ -61,13 +59,13 @@ instrumentation, the actions of observers, and related data, the data
 contained within it cannot be recomputed, and in general there is no
 substitute for this data. Best practice for disaster recovery is to
 not merely replicate the Original Format EFD live environment, but also
-to make periodic backups and ingests to a disater recovery system.
+to make periodic backups and ingests to a disaster recovery system.
 
 \end{enumerate}
 
 \paragraph{Operational Context}
 
-Ingest of data from the Original Format EFD into the Reformatted EFD
+Ingest of data from the Original Format EFD into the Transformed EFD
 must be controlled by Observatory Operations, based on the principle
 that Observatory Operations controls access to the Original Format EFD
 resources. The prime framework for controlling operations is the OCS
@@ -76,7 +74,7 @@ framework.
 
 \paragraph{Risks}
 
-The query load applied by general staff on the Original Format
+The query load applied by EFD Transformation Service  on the Original Format
 EFD at the Base Center may be disruptive to the primary purpose,
 serving Observatory Operations.
 
@@ -87,7 +85,7 @@ serving Observatory Operations.
 \subparagraph{Original Format EFD Operations}
 
 Observatory Operations is responsible for Original Format EFD
-operations in the period where LSST Operations occurs. Observatory
+operations during LSST Operations. Observatory
 Operations will copy database state and related operational
 information into a disaster recovery store at a frequency consistent
 with a Disaster Recovery Plan approved by the LSST ISO. The LSST Data
@@ -106,12 +104,11 @@ Centers.
 LSST staff working on behalf of any operations department will have
 access to the Original Format EFD at the Base Center for one-off
 studies, including studying the merits of data being loaded into the
-Reformatted EFD. Data of ongoing interest will be loaded into the
-Reformatted EFD.
+Transformed EFD. 
 
 \subparagraph{EFD Large File Annex Handling and Operations}
 
-Under control of an OCS-commandable device, the LSST Data Facility will
+Under control of the EFD Transformation Service, the LSST Data Facility will
 ingest the designated contents of the file annex of the Original
 Format EFD into the data backbone. The LSST Data Facility will arrange that these
 files participate in whatever is developed for disaster recovery for the
@@ -121,21 +118,21 @@ These files will also participate in the general file metadata and
 file-management service associated with the Data Backbone, and thus be
 available using I/O methods of the LSST stack.
 
-\subparagraph{Reformatted EFD Operations}
+\subparagraph{Transformed EFD Operations}
 
 \begin{itemize}
-\item The Reformatted EFD is replicated to the US DAC and the Chilean DAC.
-\item LDF will extract, transform and load into the Reformatted EFD pointers to files
+\item The Transformed EFD is replicated to the US DAC and the Chilean DAC.
+\item LDF will extract, transform and load into the Transformed EFD pointers to files
 that have been transferred from the EFD large file annex into the Data Backbone.
-\item LDF will extract, transform and load designated tabular data from the
-Original Format EFD into the Reformatted EFDs residing in the Data Backbone at
-NCSA and the Base Center.
+\item LDF will extract, transform and load all tabular data from the
+Original Format EFD into the Transformed EFDs residing in the Data Backbone at
+NCSA and the Base Center. Information in Tranformed EFD that is private needs to be blocked on export.  
 \item “Designated” data will include:
   \begin{itemize}
   \item Any quantities used in a production process.
   \item Any quantities designated by an authorized change control process.
   \end{itemize}
-\item The information in the Reformatted EFD is available to any authorized independent
+\item The information in the Transformed EFD is available to any authorized independent
 DAC which may choose to host a copy.
 \end{itemize}
 
@@ -149,11 +146,11 @@ The Extract, Transform and Load operation is under the control of Observing Oper
 
 Observing Operations will periodically test a restore in a disaster recovery scenario.
 
-\subparagraph{Disaster Recovery and DR Testing for the Reformatted EFD}
+\subparagraph{Disaster Recovery and DR Testing for the Transformed EFD}
 
-Should the Reformatted EFD relational database be reproducible from the
+Since the Transformed EFD relational database is reproducible from the
 Original Format EFD, disaster recovery is provided by a re-ingest from the
-original format. DR testing includes re-establishing operations of the Reformatted
+original format. DR testing includes re-establishing operations of the Transformed
 EFD relational database and ETL capabilities from the Original Format EFD. Ingested
 files from the file annex can be recovered by the general disaster recovery capabilities
 of the Data Backbone.
@@ -161,5 +158,5 @@ of the Data Backbone.
 \subparagraph{Change Control}
 
 Upgrades to the EFD ETL Service are produced by the LSST Data Facility.
-Change control of this function is coordiniated with the Observatory, with the
+Change control of this function is coordinated with the Observatory, with the
 Observatory having an absolute say about insertion and evaluation of changes.

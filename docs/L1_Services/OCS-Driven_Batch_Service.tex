@@ -1,30 +1,28 @@
 \subsubsection{Scope}
 
 The OCS-driven Batch Service provides an OCS-commandable device for Observatory
-Operations staff to submit batch jobs to the Commissioning Cluster, and optionally rendevous
-with a small amount of returned data via the Telemetry Gateway.
+Operations staff to submit batch jobs to the Commissioning Cluster, NCSA cluster, or Base cluster, and optionally return a small amount of data via the Telemetry Gateway.
 
 \subsubsection{Overview}
 
 The service provides a method for OCS script to invoke Batch
-production, allowing for the automation batch procesing into simple work
+production, allowing for the automation of batch procesing into simple work
 flows involving LSST instrumentation.
 
 
 \paragraph{Description}
 
-The servine profives OCS commands to initiate Batch Jobs and to optionally
-rendevous wiht small amounts of data.
+The service provides OCS commands to initiate Batch Jobs and to optionally
+return with small amounts of data as telemetry.
 
 \paragraph{Objective}
 
-Examples of the type of workflows may be verifation of flats or wave-front sensing
-application.
+Primary usage is expected to be preparation of daily master calibration images.  Full-frame wavefront sensing via pistoning of the Camera can also be processed in this mode.  Other uses are expeced during Commissioning.  Examples of the type of workflows may be verification of flats or wave-front sensing application.
 
 
 \paragraph{Operational Context}
 
-The service is an OCS-commandable device which runs inder the control of
+The service is an OCS-commandable device which runs under the control of
 Observatory  Operations.
 
 \subsubsection{Operational Concepts}
@@ -35,11 +33,11 @@ During normal operations, the OCS scripts submit batch jobs. The subject batch s
 
 \paragraph{Operational Scenarios}
 
-The promptness of the return of results varies accorsing to the ablity
+The promptness of the return of results varies according to the ablity
 of the batch system to schedule the coresponding batch job promptly.
 
 \subparagraph{Change Control}
 
 Upgrades to the OCS-driven Batch Service are produced by the LSST Data Facility. Change control
-of this function is coordiniated with the Observatory, with the Observatory having an absolute say
+of this function is coordinated with the Observatory, with the Observatory having an absolute say
 about insertion and evaluation of changes.

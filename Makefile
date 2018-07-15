@@ -1,4 +1,6 @@
 #
+export TEXMFHOME = lsst-texmf/texmf
+
 #
 
 tex=$(filter-out $(wildcard *acronyms.tex) , $(wildcard *.tex)) */*tex */*/*tex

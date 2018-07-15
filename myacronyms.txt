@@ -140,11 +140,11 @@ DPP:Data Processing Production
 WSUS:Windows Server Update Services
 LTS:LSST Telescope \& Site (Document handle)
 IDS:Intrusion Detection Systems
-CBP:Colimated Beam Projector
+CBP:Collimated Beam Projector
 SNMP:Simple Network Management Protocol 
 LIGO:Laser Interferometer Gravitational-Wave Observatory
 SEIM:Security Event and Incident Management
 BHR:Black Hole Router
 VPN:Virtual Private Network
-HQ:Head Quaters
+HQ:Head Quarters
 

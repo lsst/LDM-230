@@ -8,21 +8,21 @@ validation and verification activities within the construction project.
 
 \section{Services for Observatory Operations}
 The LSST Data Facility provides a set of services that supports specific
-functions of Observatory Operations and generates Level 1 (L1) data products.
+functions of Observatory Operations and generates prompt data products (L1)\footnote{Prompt products were previously referred to as Level 1 products and in this document Level 1 is often used in this context.}
 These Level 1 services include:
 
 \begin{itemize}
 \item  A Prompt Processing Service for Alert Production for wide-field and
 targeted deep-drilling observing programs, including providing data support for
 difference image templates and calibrations, Prompt Products databases, interaction with
-the alert-to-broker distribution subsystem, and providing feedback to observing systems. Prompt Processing for science images and calibration images are separate services, but will be performed by the same system with different configurations. 
-\item  A Prompt Processing Service for assessing the quality of 
+the alert-to-broker distribution subsystem, and providing feedback to observing systems. Prompt Processing for science images and calibration images are separate services, but will be performed by the same system with different configurations.
+\item  A Prompt Processing Service for assessing the quality of
 calibration exposures.
 \item  An “Offline” Prompt Batch Processing Service, not commanded by OCS, to
 facilitate catch-up processing for use cases involving extensive networking or
 infrastructure outages, reprocessing of image parameters used by the Scheduler,
 pre-processing data ahead of release of a new version of Alert Production for broker training, and other
-emergent use cases as directed by project policy. 
+emergent use cases as directed by project policy.
 \item  An Archiving Service for acquiring raw image data from the LSST main
 camera and ingesting it into the Data Backbone (Section \ref{sect:dbb-services}).
 \item  An Archiving Service for acquiring raw data from the spectrograph on the
@@ -76,7 +76,7 @@ Processing campaigns include
 \begin{itemize}
 \item  Data Release Processing: Processing of payloads of tested work flows at
 NCSA and satellite sites through and including ingest of release products into
-file stores, relational databases, and the Data Backbone, including quality control and science validation. 
+file stores, relational databases, and the Data Backbone, including quality control and science validation.
 
 \item  Calibration Processing: processing of payloads of tested work flows at NCSA
 through and including ingest of release products into file

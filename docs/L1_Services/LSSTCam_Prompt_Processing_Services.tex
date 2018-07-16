@@ -45,15 +45,15 @@ two-image-per-visit cadence, in which successive observations(only for the pair)
 in the same filter with no slew of the telescope. However, a new
 program, potentially with a new filter, a larger slew, a different
 observing cadence, or a different visit structure, can be scheduled at
-any moment for Special Programs. Alternative Science Visits are supposed to be per night.  
+any moment for Special Programs. Alternative Science Visits are supposed to be per night.
 
 Another envisioned program is ``deep drilling'', where many more exposures
-than the two exposure visit will be taken. Deep Drilling is just one example of a Special Program.  
+than the two exposure visit will be taken. Deep Drilling is just one example of a Special Program.
 
 In practice, science data-taking will proceed when conditions are
 suitable. Calibration data may be taken when conditions are not
 suitable for further observations, with science data-taking resuming
-when conditions again become suitable. Prompt Processing can be stopped when calibration data is being taken.  
+when conditions again become suitable. Prompt Processing can be stopped when calibration data is being taken.
 
 It follows that the desired behavior for science data-taking
 operations is to start the Prompt Processing system at the beginning
@@ -63,16 +63,16 @@ science observations is finished.
 The operational framework for observing discloses predictions for future exposures but they cannot be relied on until the “next visit".
 
 During science data-taking the Prompt Processing Service computes and
-promptly returns QA parameters (referred to as one of the forms of “telemetry”) to the
+promptly returns quality  parameters (referred to as one of the forms of “telemetry”) to the
 observing system. The QA parameters are not specific to an observing
 program; examples are seeing and pointing corrections derived from the
 WCS. These parameters are not strictly necessary for observing to
 proceed -- LSST can observe autonomously at the telescope site, if
 need be. Also note that the products are quality parameters, not the
-the “up-or-down” quality judgement.
+the “up-or-down” quality judgment.
 
 The scheduler may be sensitive to a subset of these messages and may
-decide on actions, but a detailed description is TBD. 
+decide on actions, but a detailed description is TBD.
 The scheduler can make use of these parameters even
 if delivered quite late, since the scheduler uses historical data
 in addition to recent data.
@@ -80,8 +80,8 @@ in addition to recent data.
 The Prompt Processing system also executes code that is specific to an
 observing program. For science exposures, the code is divided into
 a front-end -- that is able to compute the parameters sent back  to the
-observator with single frame processing, and a back end , Alert Production (AP), is the specific
-science code that detects transient objects. 
+observatory with single frame processing, and a back end , Alert Production (AP), is the specific
+science code that detects transient objects.
 
 The detected transients are passed off to another service, which
 records the alert in a catalog which can be queried offline and sends
@@ -89,16 +89,16 @@ events to an ensemble of transient brokers. Data are transmitted to end
 users either via feeds from an LSST-provisioned broker or via
 community-provided alert brokers.
 
-Alert Production for deep drilling and other Special Programs is TBD.  
+Alert Production for deep drilling and other Special Programs is TBD.
 Other observing programs
 may also include AP as a science code, or may have codes of their own.
 
 \subparagraph{Calibration Operations}
 
 In addition to collecting data for science programs, the telescope and
-camera are involved in many calibration activities. 
+camera are involved in many calibration activities.
 
-The Baseline Calibrations include flats and biases.  Darks are anticipated.  LSST has a Collumanted Beam Projector Calibrations Device as well.  
+The baseline calibrations include flats and biases.  Darks are anticipated.  LSST has a Collimated Beam Projector Calibrations Device as well.
 
 Nominally, a
 three-hour period each afternoon is scheduled for Observatory Operations
@@ -133,7 +133,7 @@ flatfield exposures in each camera filter, bias frames acquired from
 rapid reads of an un-illuminated camera, and optional dark images
 acquired from reads of an un-illuminated camera at the cadence of the
 expected exposure time.  Observers will consider the collection of
-these nightly calibrations 
+these nightly calibrations
 typically carried out prior to the start of nightly observing.  The
 Prompt Processing system computes parameters for quality assessment of
 these calibration data, and returns the QA parameters to the observing

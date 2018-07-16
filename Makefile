@@ -1,5 +1,4 @@
 #
-export TEXMFHOME = lsst-texmf/texmf
 
 #
 

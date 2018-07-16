@@ -3,7 +3,7 @@ export TEXMFHOME = lsst-texmf/texmf
 
 #
 
-tex=$(filter-out $(wildcard *acronyms.tex) , $(wildcard *.tex)) */*tex */*/*tex
+tex=$(filter-out $(wildcard *acronyms.tex) , $(wildcard *.tex)) docs/*tex docs/*/*tex
 
 LDM-230.pdf:  *.tex */*.tex */*/*.tex
 	latexmk -bibtex -pdf -f LDM-230.tex

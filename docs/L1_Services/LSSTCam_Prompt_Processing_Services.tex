@@ -11,15 +11,15 @@ observing program.
 
 \paragraph{Objective}
 The LSSTCam Prompt Processing Services provide timely processing of newly
-acquired raw data, including QA of images, alert processing and delivery,
-returning image parameters to the Observatory, and populating the Level 1
+acquired raw data, including characterization of image quality of images, alert processing and delivery,
+returning image parameters to the Observatory, and populating the Prompt Products
 Database.
 
 \paragraph{Operational Context}
 Prompt Processing is a service provided by the LSST Data Facility as part of the
-Level 1 system. It is presented to Observatory Operations as an OCS-commandable
+prompt processing system. It is presented to Observatory Operations as an OCS-commandable
 device. The Prompt Processing Service retrieves crosstalk-corrected pixel data
-from the main LSST camera at the Base Center, builds FITS images, and sends them
+from the main LSST camera at the Base Center, builds images, and sends them
 to NCSA for prompt processing.
 
 \subsubsection{Operational Concepts}
@@ -41,64 +41,66 @@ programs.
 
 About 90\% of observing time is reserved for the LSST “wide-fast-deep”
 program. In this program, observations will be on the wide-field
-two-image-per-visit cadence, in which successive observations will be
+two-image-per-visit cadence, in which successive observations(only for the pair)  will be
 in the same filter with no slew of the telescope. However, a new
 program, potentially with a new filter, a larger slew, a different
 observing cadence, or a different visit structure, can be scheduled at
-any moment.
+any moment for Special Programs. Alternative Science Visits are supposed to be per night.
 
-Another evisioned program is ``deep drilling'', where many more exposures
-than the two exposure visit will be taken.
+Another envisioned program is ``deep drilling'', where many more exposures
+than the two exposure visit will be taken. Deep Drilling is just one example of a Special Program.
 
 In practice, science data-taking will proceed when conditions are
 suitable. Calibration data may be taken when conditions are not
 suitable for further observations, with science data-taking resuming
-when conditions again become suitable.
+when conditions again become suitable. Prompt Processing can be stopped when calibration data is being taken.
 
 It follows that the desired behavior for science data-taking
 operations is to start the Prompt Processing system at the beginning
 of the night and to turn off the system after all processing for all
 science observations is finished.
 
-The operational framework for observing discloses no future knowlege
-about what exposures will be taken, until the “next visit” is
-determined.
+The operational framework for observing discloses predictions for future exposures but they cannot be relied on until the “next visit".
 
 During science data-taking the Prompt Processing Service computes and
-promptly returns QA parameters (referred to as “telemetry”) to the
+promptly returns quality  parameters (referred to as one of the forms of “telemetry”) to the
 observing system. The QA parameters are not specific to an observing
 program; examples are seeing and pointing corrections derived from the
 WCS. These parameters are not strictly necessary for observing to
 proceed -- LSST can observe autonomously at the telescope site, if
 need be. Also note that the products are quality parameters, not the
-the “up-or-down” quality judgement.
+the “up-or-down” quality judgment.
 
 The scheduler may be sensitive to a subset of these messages and may
-decide on actions, but a detailed description is TBD and may vary as
-the survey evolves. The scheduler can make use of these parameters even
+decide on actions, but a detailed description is TBD.
+The scheduler can make use of these parameters even
 if delivered quite late, since the scheduler uses historical data
-in addition to recent h data.
+in addition to recent data.
 
 The Prompt Processing system also executes code that is specific to an
 observing program. For science exposures, the code is divided into
 a front-end -- that is able to compute the parameters sent back  to the
-observator, and a back end , Alert Production (AP), is the specific
+observatory with single frame processing, and a back end , Alert Production (AP), is the specific
 science code that detects transient objects.
 
 The detected transients are passed off to another service, which
-records the data in a catalog which can be queried offline and sends
+records the alert in a catalog which can be queried offline and sends
 events to an ensemble of transient brokers. Data are transmitted to end
 users either via feeds from an LSST-provisioned broker or via
 community-provided alert brokers.
 
-Alert Production runs in the context of the wide-fast-deep survey,
-deep drilling program and TBD other programs. Other observing programs
+Alert Production for deep drilling and other Special Programs is TBD.
+Other observing programs
 may also include AP as a science code, or may have codes of their own.
 
 \subparagraph{Calibration Operations}
 
 In addition to collecting data for science programs, the telescope and
-camera are involved in many calibration activities. Nominally, a
+camera are involved in many calibration activities.
+
+The baseline calibrations include flats and biases.  Darks are anticipated.  LSST has a Collimated Beam Projector Calibrations Device as well.
+
+Nominally, a
 three-hour period each afternoon is scheduled for Observatory Operations
 to take dark and flat calibration data. As noted above, calibration data
 may be taken during the night when conditions are not suitable for
@@ -114,11 +116,11 @@ subsequently require additional calibration operations. In general,
 calibration operations will be modified over the lifetime of the
 survey as understanding of the LSST telescope and camera improves.
 
-The Prompt Processing Service computes and promptly returns QA
-parameters (referred to as “telemetry”) to the observing system. Note
+The Prompt Processing Service computes and promptly returns quality
+parameters (referred to as one of the forms of “telemetry”) to the observing system. Note
 that the quality of calibrations needed for Prompt Processing science
 operations may be less stringent than calibrations needed for other
-processing, such as annual release processing.
+processing, such as DRP.
 
 An operations strawman, which illuminates the general need for prompt
 processing, is that there are two distinct, high-level types of
@@ -126,12 +128,12 @@ calibrations.
 
 \begin{itemize}
 
-\item Nightly flats, biases and darks consist of about a sequence of  broad-band
-flatfield exposures each camera filter, bias frames acquired from
+\item Nightly flats, biases and darks consist of a sequence of  broad-band
+flatfield exposures in each camera filter, bias frames acquired from
 rapid reads of an un-illuminated camera, and optional dark images
 acquired from reads of an un-illuminated camera at the cadence of the
 expected exposure time.  Observers will consider the collection of
-these nightly calibrations as a single operational sequence that is
+these nightly calibrations
 typically carried out prior to the start of nightly observing.  The
 Prompt Processing system computes parameters for quality assessment of
 these calibration data, and returns the QA parameters to the observing
@@ -160,9 +162,9 @@ needs to provide for maintenance and improvement projects within the
 dome.  These calibrations may be taken on cloudy nights or any other
 time.  Because these operations are lengthy, and time to obtain the
 calibrations quite possibly precious, prompt processing is needed to
-run QA codes to help assure that the data are appropriate for
+run quality control codes to help assure that the data are appropriate for
 use. Note, the prompt processing system will not be used to construct
-these calibrations.
+these master calibrations.
 
 Consideration of the lengthy calibrations, and the complexity of
 scheduling them means that the system must be reasonably available
@@ -172,11 +174,7 @@ when needed.
 \paragraph{Operational Scenarios}
 
 \subparagraph{Code Performance Problems}
-Should a code run longer than budgeted, and the pace of processing
-fail to keep up with the pace of images, operations input is needed
-because there are trade-offs, as this would affect the production of
-timely QA data.  However, note that when this situation occurs no
-immediate human intervention is needed.  The Prompt Processing system
+The Prompt Processing system
 provides a number of policies (which are TBD) to Observatory
 Operations that can be selected via the OCS interface.  These policies
 are used to prioritize the need for prompt production of QA versus
@@ -189,16 +187,16 @@ sensitive to details of the observation sequence.
 \subparagraph{Offline Backup}
 When needed, all of this processing, including both generating QA
 parameters and running science codes, can be executed under offline
-conditions at the LDF at a later time.  The products of
+conditions at a later time.  The products of
 this processing may still be of operational or scientific value even
 if they are not produced in a timely manner.  Considering Alert
 Production, for example, while alerts may not be transmitted in
 offline conditions, transients can still be incorporated into the
-portion of the L1 Database that records transients.  QA image
+portion of the Prompt Products Database that records transients.  QA image
 parameters used to gauge whether an observation meets quality
 requirements can still be produced and ingested for use by the scheduler.
 
 \subparagraph{Change Control}
 Upgrades to the LSSTCam Prompt Processing Services are produced in the LSST Data Facility. Change control
-of this function is coordiniated with the Observatory, with the Observatory having an absolute say
+of this function is coordinated with the Observatory, with the Observatory having an absolute say
 about insertion and evaluation of changes.

@@ -1,0 +1,150 @@
+AI:Action Item
+AI\&T:Assembly, Integration and Test
+AP:Alerts Production
+AURA:Association of Universities for Research in Astronomy
+BAC:Budget At Completion
+BOE:Basis Of Estimate
+C:Specific programming language (also called ANSI-C)
+CAM:Control Account Manager
+CAS:Central Authentication System
+CCB:Change Control Board
+CCS:Camera Control System
+CDS:Camera Data System
+COB:Cluster On Board
+CCOB: Camera Calibration Optical Bench
+CPI:Cost Performance Index
+CR:Change Request
+DAC:Data Access Center
+DAX:Data Access Services
+DBA:DataBase Administrator
+DBB:Data BackBone
+DC:Data Center
+DCR:Document Change Request
+DM:Data Management
+DMCCB:DM Change Control Board
+DMCS:DM Control System 
+AAA: Authentication Authorization and Accounting
+DMIS:DM Interface Scientist
+DMLT:DM Leadership Team
+DMO:Data Management Organization
+DMS:Data Management Sub-system
+DMSR:DM System Requirements
+DMSS:DM Subsystem Scientist
+DR:Disaster Recovery
+DRP:Data Release Production
+EFD:Engineering Facilities Database
+ETC:Estimate To Complete
+EVMS:Earned Value Management System
+FDR:Final Design Review
+FM:Flat Mirror 
+GWT:Google Web Toolkit
+HPC:High-Performance Computing
+HSC:Hyper Suprime-Cam
+ID:Identifier (Identification)
+IPAC:Infrared Processing and Analysis Center
+IS:Interface Scientist
+ISR:Instrument Signal Removal
+IT:Integration Test
+ITC:Information Technology and Communications
+JSR:Joint Status Review
+JTM:Joint Technical Meeting
+KPM:Key Performance Metric
+L1:Level 1 (ambiguous could mean milestone or processing)
+L2:Level 2 (ambiguous could mean milestone or processing)
+LDM:LSST Data Management (handle for controlled documents)
+LHC:Large Hadron Collider (at CERN)
+LCR:LSST Change Request
+LSP:LSST Science Platform
+LIT:LSST Issue Tracker
+LOE:Level Of Effort
+LPM:LSST Project Management (Document Handle)
+LSE:LSST Systems Engineering (Document Handle)
+MC:Monte-Carlo (simulation/process)
+NCOA:National Center for Optical-Infrared Astronomy
+NCSA:National Center for Supercomputing Applications
+NET:NETworking
+NSF:National Science Foundation
+OCS:Observatory Control System
+OPS:OPerationS
+OSS:Operations Support System
+PB:PetaByte
+PDAC:Prototype Data Access Center
+PDF:Portable Document Format
+PFS:Prime Focus Spectrograph
+PM:Project Manager
+PMCS:Project Management Control System
+PS:Project Scientist
+PST:Project Science Team
+Qserv:Query Service, Proprietary LSST Database system
+RAS:Raw image Archive Service (Tag for requirements)
+RTM:Rear Transition Module
+SA:Science Alert(s)
+SAMP:Simple Application Messaging Protocol
+SEMP:Systems Engineering Management Plan
+SP:Software Product
+SPI:Schedule Performance Index
+SQuaRE:Science Quality and Reliability Engineering
+SRS:Software Requirements Specification
+SS:Subsystem Scientist
+SST:System Science Team
+STS:System Test Specification
+SUI:Science User Interface Tools
+SUIT:Science User Interface and Tools
+SV:Science Validation
+SW:Software (also denoted S/W)
+TB:TeraByte
+TCAM:Technical Control/Account Manager
+TCAMS:Technical Control/Account Manager
+TCS:Telescope Control System
+TCT:Technical Control Team (Obsolete -- now DMCCB)
+TPR:Test Plan and Report document
+TS:Test Specification
+US:United States
+UCD:Unified Content Descriptor
+USD:United States Dollar
+UW:University of Washington
+UX:User interface widget
+VCD:Verification Control Document
+VO:Virtual Observatory
+WAN:Wide Area Network
+bps:bit(s) per second
+EAC:Estimate at Completion
+MOPS:Moving Object Pipeline System
+UWS:Universal Worker Service (IVOA)
+CI:Continuous Integration
+DTN:Data Transfer Node
+CAOM:Common Astronomical Observation Model
+UIUC:University of Illinois—Urbana-Champaign
+MOU:Memo Of Understanding
+DOE:Department of Energy
+GKE:Google Kubernetes Engine
+EPO:Education and Public Outreach
+DLP:DM Long Term Plan
+BFD:Bayesian Fourier Domain
+ATS:Auxiliary Telescope System
+DMTR:Data Management Test Report
+CPP:C++ Programming language
+AVRO:Apache data serialization system
+ECS:Environmental Control System
+DESC:Dark Energy Science Collaboration
+EIA:Early Integration Activity
+DES:Dark Energy Survey
+ETL:Extract Translate and Load
+DMHS:Data Management Header Service
+OODS:Observatory Operations Data Service 
+NPCF:National Petascale Computing Facility
+XSEDE:Extreme Science and Engineering Discovery Environment
+VOIP:Voice Over IP
+OSSEC:Operating Systems SECurity
+DPP:Data Processing Production
+WSUS:Windows Server Update Services
+LTS:LSST Telescope \& Site (Document handle)
+IDS:Intrusion Detection Systems
+CBP:Collimated Beam Projector
+SNMP:Simple Network Management Protocol 
+LIGO:Laser Interferometer Gravitational-Wave Observatory
+SEIM:Security Event and Incident Management
+BHR:Black Hole Router
+VPN:Virtual Private Network
+HQ:Head Quarters
+

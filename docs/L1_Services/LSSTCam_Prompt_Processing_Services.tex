@@ -12,12 +12,12 @@ observing program.
 \paragraph{Objective}
 The LSSTCam Prompt Processing Services provide timely processing of newly
 acquired raw data, including characterization of image quality of images, alert processing and delivery,
-returning image parameters to the Observatory, and populating the Level 1
+returning image parameters to the Observatory, and populating the Prompt Products
 Database.
 
 \paragraph{Operational Context}
 Prompt Processing is a service provided by the LSST Data Facility as part of the
-Level 1 system. It is presented to Observatory Operations as an OCS-commandable
+prompt processing system. It is presented to Observatory Operations as an OCS-commandable
 device. The Prompt Processing Service retrieves crosstalk-corrected pixel data
 from the main LSST camera at the Base Center, builds images, and sends them
 to NCSA for prompt processing.
@@ -192,7 +192,7 @@ this processing may still be of operational or scientific value even
 if they are not produced in a timely manner.  Considering Alert
 Production, for example, while alerts may not be transmitted in
 offline conditions, transients can still be incorporated into the
-portion of the L1 Database that records transients.  QA image
+portion of the Prompt Products Database that records transients.  QA image
 parameters used to gauge whether an observation meets quality
 requirements can still be produced and ingested for use by the scheduler.
 

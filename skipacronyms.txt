@@ -15,6 +15,8 @@ n
 X
 S
 K
+M
+N
 FM
 LL
 CC

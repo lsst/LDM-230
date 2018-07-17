@@ -8,7 +8,7 @@ This section describes the concept of operations for hosting the system that dis
 Alert Distribution consists of:
 \begin{itemize}
 
-\item Receiving alerts from instances of the Alert Production Pipeline or backlogs of alerts from offline L1 production.
+\item Receiving alerts from instances of the Alert Production Pipeline or backlogs of alerts from offline alert production.
 
 \item If needed, formatting received alerts into broker-specific syntax and forwarding the alerts to services which propagate alerts to the community. This includes  community brokers selected by LSST and also  the LSST alert “mini broker”, which is a limited functionality broker the LSST construction project is providing.
 
@@ -113,6 +113,6 @@ Broker test/broker support: LSST has a notion of a limited number of supported b
 
 \item Concurrent operations of two feeds to support major upgrades of a broker’s infrastructure.
 
-\item Pushing training sets to community-provided alert brokers through out-of-band means, for example in the case that our data model changes, and the classification algorithms in the target broker need to see training set data, processed by the new LSST algorithms. 
+\item Pushing training sets to community-provided alert brokers through out-of-band means, for example in the case that our data model changes, and the classification algorithms in the target broker need to see training set data, processed by the new LSST algorithms.
 
 \end{enumerate}
